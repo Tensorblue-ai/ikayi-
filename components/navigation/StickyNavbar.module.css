@@ -1,0 +1,95 @@
+﻿.header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 20;
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(120px, 0.9fr) minmax(420px, 1.9fr) minmax(130px, 0.9fr);
+  align-items: center;
+  gap: 28px;
+  padding: 12px max(32px, calc((100vw - 1320px) / 2));
+  transform: translateX(-50%);
+  background: color-mix(in srgb, var(--ikayi-nav-surface) 82%, transparent);
+  border-bottom: 1px solid rgba(167, 43, 36, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  display: inline-flex;
+  width: fit-content;
+  flex-direction: column;
+  color: var(--ikayi-deep-red);
+  letter-spacing: 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.logo span {
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(1.9rem, 3vw, 3rem);
+  line-height: 0.85;
+}
+
+.logo small {
+  margin-top: 10px;
+  font-size: 0.62rem;
+  letter-spacing: 4px;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.nav a,
+.reservationLink {
+  color: var(--ikayi-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.reservationLink {
+  justify-self: end;
+  border: 1px solid rgba(167, 43, 36, 0.45);
+  padding: 12px 22px;
+  color: var(--ikayi-deep-red);
+}
+
+@media (max-width: 980px) {
+  .header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    gap: 16px;
+    padding: 12px 16px;
+  }
+
+  .logo {
+    letter-spacing: 5px;
+  }
+
+  .logo small {
+    letter-spacing: 2px;
+  }
+
+  .reservationLink {
+    padding: 10px 12px;
+    font-size: 0.58rem;
+    letter-spacing: 2px;
+  }
+}
+
+
+

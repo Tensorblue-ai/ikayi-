@@ -1,0 +1,342 @@
+.story {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(42px, 5.5vw, 70px) 0 44px;
+  background:
+    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--ikayi-white) 60%, transparent) 0, transparent 28%),
+    linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-hero-surface) 52%, var(--ikayi-surface-end) 100%);
+  color: var(--ikayi-ink);
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 30%, transparent);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 92px, 1280px);
+  margin: 0 auto;
+}
+
+.logoBadge {
+  position: absolute;
+  left: max(26px, calc((100vw - 1340px) / 2));
+  top: 18px;
+  z-index: 2;
+  display: grid;
+  width: 100px;
+  height: 100px;
+  place-items: center;
+  align-content: center;
+  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-dark-surface);
+  color: var(--ikayi-gold);
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 18px 34px color-mix(in srgb, var(--ikayi-ink) 18%, transparent);
+}
+
+.logoBadge span {
+  font-family: var(--ikayi-font-display);
+  font-size: 1.08rem;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.logoBadge small {
+  margin-top: 6px;
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.4rem;
+  letter-spacing: 1.4px;
+}
+
+.headingBlock {
+  display: grid;
+  grid-template-columns: minmax(54px, 110px) auto minmax(54px, 110px);
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--ikayi-deep-red);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.headingBlock h2 {
+  margin: 0;
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 7px;
+  line-height: 1;
+}
+
+.titleRule {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.titleRule::before,
+.titleRule::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: color-mix(in srgb, var(--ikayi-deep-red) 48%, transparent);
+}
+
+.titleRule span {
+  width: 8px;
+  height: 8px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 62%, transparent);
+  transform: rotate(45deg);
+}
+
+.intro {
+  width: min(100%, 610px);
+  margin: 18px auto 36px;
+  color: var(--ikayi-muted-ink);
+  text-align: center;
+  font-family: var(--ikayi-font-body);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.intro span {
+  display: block;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ikayi-white) 42%, transparent);
+  text-align: center;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 1.28;
+  overflow: hidden;
+  border-radius: 7px 7px 0 0;
+}
+
+.imageWrap img {
+  object-fit: cover;
+}
+
+.iconBadge {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  margin: -23px auto 14px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid color-mix(in srgb, var(--ikayi-white) 78%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-terracotta);
+  color: var(--ikayi-white);
+  font-size: 1.15rem;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--ikayi-terracotta) 32%, transparent);
+}
+
+.card h3 {
+  margin: 0;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1.8px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cardRule {
+  display: flex;
+  align-items: center;
+  width: 62px;
+  margin: 10px auto 12px;
+}
+
+.cardRule::before,
+.cardRule::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: color-mix(in srgb, var(--ikayi-terracotta) 62%, transparent);
+}
+
+.cardRule span {
+  width: 6px;
+  height: 6px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 72%, transparent);
+  transform: rotate(45deg);
+}
+
+.card p {
+  min-height: 42px;
+  margin: 0 auto 18px;
+  width: min(100% - 26px, 150px);
+  color: var(--ikayi-muted-ink);
+  font-family: var(--ikayi-font-body);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.storyBanner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  min-height: 120px;
+  margin-top: 22px;
+  padding: 16px 48px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ikayi-white) 28%, transparent);
+}
+
+.bannerArt {
+  width: 170px;
+  height: 132px;
+  object-fit: contain;
+  opacity: 0.34;
+}
+
+.storyBanner p {
+  margin: 0;
+  color: var(--ikayi-terracotta);
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.storyBanner p span {
+  display: inline-block;
+  margin: 0 14px;
+  color: color-mix(in srgb, var(--ikayi-terracotta) 72%, transparent);
+  font-size: 2rem;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.storyBanner a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-width: 180px;
+  min-height: 46px;
+  padding: 0 24px;
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.bannerDots {
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  width: 58px;
+  height: 58px;
+  opacity: 0.46;
+  background-image: radial-gradient(circle, var(--ikayi-terracotta) 1.2px, transparent 1.2px);
+  background-size: 11px 11px;
+}
+
+
+@media (max-width: 1120px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .storyBanner {
+    grid-template-columns: 130px minmax(0, 1fr);
+  }
+
+  .storyBanner a {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  .bannerArt {
+    width: 130px;
+  }
+}
+
+@media (max-width: 760px) {
+  .story {
+    padding-top: 124px;
+  }
+
+  .inner {
+    width: min(100% - 32px, 680px);
+  }
+
+  .logoBadge {
+    left: 18px;
+    width: 82px;
+    height: 82px;
+  }
+
+  .headingBlock {
+    grid-template-columns: 1fr;
+  }
+
+  .titleRule {
+    display: none;
+  }
+
+  .headingBlock h2 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+    letter-spacing: 5px;
+  }
+
+  .cards,
+  .storyBanner {
+    grid-template-columns: 1fr;
+  }
+
+  .storyBanner {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .bannerArt {
+    justify-self: center;
+  }
+
+  .storyBanner a {
+    grid-column: auto;
+    width: 100%;
+  }
+}

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# local agent handoff files
+AGENTS.md
+CLAUDE.md

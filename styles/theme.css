@@ -1,0 +1,33 @@
+﻿:root {
+  --ikayi-peach: #FAD8B5;
+  --ikayi-terracotta: #E69C76;
+  --ikayi-deep-red: #A42828;
+  --ikayi-white: #FFFFFF;
+  --ikayi-sage-green: #7D9270;
+  --ikayi-background-blue: #1B3370;
+  --ikayi-gold: #DDB078;
+
+  --ikayi-ink: #312A26;
+  --ikayi-muted-ink: #4F443D;
+  --ikayi-dark-surface: #17140F;
+  --ikayi-hero-surface: #F4EADF;
+  --ikayi-surface-start: #F3DFCA;
+  --ikayi-surface-end: #EAD2BB;
+  --ikayi-nav-surface: #F8E8D6;
+  --ikayi-peach-rgb: 250 216 181;
+  --ikayi-terracotta-rgb: 230 156 118;
+  --ikayi-deep-red-rgb: 164 40 40;
+  --ikayi-white-rgb: 255 255 255;
+  --ikayi-sage-green-rgb: 125 146 112;
+  --ikayi-background-blue-rgb: 27 51 112;
+  --ikayi-gold-rgb: 221 176 120;
+
+  --ikayi-font-display: Optima, "Avenir Next Thai Traditional", Avenir, sans-serif;
+  --ikayi-font-body: Avenir, "Avenir Next", sans-serif;
+  --ikayi-font-accent: "Avenir Next Thai Traditional", Optima, Avenir, sans-serif;
+
+  --background: var(--ikayi-hero-surface);
+  --foreground: var(--ikayi-ink);
+}
+
+

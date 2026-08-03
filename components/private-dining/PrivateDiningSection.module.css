@@ -1,0 +1,294 @@
+﻿.privateDining {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(62px, 7vw, 92px) 0;
+  background:
+    radial-gradient(circle at 24% 12%, color-mix(in srgb, var(--ikayi-white) 56%, transparent) 0, transparent 30%),
+    linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-surface-end) 100%);
+  color: var(--ikayi-ink);
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(430px, 1.08fr) minmax(420px, 0.92fr);
+  align-items: center;
+  gap: clamp(42px, 6vw, 78px);
+  width: min(100% - 88px, 1320px);
+  margin: 0 auto;
+}
+
+.logoBadge {
+  position: absolute;
+  left: max(28px, calc((100vw - 1320px) / 2));
+  top: 26px;
+  z-index: 2;
+  display: grid;
+  width: 88px;
+  height: 88px;
+  place-items: center;
+  align-content: center;
+  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-dark-surface);
+  color: var(--ikayi-gold);
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 16%, transparent);
+}
+
+.logoBadge span {
+  font-family: var(--ikayi-font-display);
+  font-size: 1.05rem;
+  letter-spacing: 4px;
+  line-height: 1;
+}
+
+.logoBadge small {
+  margin-top: 5px;
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.4rem;
+  letter-spacing: 1.8px;
+}
+
+.imagePanel {
+  position: relative;
+  aspect-ratio: 1.08;
+  min-height: 520px;
+  overflow: hidden;
+  border: 3px solid color-mix(in srgb, var(--ikayi-white) 62%, transparent);
+  border-radius: 82px 12px 12px 12px;
+  box-shadow: 0 22px 48px color-mix(in srgb, var(--ikayi-ink) 18%, transparent);
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.copyPanel {
+  max-width: 560px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-accent);
+  text-transform: uppercase;
+}
+
+.kicker p {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.copyPanel h2 {
+  margin: 0;
+  color: var(--ikayi-ink);
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(3.1rem, 5.2vw, 5.25rem);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.divider {
+  position: relative;
+  width: 142px;
+  height: 1px;
+  margin: 18px 0 20px;
+  background: color-mix(in srgb, var(--ikayi-terracotta) 58%, transparent);
+}
+
+.divider::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 70%, transparent);
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--ikayi-surface-start);
+}
+
+.copyPanel > p {
+  max-width: 500px;
+  margin: 0 0 16px;
+  color: var(--ikayi-muted-ink);
+  font-family: var(--ikayi-font-body);
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.highlightCard {
+  min-width: 0;
+  padding: 18px 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 40%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ikayi-white) 40%, transparent);
+  text-align: center;
+}
+
+.iconBadge {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--ikayi-terracotta);
+  color: var(--ikayi-white);
+  font-family: var(--ikayi-font-accent);
+  font-size: 1rem;
+}
+
+.highlightCard h3 {
+  margin: 0;
+  color: var(--ikayi-ink);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.cardDivider {
+  width: 44px;
+  height: 1px;
+  margin: 10px auto 8px;
+  background: color-mix(in srgb, var(--ikayi-terracotta) 60%, transparent);
+}
+
+.highlightCard p {
+  margin: 0;
+  color: var(--ikayi-muted-ink);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 24px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 32%, transparent);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-decoration: none;
+}
+
+.primaryAction {
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+}
+
+.secondaryAction {
+  background: color-mix(in srgb, var(--ikayi-white) 42%, transparent);
+  color: var(--ikayi-deep-red);
+}
+
+.dotGrid {
+  position: absolute;
+  left: max(116px, calc((100vw - 1180px) / 2));
+  top: 52px;
+  width: 74px;
+  height: 90px;
+  opacity: 0.34;
+  background-image: radial-gradient(circle, var(--ikayi-terracotta) 1.5px, transparent 1.5px);
+  background-size: 13px 13px;
+}
+
+.archMark {
+  position: absolute;
+  right: max(42px, calc((100vw - 1320px) / 2));
+  top: 34px;
+  width: 178px;
+  height: 150px;
+  opacity: 0.2;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 48%, transparent);
+  border-radius: 50% 50% 0 0;
+}
+
+.circleAccent {
+  position: absolute;
+  right: -74px;
+  bottom: -88px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ikayi-terracotta) 70%, transparent);
+}
+
+@media (max-width: 980px) {
+  .inner {
+    grid-template-columns: 1fr;
+    width: min(100% - 44px, 760px);
+  }
+
+  .imagePanel {
+    min-height: 440px;
+  }
+
+  .copyPanel {
+    max-width: none;
+  }
+
+  .logoBadge {
+    left: 22px;
+  }
+}
+
+@media (max-width: 680px) {
+  .privateDining {
+    padding-top: 112px;
+  }
+
+  .inner {
+    width: min(100% - 32px, 760px);
+  }
+
+  .imagePanel {
+    min-height: auto;
+    aspect-ratio: 0.9;
+    border-radius: 54px 10px 10px 10px;
+  }
+
+  .copyPanel h2 {
+    font-size: clamp(2.7rem, 13vw, 4rem);
+  }
+
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .archMark,
+  .circleAccent,
+  .dotGrid {
+    display: none;
+  }
+}

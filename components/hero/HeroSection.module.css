@@ -1,0 +1,235 @@
+﻿.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ikayi-hero-surface);
+  color: var(--ikayi-ink);
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: center right;
+  z-index: -4;
+}
+
+.leftBlurLayer {
+  position: absolute;
+  inset: -24px 24% -24px -24px;
+  z-index: -3;
+  background-image: url("/assets/hero.png");
+  background-size: cover;
+  background-position: center right;
+  filter: blur(11px);
+  transform: scale(1.03);
+  mask-image: linear-gradient(90deg, var(--ikayi-white) 0%, var(--ikayi-white) 48%, transparent 100%);
+}
+
+.tintLayer {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(255, 249, 241, 0.98) 0%, rgba(255, 247, 237, 0.88) 22%, rgba(255, 243, 229, 0.52) 45%, rgba(255, 239, 222, 0.12) 68%, rgba(255, 235, 216, 0.02) 100%),
+    linear-gradient(180deg, rgba(118, 60, 33, 0.12) 0%, transparent 42%, rgba(68, 30, 18, 0.08) 100%);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 64px, 1320px);
+  margin: 0 auto;
+  padding-top: clamp(132px, 20vh, 196px);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 26px;
+  color: var(--ikayi-terracotta);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.star {
+  color: var(--ikayi-gold);
+  font-family: var(--ikayi-font-display);
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.content h1 {
+  max-width: 680px;
+  margin: 0;
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(3.35rem, 5.6vw, 5.75rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--ikayi-ink);
+  white-space: nowrap;
+}
+
+.content h1 span {
+  display: block;
+  color: var(--ikayi-deep-red);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 340px;
+  margin: 34px 0 28px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: rgba(195, 131, 72, 0.5);
+}
+
+.divider span {
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(195, 131, 72, 0.8);
+  transform: rotate(45deg);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 28px;
+  border: 1px solid rgba(167, 43, 36, 0.26);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.primaryAction {
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+  box-shadow: 0 18px 34px rgba(95, 29, 24, 0.2);
+}
+
+.secondaryAction {
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--ikayi-ink);
+}
+
+.floralLeft,
+.floralRight {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.floralLeft {
+  left: -42px;
+  top: 125px;
+  width: 150px;
+  height: 210px;
+  border: 1px solid rgba(191, 111, 54, 0.23);
+  border-radius: 48% 52% 42% 58%;
+  transform: rotate(-28deg);
+}
+
+.floralLeft::before,
+.floralLeft::after,
+.floralRight::before,
+.floralRight::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(191, 111, 54, 0.28);
+  border-radius: 50%;
+}
+
+.floralLeft::before {
+  inset: 34px -18px 54px 28px;
+}
+
+.floralLeft::after {
+  inset: 82px 28px -18px -12px;
+}
+
+.floralRight {
+  right: -54px;
+  bottom: 46px;
+  width: 180px;
+  height: 150px;
+  border-top: 1px solid rgba(255, 244, 229, 0.45);
+  transform: rotate(21deg);
+}
+
+.floralRight::before {
+  inset: 12px 32px 24px -14px;
+}
+
+.floralRight::after {
+  inset: 46px -8px -8px 46px;
+}
+
+@media (max-width: 980px) {
+  .content {
+    padding-top: clamp(88px, 14vh, 132px);
+  }
+
+  .leftBlurLayer {
+    inset: -24px 6% -24px -24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 760px;
+  }
+
+  .content {
+    width: min(100% - 32px, 1320px);
+  }
+
+  .content h1 {
+    max-width: 100%;
+    font-size: clamp(2.45rem, 11vw, 3.6rem);
+  }
+
+  .divider {
+    width: min(100%, 270px);
+  }
+
+  .actions {
+    width: min(100%, 330px);
+    gap: 14px;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+
+
+
+
+
+
+
+
