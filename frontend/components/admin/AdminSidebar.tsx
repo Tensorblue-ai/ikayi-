@@ -1,4 +1,5 @@
-﻿import styles from "./AdminSidebar.module.css";
+import Link from "next/link";
+import styles from "./AdminSidebar.module.css";
 
 export type AdminView = "content" | "bookings" | "media" | "settings";
 
@@ -46,10 +47,10 @@ export function AdminSidebar({ activeView, onViewChange }: AdminSidebarProps) {
           <SidebarIcon name="pulse" />
           System uptime monitor
         </button>
-        <a className={styles.viewSiteLink} href="/">
+        <Link className={styles.viewSiteLink} href="/">
           <SidebarIcon name="external" />
           View website
-        </a>
+        </Link>
       </div>
     </aside>
   );

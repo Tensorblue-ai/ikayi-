@@ -1,15 +1,15 @@
 ﻿.sidebar {
   position: sticky;
-  top: 28px;
+  top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 18px;
   align-self: start;
-  height: calc(100vh - 56px);
-  margin: 28px 0 28px 24px;
-  padding: 40px 20px 20px;
+  height: calc(100vh - 48px);
+  margin: 24px 0 24px 20px;
+  padding: 28px 18px 18px;
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
-  border-radius: 28px;
+  border-radius: 22px;
   background: rgb(var(--ikayi-white-rgb) / 0.82);
   box-shadow: 0 24px 70px rgb(var(--ikayi-deep-red-rgb) / 0.08);
 }
@@ -17,8 +17,8 @@
 .sidebarLogo {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 0 12px 28px;
+  gap: 12px;
+  padding: 0 10px 24px;
   border-bottom: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
   color: var(--ikayi-deep-red);
 }
@@ -26,13 +26,13 @@
 .logoMark {
   display: inline-grid;
   place-items: center;
-  width: 72px;
-  height: 44px;
-  border-radius: 12px;
+  width: 58px;
+  height: 40px;
+  border-radius: 10px;
   background: rgb(var(--ikayi-deep-red-rgb) / 0.1);
   color: var(--ikayi-deep-red);
   font-family: var(--ikayi-font-display);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 900;
   line-height: 1;
 }
@@ -45,21 +45,21 @@
 
 .logoText strong {
   color: var(--ikayi-ink);
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 900;
   line-height: 1;
 }
 
 .logoText small {
   color: var(--ikayi-ink);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 900;
   line-height: 1.18;
 }
 
 .sidebarNav {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .sidebarLink,
@@ -68,10 +68,10 @@
 .viewSiteLink {
   display: flex;
   align-items: center;
-  gap: 14px;
-  min-height: 58px;
-  border-radius: 12px;
-  padding: 0 14px;
+  gap: 12px;
+  min-height: 48px;
+  border-radius: 10px;
+  padding: 0 12px;
   color: var(--ikayi-muted-ink);
   font: inherit;
   font-weight: 900;
@@ -116,14 +116,14 @@
 
 .sidebarFooter {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   margin-top: auto;
 }
 
 .monitorLink,
 .viewSiteLink {
   justify-content: flex-start;
-  min-height: 56px;
+  min-height: 48px;
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.18);
   background: rgb(var(--ikayi-white-rgb) / 0.76);
   color: var(--ikayi-deep-red);
