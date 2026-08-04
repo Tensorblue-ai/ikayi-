@@ -1,4 +1,4 @@
-.closingSection {
+﻿.closingSection {
   background: var(--ikayi-surface-start);
   color: var(--ikayi-ink);
 }
@@ -121,6 +121,7 @@
   gap: 28px;
   width: min(100% - 140px, 1080px);
   margin: 0 auto;
+  isolation: isolate;
 }
 
 .card {
@@ -129,7 +130,32 @@
   border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 42%, transparent);
   border-radius: 8px;
   background: color-mix(in srgb, var(--ikayi-white) 38%, transparent);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 8%, transparent);
   text-align: center;
+  transform-origin: center;
+  animation: testimonialCardOne 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.card:nth-child(2) { animation-name: testimonialCardTwo; }
+.card:nth-child(3) { animation-name: testimonialCardThree; }
+
+@keyframes testimonialCardOne {
+  0%, 8%, 91%, 100% { z-index: 1; transform: translateX(0) translateY(0) scale(1); }
+  25%, 41% { z-index: 3; transform: translateX(calc(100% + 28px)) translateY(-12px) scale(1.055); }
+  58%, 74% { z-index: 1; transform: translateX(calc(200% + 56px)) translateY(0) scale(1); }
+}
+
+@keyframes testimonialCardTwo {
+  0%, 8%, 91%, 100% { z-index: 3; transform: translateX(0) translateY(-12px) scale(1.055); }
+  25%, 41% { z-index: 1; transform: translateX(calc(100% + 28px)) translateY(0) scale(1); }
+  58%, 74% { z-index: 1; transform: translateX(calc(-100% - 28px)) translateY(0) scale(1); }
+}
+
+@keyframes testimonialCardThree {
+  0%, 8%, 91%, 100% { z-index: 1; transform: translateX(0) translateY(0) scale(1); }
+  25%, 41% { z-index: 1; transform: translateX(calc(-200% - 56px)) translateY(0) scale(1); }
+  58%, 74% { z-index: 3; transform: translateX(calc(-100% - 28px)) translateY(-12px) scale(1.055); }
 }
 
 .quoteMark {
@@ -311,6 +337,11 @@
     width: min(100% - 48px, 680px);
   }
 
+
+  .card {
+    animation: none;
+  }
+
   .footerArt {
     min-height: 180px;
   }
@@ -319,6 +350,12 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
   }
 }
 
@@ -340,5 +377,7 @@
     padding-left: 20px;
   }
 }
+
+
 
 

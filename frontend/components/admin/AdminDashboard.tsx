@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
+import { AdminSectionEditorModal } from "./AdminSectionEditorModal";
 import { AdminSidebar, type AdminView } from "./AdminSidebar";
 import { bookings, initialSections } from "./adminDashboardData";
 import styles from "./AdminDashboard.module.css";
@@ -114,73 +115,12 @@ export function AdminDashboard() {
         ) : null}
 
         {activeView === "media" && isEditorOpen ? (
-          <section className={styles.editorPanel} aria-labelledby="edit-section-heading">
-            <div className={styles.editorHeader}>
-              <div>
-                <h2 id="edit-section-heading">Edit homepage section</h2>
-                <p>Change visible content and publishing state. Saved changes update the preview state.</p>
-              </div>
-              <button className={styles.closeButton} type="button" aria-label="Close editor" onClick={() => setIsEditorOpen(false)}>X</button>
-            </div>
-
-            <div className={styles.formGrid}>
-              <label className={styles.fieldFull}>
-                <span>Section title</span>
-                <input value={selectedSection.title} onChange={(event) => updateSelectedSection({ title: event.target.value })} />
-              </label>
-
-              <label className={styles.fieldFull}>
-                <span>Supporting copy</span>
-                <input value={selectedSection.copy} onChange={(event) => updateSelectedSection({ copy: event.target.value })} />
-              </label>
-
-              <label>
-                <span>Section layout</span>
-                <select value={selectedSection.layout} onChange={(event) => updateSelectedSection({ layout: event.target.value })}>
-                  <option>Guest feelings</option>
-                  <option>Image collage</option>
-                  <option>Story cards</option>
-                  <option>Experience cards</option>
-                  <option>Journey highlights</option>
-                  <option>Image grid</option>
-                </select>
-              </label>
-
-              <label>
-                <span>Publishing</span>
-                <select value={selectedSection.status} onChange={(event) => updateSelectedSection({ status: event.target.value as SectionStatus })}>
-                  <option value="published">Published - visible</option>
-                  <option value="draft">Draft - hidden</option>
-                </select>
-              </label>
-
-              <label className={styles.fieldFull}>
-                <span>See all link (optional)</span>
-                <input placeholder="/gallery" />
-              </label>
-            </div>
-
-            <div className={styles.itemsHeader}>Content shown</div>
-            <div className={styles.itemGrid}>
-              {selectedSection.items.map((item) => (
-                <label className={styles.itemChoice} key={item.title}>
-                  <input type="checkbox" defaultChecked />
-                  <span>
-                    <strong>{item.title}</strong>
-                    <small>{item.copy}</small>
-                  </span>
-                </label>
-              ))}
-            </div>
-
-            <div className={styles.editorActions}>
-              <button className={styles.deleteButton} type="button">Delete section</button>
-              <div>
-                <button className={styles.cancelButton} type="button" onClick={() => setIsEditorOpen(false)}>Cancel</button>
-                <button className={styles.primaryButton} type="button" onClick={() => setIsEditorOpen(false)}>Save section</button>
-              </div>
-            </div>
-          </section>
+          <AdminSectionEditorModal
+            section={selectedSection}
+            onClose={() => setIsEditorOpen(false)}
+            onSave={() => setIsEditorOpen(false)}
+            onUpdate={updateSelectedSection}
+          />
         ) : null}
 
         {activeView === "bookings" ? (
