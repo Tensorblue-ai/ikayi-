@@ -2,34 +2,34 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { getActiveItems, GuestJourneySectionData } from "@/lib/homepage-sections";
 import styles from "./PrivateDiningSection.module.css";
 
-const highlights = [
-  {
-    title: "Arrival",
-    copy: "Reservation details, names, and preferences remembered",
-    icon: "*",
-  },
-  {
-    title: "At The Table",
-    copy: "Welcome drink first, then menus once guests settle",
-    icon: "+",
-  },
-  {
-    title: "Departure",
-    copy: "A sincere thank-you, feedback, and a memorable final touch",
-    icon: "~",
-  },
-];
+type PrivateDiningSectionProps = {
+  section: GuestJourneySectionData;
+};
 
-export function PrivateDiningSection() {
+function splitHeading(heading: string) {
+  if (heading.includes(" To ")) {
+    const [beforeTo, afterTo] = heading.split(" To ");
+    return [beforeTo, `To ${afterTo}`];
+  }
+
+  const words = heading.split(" ");
+  const midpoint = Math.ceil(words.length / 2);
+  return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ")].filter(Boolean);
+}
+
+export function PrivateDiningSection({ section }: PrivateDiningSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const highlights = getActiveItems(section.highlights);
+  const headingLines = splitHeading(section.heading);
 
   useEffect(() => {
-    const section = sectionRef.current;
+    const currentSection = sectionRef.current;
 
-    if (!section || isVisible) {
+    if (!currentSection || isVisible) {
       return;
     }
 
@@ -48,7 +48,7 @@ export function PrivateDiningSection() {
       { threshold: 0.28 }
     );
 
-    observer.observe(section);
+    observer.observe(currentSection);
 
     return () => observer.disconnect();
   }, [isVisible]);
@@ -72,8 +72,8 @@ export function PrivateDiningSection() {
         <div className={styles.imagePanel}>
           <Image
             className={styles.heroImage}
-            src="/assets/chef9.png"
-            alt="Private dining table set inside Ikayi's arched dining room"
+            src={section.image}
+            alt={section.imageAlt}
             fill
             sizes="(max-width: 980px) 90vw, 620px"
           />
@@ -82,24 +82,20 @@ export function PrivateDiningSection() {
         <div className={styles.copyPanel}>
           <div className={styles.kicker}>
             <span aria-hidden="true">*</span>
-            <p>Guest Journey</p>
+            <p>{section.kicker}</p>
             <span aria-hidden="true">*</span>
           </div>
 
           <h2 id="private-dining-heading">
-            <span>From Reservation</span>
-            <span>To Departure</span>
+            {headingLines.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
           </h2>
           <div className={styles.divider} aria-hidden="true" />
 
-          <p>
-            The guest journey begins when a reservation is made, not when someone reaches
-            the door. Names and preferences should be captured so recognition feels natural.
-          </p>
-          <p>
-            Guests should feel as though they have arrived at someone&apos;s home: greeted warmly,
-            seated with care, welcomed immediately, and thanked personally before they leave.
-          </p>
+          {section.bodyParagraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
 
           <div className={styles.highlights}>
             {highlights.map((highlight) => (
@@ -115,12 +111,12 @@ export function PrivateDiningSection() {
           </div>
 
           <div className={styles.actions}>
-            <a className={styles.primaryAction} href="#reservations">
-              <span>Enquire Now</span>
+            <a className={styles.primaryAction} href={section.primaryCtaHref}>
+              <span>{section.primaryCtaLabel}</span>
               <b aria-hidden="true">+</b>
             </a>
-            <a className={styles.secondaryAction} href="#gallery">
-              <span>View Dining Spaces</span>
+            <a className={styles.secondaryAction} href={section.secondaryCtaHref}>
+              <span>{section.secondaryCtaLabel}</span>
               <b aria-hidden="true">{`\u2192`}</b>
             </a>
           </div>

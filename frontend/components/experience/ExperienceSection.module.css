@@ -91,6 +91,14 @@
   color: var(--ikayi-deep-red);
 }
 
+.copyBlock h2 .headingLine {
+  color: var(--ikayi-ink);
+}
+
+.copyBlock h2 .headingLine > span {
+  color: var(--ikayi-deep-red);
+}
+
 .smallDivider {
   display: flex;
   align-items: center;
