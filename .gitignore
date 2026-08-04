@@ -14,8 +14,9 @@ frontend/next-env.d.ts
 frontend/AGENTS.md
 frontend/CLAUDE.md
 
-# Backend local environment
-backend/
+# Backend local/build artifacts
+backend/node_modules/
 backend/.env
 backend/.env.*
 !backend/.env.example
+backend/*.log

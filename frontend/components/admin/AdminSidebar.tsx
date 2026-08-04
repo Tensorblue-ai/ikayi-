@@ -24,7 +24,7 @@ export function AdminSidebar({ activeView, onViewChange }: AdminSidebarProps) {
         <span className={styles.logoMark}>IK</span>
         <span className={styles.logoText}>
           <strong>Ikayi</strong>
-          <small>Company CMS</small>
+          <small>Backend</small>
         </span>
       </div>
 
