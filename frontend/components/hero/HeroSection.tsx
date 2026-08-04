@@ -17,16 +17,15 @@ export function HeroSection() {
       <div className={styles.floralLeft} aria-hidden="true" />
       <div className={styles.floralRight} aria-hidden="true" />
 
-
       <div className={styles.content}>
         <div className={styles.eyebrow}>
           <span className={styles.star}>*</span>
-          <span>Modern Indian</span>
+          <span>Rooted in Unity</span>
         </div>
 
         <h1>
-          Gather Around
-          <span>The Table.</span>
+          We Are Because
+          <span>You Are.</span>
         </h1>
 
         <div className={styles.divider} aria-hidden="true">
@@ -39,7 +38,7 @@ export function HeroSection() {
             <span aria-hidden="true">+</span>
           </a>
           <a className={styles.secondaryAction} href="#experience">
-            <span>Explore Ikayi</span>
+            <span>Discover Ikayi</span>
             <span aria-hidden="true">+</span>
           </a>
         </div>
@@ -47,5 +46,3 @@ export function HeroSection() {
     </section>
   );
 }
-
-

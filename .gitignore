@@ -1,3 +1,21 @@
 Temp/
 IKAYI - website.pdf
 AGENTS.md
+# Frontend local/build artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/coverage/
+frontend/.vercel/
+frontend/.env*
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+frontend/AGENTS.md
+frontend/CLAUDE.md
+
+# Backend local environment
+backend/
+backend/.env
+backend/.env.*
+!backend/.env.example

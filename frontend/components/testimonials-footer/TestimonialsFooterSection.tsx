@@ -3,22 +3,19 @@ import styles from "./TestimonialsFooterSection.module.css";
 
 const testimonials = [
   {
-    quote:
-      "IKAYI is a beautiful blend of tradition and modernity. The food, the ambiance, the warmth-everything feels so thoughtfully curated.",
-    name: "Ananya S.",
-    city: "Mumbai",
+    quote: "Welcomed like they were expected, not merely seated.",
+    name: "Recognition",
+    city: "Guest Feeling",
   },
   {
-    quote:
-      "From the Galouti Kebabs to the Sunset Sessions, every detail is perfect. A must-visit in Lucknow!",
-    name: "Rohan M.",
-    city: "Delhi",
+    quote: "Calm, unhurried, and easy, without performance.",
+    name: "Ease",
+    city: "Guest Feeling",
   },
   {
-    quote:
-      "The hospitality at IKAYI is unparalleled. It's more than a meal-it's an experience that stays with you.",
-    name: "Neha & Arjun",
-    city: "Bangalore",
+    quote: "Connected to the people they came with, and to something larger.",
+    name: "Oneness",
+    city: "Guest Feeling",
   },
 ];
 
@@ -35,7 +32,7 @@ const footerLinkGroups = [
     title: "Dining",
     links: [
       { label: "Signature Experiences", href: "#signature-experiences" },
-      { label: "Private Dining", href: "#private-dining" },
+      { label: "Guest Journey", href: "#private-dining" },
       { label: "Reservations", href: "#reservations" },
     ],
   },
@@ -43,7 +40,7 @@ const footerLinkGroups = [
     title: "Discover",
     links: [
       { label: "Gallery", href: "#gallery" },
-      { label: "Testimonials", href: "#testimonials" },
+      { label: "Guest Feelings", href: "#testimonials" },
       { label: "Instagram", href: "https://www.instagram.com/ikayi_lucknow/" },
     ],
   },
@@ -62,15 +59,18 @@ export function TestimonialsFooterSection() {
           <div className={styles.titleRule} aria-hidden="true">
             <span />
           </div>
-          <h2 id="testimonials-heading">Testimonials</h2>
+          <h2 id="testimonials-heading">
+            <span>What Guests</span>
+            <span>Carry Home</span>
+          </h2>
           <div className={styles.titleRule} aria-hidden="true">
             <span />
           </div>
         </div>
 
         <p className={styles.intro}>
-          Moments shared. Experiences cherished.
-          <span>Here&apos;s what our guests have to say.</span>
+          Not only the food, but the feeling after the meal.
+          <span>Welcomed, celebrated, calm, inspired, and connected.</span>
         </p>
 
         <div className={styles.cards}>
@@ -94,7 +94,7 @@ export function TestimonialsFooterSection() {
               <span>IKAYI</span>
               <small>Modern Indian</small>
             </div>
-            <p>Come together over unforgettable food, warm conversations, and moments that matter.</p>
+            <p>Rooted in unity, built for meaningful dining experiences in Lucknow.</p>
             <div className={styles.socials} aria-label="Social links">
               <a href="https://www.instagram.com/ikayi_lucknow/" aria-label="Instagram">{"\u25CE"}</a>
               <a href="#facebook" aria-label="Facebook">f</a>

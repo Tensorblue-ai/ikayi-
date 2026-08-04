@@ -4,26 +4,26 @@ import styles from "./SignatureExperiencesSection.module.css";
 const experiences = [
   {
     image: "/assets/chef5.png",
-    title: "Chef's Table",
-    copy: "A curated multi-course journey crafted just for you.",
+    title: "Ikayi High Tea",
+    copy: "A relaxed, elegant afternoon pause with sweet and savoury offerings.",
     icon: "cloche",
   },
   {
     image: "/assets/chef6.png",
-    title: "High Tea",
-    copy: "Elegant conversations over curated teas and delicacies.",
+    title: "Veranda Ritual",
+    copy: "Sunset cocktails, small bites, and a curated shift into evening.",
     icon: "cup",
   },
   {
     image: "/assets/chef7.png",
-    title: "Sunday Brunch",
-    copy: "Long tables, great food, and even better company.",
+    title: "Ikayi Brunch",
+    copy: "Sharing-style dishes served to the table with convivial abundance.",
     icon: "table",
   },
   {
     image: "/assets/chef8.png",
-    title: "Sunset Sessions",
-    copy: "Cocktails, conversations and Lucknow's golden hour.",
+    title: "Welcome Ritual",
+    copy: "A signature IKAYI gesture being developed ahead of opening.",
     icon: "glass",
   },
 ];
@@ -47,10 +47,10 @@ export function SignatureExperiencesSection() {
       </div>
 
       <p className={styles.intro}>
-        Curated moments. Timeless flavours. Unforgettable memories.
+        Signature moments shaped by warmth, rhythm, and recognition.
         <span>
-          At IKAYI, every experience is designed to bring people together through food,
-          conversation, and the joy of being present.
+          These experiences are designed to make afternoons unhurried, sunsets memorable,
+          and gatherings feel abundant without overwhelming conversation.
         </span>
       </p>
 
@@ -72,10 +72,10 @@ export function SignatureExperiencesSection() {
 
       <div className={styles.footerPanel}>
         <div className={styles.dotGrid} aria-hidden="true" />
-        <p>Where Every Occasion Becomes Special</p>
+        <p>Traffic Tools, Not Brand Positioning</p>
         <span>
-          From intimate dinners to grand celebrations, our spaces and experiences are tailored
-          to make every moment extraordinary.
+          Happy Hour and selective 20% vouchers can support quieter periods, but they should
+          never compete with IKAYI&apos;s premium, artisan-led identity.
         </span>
         <a href="#gallery">
           <span>Explore Our Spaces</span>
@@ -85,4 +85,3 @@ export function SignatureExperiencesSection() {
     </section>
   );
 }
-

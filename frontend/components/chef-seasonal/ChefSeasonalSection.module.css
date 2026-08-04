@@ -1,0 +1,453 @@
+.chefSeasonal {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(58px, 7vw, 88px) 0 clamp(46px, 6vw, 68px);
+  background:
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--ikayi-white) 72%, transparent) 0, transparent 30%),
+    radial-gradient(circle at 82% 28%, color-mix(in srgb, var(--ikayi-white) 52%, transparent) 0, transparent 26%),
+    linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-surface-end) 100%);
+  color: var(--ikayi-ink);
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  opacity: 0;
+  transform: scale(1.012);
+  transform-origin: center top;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.95fr) auto minmax(520px, 1.25fr);
+  align-items: stretch;
+  gap: clamp(34px, 5vw, 58px);
+  width: min(100% - 80px, 1320px);
+  margin: 0 auto;
+}
+
+.chefStory,
+.menuPanel {
+  position: relative;
+  min-width: 0;
+}
+
+.logoBadge {
+  display: grid;
+  width: 92px;
+  height: 92px;
+  place-items: center;
+  margin-bottom: 22px;
+  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-dark-surface);
+  color: var(--ikayi-gold);
+  font-family: var(--ikayi-font-display);
+  font-size: 1.08rem;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 18%, transparent);
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-accent);
+  text-transform: uppercase;
+}
+
+.kicker span {
+  color: var(--ikayi-deep-red);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.kicker p {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.chefStory h2,
+.menuPanel h2 {
+  margin: 0;
+  color: var(--ikayi-ink);
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(2.8rem, 4.7vw, 4.65rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.98;
+}
+
+.fineRule {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 148px;
+  margin: 22px 0 26px;
+}
+
+.fineRule::before,
+.fineRule::after,
+.bottomRule::before,
+.bottomRule::after,
+.cardRule::before,
+.cardRule::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: color-mix(in srgb, var(--ikayi-terracotta) 62%, transparent);
+}
+
+.fineRule span,
+.bottomRule span,
+.cardRule span {
+  width: 8px;
+  height: 8px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 72%, transparent);
+  transform: rotate(45deg);
+}
+
+.chefGrid {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.72fr) minmax(210px, 1fr);
+  align-items: end;
+  gap: clamp(24px, 4vw, 38px);
+}
+
+.storyCopy p {
+  max-width: 230px;
+  margin: 0 0 15px;
+  color: var(--ikayi-muted-ink);
+  font-family: var(--ikayi-font-body);
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.signature {
+  margin-top: 26px;
+  color: var(--ikayi-deep-red);
+}
+
+.signature span {
+  display: block;
+  font-family: var(--ikayi-font-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.signature small {
+  display: block;
+  margin-top: 7px;
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.chefPortrait {
+  position: relative;
+  align-self: end;
+  aspect-ratio: 0.76;
+  min-height: 360px;
+  overflow: hidden;
+  border: 3px solid color-mix(in srgb, var(--ikayi-white) 76%, transparent);
+  border-radius: 50% 50% 12px 12px / 26% 26% 12px 12px;
+  background: var(--ikayi-dark-surface);
+  box-shadow: 0 22px 44px color-mix(in srgb, var(--ikayi-ink) 18%, transparent);
+  opacity: 0;
+  transform: scale(0.9) translateY(14px);
+  transform-origin: center bottom;
+}
+
+.chefPortrait::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-gold) 58%, transparent);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.chefPortrait img,
+.menuImage img {
+  object-fit: cover;
+}
+
+.verticalRule {
+  width: 1px;
+  min-height: 100%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--ikayi-terracotta) 58%, transparent), transparent);
+}
+
+.verticalRule::after {
+  content: "*";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  color: var(--ikayi-terracotta);
+  font-family: var(--ikayi-font-display);
+  font-size: 1.35rem;
+  transform: translate(-50%, -50%);
+}
+
+.menuPanel {
+  padding-top: 62px;
+}
+
+.menuIntro {
+  max-width: 560px;
+  margin: 18px 0 24px;
+  color: var(--ikayi-muted-ink);
+  font-family: var(--ikayi-font-body);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.menuCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  overflow: hidden;
+}
+
+.menuCard {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ikayi-white) 84%, var(--ikayi-terracotta));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
+  box-shadow: 0 18px 34px color-mix(in srgb, var(--ikayi-ink) 12%, transparent);
+  opacity: 0;
+  transform: translateX(42px);
+
+}
+
+.isVisible {
+  animation: chefSectionDrift 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.isVisible .chefPortrait {
+  animation: chefPortraitScale 1180ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both;
+}
+
+.isVisible .menuCard {
+  animation: seasonalCardIn 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.isVisible .menuCard:nth-child(1) { animation-delay: 320ms; }
+.isVisible .menuCard:nth-child(2) { animation-delay: 470ms; }
+.isVisible .menuCard:nth-child(3) { animation-delay: 620ms; }
+
+.seasonIcon {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 2;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 58%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ikayi-white) 78%, transparent);
+  color: var(--ikayi-terracotta);
+  font-family: var(--ikayi-font-display);
+  font-size: 1rem;
+}
+
+.seasonIcon::before {
+  content: "*";
+}
+
+.seasonIcon[data-season="sun"]::before {
+  content: "ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤";
+}
+
+.seasonIcon[data-season="rain"]::before {
+  content: "?";
+}
+
+.seasonIcon[data-season="snow"]::before {
+  content: "?";
+}
+
+.menuImage {
+  position: relative;
+  aspect-ratio: 1.24;
+  overflow: hidden;
+}
+
+.cardCopy {
+  padding: 16px 16px 18px;
+  text-align: center;
+}
+
+.cardCopy h3 {
+  margin: 0;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.cardRule {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 86px;
+  margin: 11px auto 10px;
+}
+
+.cardCopy p {
+  margin: 0;
+  color: var(--ikayi-muted-ink);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.closingLine {
+  position: relative;
+  z-index: 1;
+  margin: 34px auto 0;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.bottomRule {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(100% - 96px, 340px);
+  margin: 18px auto 0;
+}
+
+.dotPattern {
+  position: absolute;
+  left: max(24px, calc((100vw - 1320px) / 2));
+  top: 18px;
+  width: 72px;
+  height: 86px;
+  opacity: 0.46;
+  background-image: radial-gradient(circle, var(--ikayi-terracotta) 1.4px, transparent 1.4px);
+  background-size: 13px 13px;
+}
+
+.archSketch {
+  position: absolute;
+  right: max(36px, calc((100vw - 1320px) / 2));
+  top: 32px;
+  width: 180px;
+  height: 154px;
+  opacity: 0.26;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 48%, transparent);
+  border-radius: 50% 50% 8px 8px / 42% 42% 8px 8px;
+}
+
+.archSketch::before,
+.archSketch::after {
+  content: "";
+  position: absolute;
+  inset: 14px 24px 0;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 38%, transparent);
+  border-bottom: 0;
+  border-radius: inherit;
+}
+
+.archSketch::after {
+  inset: 28px 48px 0;
+}
+
+@keyframes chefSectionDrift {
+  0% { opacity: 0; transform: scale(1.012); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes chefPortraitScale {
+  0% { opacity: 0; transform: scale(0.9) translateY(14px); }
+  72% { opacity: 1; transform: scale(1.018) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes seasonalCardIn {
+  0% { opacity: 0; transform: translateX(42px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chefSeasonal,
+  .chefPortrait,
+  .menuCard {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 1080px) {
+  .inner {
+    grid-template-columns: 1fr;
+    width: min(100% - 48px, 820px);
+  }
+
+  .verticalRule {
+    display: none;
+  }
+
+  .menuPanel {
+    padding-top: 0;
+  }
+
+  .chefGrid {
+    grid-template-columns: minmax(0, 0.72fr) minmax(260px, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .chefSeasonal {
+    padding-top: 46px;
+  }
+
+  .inner {
+    width: min(100% - 32px, 820px);
+  }
+
+  .logoBadge {
+    width: 78px;
+    height: 78px;
+    font-size: 0.92rem;
+  }
+
+  .chefStory h2,
+  .menuPanel h2 {
+    font-size: clamp(2.25rem, 13vw, 3.25rem);
+  }
+
+  .chefGrid,
+  .menuCards {
+    grid-template-columns: 1fr;
+  }
+
+  .storyCopy p {
+    max-width: none;
+  }
+
+  .chefPortrait {
+    min-height: auto;
+    aspect-ratio: 0.86;
+  }
+
+  .dotPattern,
+  .archSketch {
+    display: none;
+  }
+}

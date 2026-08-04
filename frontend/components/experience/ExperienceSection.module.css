@@ -1,4 +1,4 @@
-﻿.experience {
+.experience {
   position: relative;
   overflow: hidden;
   min-height: 100svh;
@@ -8,6 +8,8 @@
     linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-surface-end) 100%);
   color: var(--ikayi-ink);
   border-top: 1px solid rgba(183, 118, 66, 0.22);
+  transform-origin: center top;
+  animation: experienceReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .introGrid {
@@ -126,12 +128,14 @@
 }
 
 .cta {
+  position: relative;
   display: inline-flex;
   min-height: 42px;
   align-items: center;
   justify-content: center;
   gap: 20px;
   padding: 0 22px;
+  border-radius: 6px;
   background: var(--ikayi-sage-green);
   color: var(--ikayi-white);
   font-size: 0.68rem;
@@ -139,7 +143,25 @@
   letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
+  overflow: hidden;
   box-shadow: 0 14px 28px rgba(73, 94, 61, 0.18);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 0%, transparent 38%, color-mix(in srgb, var(--ikayi-gold) 72%, transparent) 48%, color-mix(in srgb, var(--ikayi-white) 54%, transparent) 52%, transparent 64%, transparent 100%);
+  transform: translateX(-130%);
+  animation: journeyShimmer 3.8s ease-in-out 900ms infinite;
+  pointer-events: none;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px color-mix(in srgb, var(--ikayi-sage-green) 24%, transparent);
 }
 
 .featuredHeader {
@@ -174,7 +196,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 24px;
   width: min(100% - 96px, 1280px);
@@ -190,6 +212,30 @@
 .card {
   min-width: 0;
   text-align: center;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: cardMicroLift 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease;
+}
+
+.card:nth-child(1) {
+  animation-delay: 220ms;
+}
+
+.card:nth-child(2) {
+  animation-delay: 340ms;
+}
+
+.card:nth-child(3) {
+  animation-delay: 460ms;
+}
+
+.card:nth-child(4) {
+  animation-delay: 580ms;
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 .cardImageWrap {
@@ -198,6 +244,12 @@
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 14px 28px rgba(85, 48, 28, 0.16);
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+
+.card:hover .cardImageWrap {
+  box-shadow: 0 20px 34px color-mix(in srgb, var(--ikayi-deep-red) 18%, transparent);
+  transform: translateY(-2px);
 }
 
 .cardImage {
@@ -245,6 +297,61 @@
   background-size: 14px 14px;
 }
 
+@keyframes experienceReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.018);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes journeyShimmer {
+  0%,
+  42% {
+    transform: translateX(-130%);
+  }
+
+  68%,
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes cardMicroLift {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience,
+  .cta::after,
+  .card {
+    animation: none;
+  }
+
+  .experience,
+  .card {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cta,
+  .card,
+  .cardImageWrap {
+    transition: none;
+  }
+}
 @media (max-width: 980px) {
   .experience {
     min-height: auto;

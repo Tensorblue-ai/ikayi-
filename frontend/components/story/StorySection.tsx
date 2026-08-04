@@ -1,39 +1,39 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import styles from "./StorySection.module.css";
 
 const storyCards = [
   {
     image: "/assets/story1.png",
-    title: "Farmers",
-    copy: "Honoring the hands that nourish our tables.",
+    title: "Rooted",
+    copy: "Close to the land, food, and stories of Lucknow and India.",
     href: "#experience",
     icon: "\u2698",
   },
   {
     image: "/assets/story2.png",
-    title: "Ingredients",
-    copy: "The best of India, thoughtfully sourced.",
+    title: "Warm",
+    copy: "Every guest welcomed as you would welcome someone home.",
     href: "#kitchen-experience",
     icon: "\u25CE",
   },
   {
     image: "/assets/story3.png",
-    title: "Craftsmanship",
-    copy: "Time-honored techniques, made with pride.",
+    title: "Refined",
+    copy: "Excellence over excess; every detail considered.",
     href: "#signature-experiences",
     icon: "\u2726",
   },
   {
     image: "/assets/story4.png",
-    title: "Lucknow Stories",
-    copy: "A city of elegance, culture, and cuisine.",
+    title: "Curious",
+    copy: "Always asking how things can be more honest and thoughtful.",
     href: "#private-dining",
     icon: "\u2302",
   },
   {
     image: "/assets/exp3.png",
-    title: "Ikayi Moments",
-    copy: "Gatherings shaped by warmth and memory.",
+    title: "Indian",
+    copy: "Proudly Indian, honouring tradition without caricature.",
     href: "#gallery",
     icon: "\u2605",
   },
@@ -59,8 +59,8 @@ export function StorySection() {
         </div>
 
         <p className={styles.intro}>
-          Every ingredient has a story. Every tradition has a soul.
-          <span>Discover the people, places, and passions that inspire IKAYI.</span>
+          Hospitality is one of the most powerful ways to bring people together.
+          <span>IKAYI belongs to Lucknow, and to those who come to discover it.</span>
         </p>
 
         <div className={styles.cards}>
@@ -87,13 +87,13 @@ export function StorySection() {
           <Image className={styles.bannerArt} src="/assets/footer.png" alt="" width={170} height={132} aria-hidden="true" />
           <p>
             <span aria-hidden="true">{`\u201C`}</span>
-            Our stories are rooted in tradition,
+            Slow down and indulge.
             <br />
-            yet inspired by the world around us.
+            Life is meant to be lived, felt, and shared.
             <span aria-hidden="true">{`\u201D`}</span>
           </p>
           <a href="#gallery">
-            Discover More <span aria-hidden="true">{`\u2726`}</span>
+            See the Space <span aria-hidden="true">{`\u2726`}</span>
           </a>
         </div>
       </div>

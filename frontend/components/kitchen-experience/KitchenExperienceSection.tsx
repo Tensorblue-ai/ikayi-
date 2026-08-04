@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import styles from "./KitchenExperienceSection.module.css";
 
@@ -45,7 +45,7 @@ export function KitchenExperienceSection() {
 
             <div className={styles.kicker}>
               <span aria-hidden="true">*</span>
-              <p>The Ikayi Experience</p>
+              <p>Dining Concept</p>
             </div>
 
             <h2 id="kitchen-experience-heading">
@@ -58,13 +58,13 @@ export function KitchenExperienceSection() {
             </div>
 
             <p>
-              Step into the heart of IKAYI and witness culinary craftsmanship come alive.
-              Our open kitchen invites you to experience the rhythm of fire, the artistry
-              of flavour, and the joy of connection up close and unfiltered.
+              The open kitchen is an invitation for interaction and connection. Chefs
+              engage with guests where appropriate, finishing touches may happen
+              tableside, and each moment is guided so it feels intentional, not random.
             </p>
 
             <a className={styles.cta} href="#reservations">
-              <span>Discover the Kitchen</span>
+              <span>Plan Your Visit</span>
               <span aria-hidden="true">+</span>
             </a>
           </div>

@@ -1,4 +1,4 @@
-﻿.header {
+.header {
   position: fixed;
   top: 0;
   left: 50%;
@@ -58,6 +58,34 @@
   border: 1px solid rgba(167, 43, 36, 0.45);
   padding: 12px 22px;
   color: var(--ikayi-deep-red);
+  box-shadow: 0 0 0 color-mix(in srgb, var(--ikayi-gold) 0%, transparent);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  animation: reservationGlow 3.6s ease-in-out infinite;
+}
+
+.reservationLink:hover,
+.reservationLink:focus-visible {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--ikayi-gold) 72%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--ikayi-gold) 30%, transparent);
+}
+
+@keyframes reservationGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 color-mix(in srgb, var(--ikayi-gold) 0%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 16px color-mix(in srgb, var(--ikayi-gold) 24%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reservationLink {
+    animation: none;
+    transition: none;
+  }
 }
 
 @media (max-width: 980px) {

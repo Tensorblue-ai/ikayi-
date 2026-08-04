@@ -1,27 +1,65 @@
-﻿import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styles from "./PrivateDiningSection.module.css";
 
 const highlights = [
   {
-    title: "Intimate Celebrations",
-    copy: "Birthdays, anniversaries, special evenings",
+    title: "Arrival",
+    copy: "Reservation details, names, and preferences remembered",
     icon: "*",
   },
   {
-    title: "Curated Dining",
-    copy: "Personalized menus and attentive service",
+    title: "At The Table",
+    copy: "Welcome drink first, then menus once guests settle",
     icon: "+",
   },
   {
-    title: "Elegant Setting",
-    copy: "Warm interiors, privacy, and refined atmosphere",
+    title: "Departure",
+    copy: "A sincere thank-you, feedback, and a memorable final touch",
     icon: "~",
   },
 ];
 
 export function PrivateDiningSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section || isVisible) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.28 }
+    );
+
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
   return (
-    <section className={styles.privateDining} id="private-dining" aria-labelledby="private-dining-heading">
+    <section
+      ref={sectionRef}
+      className={`${styles.privateDining} ${isVisible ? styles.isVisible : ""}`}
+      id="private-dining"
+      aria-labelledby="private-dining-heading"
+    >
       <div className={styles.logoBadge} aria-hidden="true">
         <span>IKAYI</span>
         <small>Modern Indian</small>
@@ -44,20 +82,23 @@ export function PrivateDiningSection() {
         <div className={styles.copyPanel}>
           <div className={styles.kicker}>
             <span aria-hidden="true">*</span>
-            <p>Exclusive Gatherings</p>
+            <p>Guest Journey</p>
             <span aria-hidden="true">*</span>
           </div>
 
-          <h2 id="private-dining-heading">Private Dining</h2>
+          <h2 id="private-dining-heading">
+            <span>From Reservation</span>
+            <span>To Departure</span>
+          </h2>
           <div className={styles.divider} aria-hidden="true" />
 
           <p>
-            Host intimate celebrations, milestone dinners, and meaningful gatherings in a
-            space designed for warmth, privacy, and effortless hospitality.
+            The guest journey begins when a reservation is made, not when someone reaches
+            the door. Names and preferences should be captured so recognition feels natural.
           </p>
           <p>
-            From family occasions to curated business dinners, every detail is thoughtfully
-            arranged to make the evening feel personal and memorable.
+            Guests should feel as though they have arrived at someone&apos;s home: greeted warmly,
+            seated with care, welcomed immediately, and thanked personally before they leave.
           </p>
 
           <div className={styles.highlights}>
@@ -80,7 +121,7 @@ export function PrivateDiningSection() {
             </a>
             <a className={styles.secondaryAction} href="#gallery">
               <span>View Dining Spaces</span>
-              <b aria-hidden="true">→</b>
+              <b aria-hidden="true">{`\u2192`}</b>
             </a>
           </div>
         </div>

@@ -141,6 +141,7 @@
   margin: 28px 0 0 50%;
   padding: 0 28px;
   border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 45%, transparent);
+  border-radius: 6px;
   color: var(--ikayi-deep-red);
   font-family: var(--ikayi-font-accent);
   font-size: 0.76rem;

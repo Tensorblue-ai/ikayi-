@@ -1,7 +1,14 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import styles from "./StickyNavbar.module.css";
 
-const navItems = ["Experience", "Menu", "Kitchen Experience", "Stories", "Gallery", "About"];
+const navItems = [
+  { label: "Experience", href: "/#experience" },
+  { label: "Kitchen", href: "/#kitchen-experience" },
+  { label: "Stories", href: "/#stories" },
+  { label: "Signature", href: "/#signature-experiences" },
+  { label: "Guest Journey", href: "/#private-dining" },
+  { label: "Gallery", href: "/#gallery" },
+];
 
 export function StickyNavbar() {
   return (
@@ -13,8 +20,8 @@ export function StickyNavbar() {
 
       <nav className={styles.nav} aria-label="Primary navigation">
         {navItems.map((item) => (
-          <Link href={`/#${item.toLowerCase().replaceAll(" ", "-")}`} key={item}>
-            {item}
+          <Link href={item.href} key={item.label}>
+            {item.label}
           </Link>
         ))}
       </nav>

@@ -1,6 +1,7 @@
 import { ExperienceSection } from "@/components/experience/ExperienceSection";
 import { HeroSection } from "@/components/hero/HeroSection";
 import { KitchenExperienceSection } from "@/components/kitchen-experience/KitchenExperienceSection";
+import { ChefSeasonalSection } from "@/components/chef-seasonal/ChefSeasonalSection";
 import { StorySection } from "@/components/story/StorySection";
 import { SignatureExperiencesSection } from "@/components/signature-experiences/SignatureExperiencesSection";
 import { PrivateDiningSection } from "@/components/private-dining/PrivateDiningSection";
@@ -13,6 +14,7 @@ export default function Home() {
       <HeroSection />
       <ExperienceSection />
       <KitchenExperienceSection />
+      <ChefSeasonalSection />
       <StorySection />
       <SignatureExperiencesSection />
       <PrivateDiningSection />
