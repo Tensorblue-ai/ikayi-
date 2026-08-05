@@ -7,8 +7,11 @@ const Story = require("./models/Story");
 const SignatureExperience = require("./models/SignatureExperience");
 const GuestJourney = require("./models/GuestJourney");
 const Gallery = require("./models/Gallery");
+const Reservation = require("./models/Reservation");
 
 dotenv.config({ quiet: true });
+
+const apiAssetBaseUrl = (process.env.API_ASSET_BASE_URL || "http://localhost:5000/api/assets").replace(/\/+$/, "");
 
 const sections = [
   {
@@ -263,13 +266,39 @@ const sections = [
         { src: "/assets/exp3.png", alt: "Ikayi signature dish presented with warm table styling", sortOrder: 5 },
         { src: "/assets/kitch3.png", alt: "Guests watching the Ikayi open kitchen counter", sortOrder: 6 },
         { src: "/assets/exp2.png", alt: "Ikayi dish with herbs and cocktail styling", sortOrder: 7 },
-        { src: "/assets/story4.png", alt: "Lucknow architecture at sunset", sortOrder: 8 },
+        { src: "/assets/reservation%20(2).png", alt: "Ikayi reservation experience with dining collage", sortOrder: 8 },
         { src: "/assets/exp5.png", alt: "Creamy Ikayi cocktail with garnish", sortOrder: 9 },
         { src: "/assets/kitch2.png", alt: "Ikayi chef preparing dishes in the kitchen", sortOrder: 10 },
         { src: "/assets/chef9%20(2).png", alt: "Ikayi curry plated with Indian breads", sortOrder: 11 },
       ],
       ctaLabel: "Explore More Moments",
       ctaHref: "#stories",
+      isPublished: true,
+    },
+  },
+  {
+    model: Reservation,
+    key: "reservations",
+    data: {
+      sectionKey: "reservations",
+      image: `${apiAssetBaseUrl}/assets/reservation.png`,
+      imageAlt: "Ikayi reservation experience collage",
+      tabs: ["Overview", "Reservations", "More Information", "Location"],
+      details: ["The City Palace, Lucknow", "90-120 Minutes", "Tasting Experience"],
+      title: "Six-Course Tasting Menu",
+      priceLabel: "INR 4,800 ++",
+      description:
+        "An evening of refined indulgence. Our six-course tasting menu is a journey through seasonal ingredients, regional inspiration, and contemporary technique crafted to delight, surprise, and leave a lasting impression.",
+      note: "Advance reservations are highly recommended to ensure a seamless dining experience.",
+      bookingTitle: "Book Now",
+      timeSlots: ["12:30 PM", "2:30 PM", "7:30 PM", "9:30 PM"],
+      defaultGuests: 2,
+      helperText: "You will be able to review and confirm your reservation on the next step.",
+      primaryCtaLabel: "Check Availability",
+      inquiryCtaLabel: "Send Inquiry",
+      inquiryCtaHref: "/#reservations",
+      policyLabel: "Cancellation Policy",
+      policyHref: "#cancellation-policy",
       isPublished: true,
     },
   },

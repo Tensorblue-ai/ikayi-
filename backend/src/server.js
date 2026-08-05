@@ -1,10 +1,11 @@
-﻿const express = require("express");
+const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const adminSectionsRoutes = require("./routes/adminSectionsRoutes");
+const assetsRoutes = require("./routes/assetsRoutes");
 
 dotenv.config({ quiet: true });
 
@@ -12,7 +13,7 @@ const app = express();
 const port = Number(process.env.PORT) || 5000;
 const frontendOrigin = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
 
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(
   cors({
     origin: frontendOrigin,
@@ -23,6 +24,7 @@ app.use(express.json({ limit: "1mb" }));
 app.use(cookieParser());
 
 app.use("/api/admin/sections", adminSectionsRoutes);
+app.use("/api/assets", assetsRoutes);
 
 app.get("/health", (_req, res) => {
   res.status(200).json({

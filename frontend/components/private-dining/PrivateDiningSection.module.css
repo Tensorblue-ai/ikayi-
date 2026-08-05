@@ -453,6 +453,16 @@
     grid-template-columns: 1fr;
   }
 
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: min(100%, 280px);
+  }
+
   .archMark,
   .circleAccent,
   .dotGrid {

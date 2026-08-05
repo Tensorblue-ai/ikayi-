@@ -4,6 +4,7 @@ const Story = require("../models/Story");
 const SignatureExperience = require("../models/SignatureExperience");
 const GuestJourney = require("../models/GuestJourney");
 const Gallery = require("../models/Gallery");
+const Reservation = require("../models/Reservation");
 
 const sectionRegistry = [
   {
@@ -41,6 +42,12 @@ const sectionRegistry = [
     model: Gallery,
     getTitle: (doc) => doc.heading,
     getSummary: (doc) => doc.intro,
+  },
+  {
+    sectionKey: "reservations",
+    model: Reservation,
+    getTitle: (doc) => doc.title,
+    getSummary: (doc) => doc.description,
   },
 ];
 
@@ -214,6 +221,11 @@ function applyAdminSummaryUpdate(entry, doc, payload) {
       break;
     case "gallery":
       applyGalleryUpdate(doc, payload);
+      break;
+    case "reservations":
+      if (hasText(payload.title)) doc.title = payload.title.trim();
+      if (hasText(payload.copy)) doc.priceLabel = payload.copy.trim();
+      if (hasText(payload.summary)) doc.description = payload.summary.trim();
       break;
   }
 }

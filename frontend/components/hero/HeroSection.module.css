@@ -257,7 +257,10 @@
 
   .actions {
     width: min(100%, 330px);
+    justify-content: center;
     gap: 14px;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .primaryAction,

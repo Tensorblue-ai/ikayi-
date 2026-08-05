@@ -26,7 +26,7 @@ export function StickyNavbar() {
         ))}
       </nav>
 
-      <Link className={styles.reservationLink} href="/#reservations">
+      <Link className={styles.reservationLink} href="/reservations">
         Reservations
       </Link>
     </header>

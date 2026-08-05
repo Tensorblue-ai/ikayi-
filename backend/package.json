@@ -7,13 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "seed": "node src/seed.js"
+    "seed": "node src/seed.js",
+    "assets:r2": "node src/scripts/uploadAssetsToR2.js",
+    "assets:r2:upload": "node src/scripts/uploadAssetsToR2.js --upload-only",
+    "assets:r2:rewrite": "node src/scripts/uploadAssetsToR2.js --rewrite-only"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.26.2",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1103.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",

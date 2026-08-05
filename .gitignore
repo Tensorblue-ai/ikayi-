@@ -20,3 +20,6 @@ backend/.env
 backend/.env.*
 !backend/.env.example
 backend/*.log
+
+# Local pnpm store
+.pnpm-store/

@@ -400,6 +400,13 @@
     white-space: normal;
   }
 
+  .cta {
+    display: flex;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .featuredHeader,
   .cardRow {
     width: min(100% - 32px, 680px);

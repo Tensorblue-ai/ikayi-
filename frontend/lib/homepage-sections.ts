@@ -121,6 +121,35 @@ export type GallerySectionData = {
   isPublished?: boolean;
 };
 
+
+export type ReservationDateOption = SortableItem & {
+  day: string;
+  label: string;
+  selected?: boolean;
+};
+
+export type ReservationSectionData = {
+  sectionKey: "reservations";
+  image: string;
+  imageAlt: string;
+  tabs: string[];
+  details: string[];
+  title: string;
+  priceLabel: string;
+  description: string;
+  note: string;
+  bookingTitle: string;
+  dateOptions?: ReservationDateOption[];
+  timeSlots: string[];
+  defaultGuests: number;
+  helperText: string;
+  primaryCtaLabel: string;
+  inquiryCtaLabel: string;
+  inquiryCtaHref: string;
+  policyLabel: string;
+  policyHref: string;
+  isPublished?: boolean;
+};
 export type HomepageSections = {
   experience?: ExperienceSectionData;
   "kitchen-experience"?: KitchenExperienceSectionData;
@@ -185,4 +214,23 @@ export async function getHomepageSections(): Promise<HomepageSections> {
   }
 
   return homepageSections;
+}
+type ApiSectionResponse<T> = {
+  section?: T;
+};
+
+export async function getReservationSection(): Promise<ReservationSectionData | null> {
+  const apiOrigin = process.env.IKAYI_API_ORIGIN || process.env.NEXT_PUBLIC_API_ORIGIN || "http://localhost:5000";
+  const response = await fetch(`${apiOrigin}/api/admin/sections/reservations`, { cache: "no-store" });
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error(`Reservation section request failed with ${response.status}`);
+  }
+
+  const payload = (await response.json()) as ApiSectionResponse<ReservationSectionData>;
+  return payload.section && payload.section.isPublished !== false ? payload.section : null;
 }

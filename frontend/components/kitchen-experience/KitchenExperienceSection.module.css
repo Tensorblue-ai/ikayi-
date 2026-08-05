@@ -274,6 +274,13 @@
     white-space: normal;
   }
 
+  .cta {
+    display: flex;
+    width: min(100%, 240px);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .collage {
     grid-template-columns: 1fr;
     grid-template-rows: none;
