@@ -21,7 +21,10 @@ export function AdminSidebar({ activeView, onViewChange }: AdminSidebarProps) {
   return (
     <aside className={styles.sidebar} aria-label="Admin navigation">
       <div className={styles.sidebarLogo} aria-label="Ikayi admin home">
-        <span className={styles.logoMark}>IK</span>
+        <span className={styles.logoMark}>
+          <span>IKAYI</span>
+          <small>Modern Indian</small>
+        </span>
         <span className={styles.logoText}>
           <strong>Ikayi</strong>
           <small>Backend</small>

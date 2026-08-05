@@ -5,6 +5,8 @@ export const initialSections: HomepageSection[] = [
     id: "experience",
     title: "Hospitality before service",
     copy: "Every meal begins with a welcome.",
+    summary:
+      "IKAYI is built on oneness: guests, team, community, artisans, farmers, Lucknow, and India held as one thread. Every detail should feel warm, harmonious, and refined.",
     layout: "Guest feelings",
     status: "published",
     items: [
@@ -18,6 +20,8 @@ export const initialSections: HomepageSection[] = [
     id: "kitchen",
     title: "Open Kitchen Experience",
     copy: "Interaction, connection and tableside finishing touches.",
+    summary:
+      "The open kitchen is an invitation for interaction and connection. Chefs engage with guests where appropriate, finishing touches may happen tableside, and each moment is guided so it feels intentional, not random.",
     layout: "Image collage",
     status: "published",
     items: [
@@ -31,6 +35,8 @@ export const initialSections: HomepageSection[] = [
     id: "stories",
     title: "Stories",
     copy: "IKAYI belongs to Lucknow, and to those who come to discover it.",
+    summary:
+      "Hospitality is one of the most powerful ways to bring people together. IKAYI belongs to Lucknow, and to those who come to discover it.",
     layout: "Story cards",
     status: "published",
     items: [
@@ -44,6 +50,8 @@ export const initialSections: HomepageSection[] = [
     id: "signature",
     title: "Signature Experiences",
     copy: "High tea, rituals, brunch and welcome gestures.",
+    summary:
+      "Signature moments shaped by warmth, rhythm, and recognition. These experiences are designed to make afternoons unhurried, sunsets memorable, and gatherings feel abundant without overwhelming conversation.",
     layout: "Experience cards",
     status: "published",
     items: [
@@ -57,6 +65,8 @@ export const initialSections: HomepageSection[] = [
     id: "guest-journey",
     title: "From Reservation To Departure",
     copy: "Names and preferences remembered from the first booking.",
+    summary:
+      "The guest journey begins when a reservation is made, not when someone reaches the door. Names and preferences should be captured so recognition feels natural.",
     layout: "Journey highlights",
     status: "published",
     items: [
@@ -69,6 +79,7 @@ export const initialSections: HomepageSection[] = [
     id: "gallery",
     title: "Gallery",
     copy: "A glimpse into flavours, ambiance and memorable moments.",
+    summary: "A glimpse into our world of flavours, ambiance, and unforgettable moments.",
     layout: "Image grid",
     status: "published",
     items: [

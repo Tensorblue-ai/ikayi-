@@ -256,26 +256,46 @@
   border-radius: 50%;
   background: color-mix(in srgb, var(--ikayi-white) 78%, transparent);
   color: var(--ikayi-terracotta);
-  font-family: var(--ikayi-font-display);
-  font-size: 1rem;
 }
 
 .seasonIcon::before {
-  content: "*";
+  content: "";
+  display: block;
 }
 
 .seasonIcon[data-season="sun"]::before {
-  content: "ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤";
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  box-shadow:
+    0 -8px 0 -5px currentColor,
+    0 8px 0 -5px currentColor,
+    8px 0 0 -5px currentColor,
+    -8px 0 0 -5px currentColor,
+    6px 6px 0 -5px currentColor,
+    -6px -6px 0 -5px currentColor,
+    6px -6px 0 -5px currentColor,
+    -6px 6px 0 -5px currentColor;
 }
 
 .seasonIcon[data-season="rain"]::before {
-  content: "?";
+  width: 8px;
+  height: 12px;
+  border-radius: 8px 8px 8px 0;
+  background: currentColor;
+  transform: rotate(-35deg);
 }
 
 .seasonIcon[data-season="snow"]::before {
-  content: "?";
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(currentColor, currentColor) center / 2px 16px no-repeat,
+    linear-gradient(90deg, currentColor, currentColor) center / 16px 2px no-repeat,
+    linear-gradient(45deg, currentColor, currentColor) center / 14px 2px no-repeat,
+    linear-gradient(-45deg, currentColor, currentColor) center / 14px 2px no-repeat;
 }
-
 .menuImage {
   position: relative;
   aspect-ratio: 1.24;

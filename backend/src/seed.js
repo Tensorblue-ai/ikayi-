@@ -219,7 +219,7 @@ const sections = [
         "The guest journey begins when a reservation is made, not when someone reaches the door. Names and preferences should be captured so recognition feels natural.",
         "Guests should feel as though they have arrived at someone's home: greeted warmly, seated with care, welcomed immediately, and thanked personally before they leave.",
       ],
-      image: "/assets/chef9.png",
+      image: "/assets/chef9%20(2).png",
       imageAlt: "Private dining table set inside Ikayi's arched dining room",
       highlights: [
         {
@@ -266,7 +266,7 @@ const sections = [
         { src: "/assets/story4.png", alt: "Lucknow architecture at sunset", sortOrder: 8 },
         { src: "/assets/exp5.png", alt: "Creamy Ikayi cocktail with garnish", sortOrder: 9 },
         { src: "/assets/kitch2.png", alt: "Ikayi chef preparing dishes in the kitchen", sortOrder: 10 },
-        { src: "/assets/chef9.png", alt: "Ikayi curry plated with Indian breads", sortOrder: 11 },
+        { src: "/assets/chef9%20(2).png", alt: "Ikayi curry plated with Indian breads", sortOrder: 11 },
       ],
       ctaLabel: "Explore More Moments",
       ctaHref: "#stories",

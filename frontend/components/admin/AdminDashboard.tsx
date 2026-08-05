@@ -12,6 +12,7 @@ export type HomepageSection = {
   id: string;
   title: string;
   copy: string;
+  summary: string;
   layout: string;
   status: SectionStatus;
   items: Array<{ title: string; copy: string }>;
@@ -25,11 +26,24 @@ export type Booking = {
   status: "confirmed" | "completed" | "cancelled";
 };
 
+const backendSectionKeyById: Record<string, string> = {
+  experience: "experience",
+  kitchen: "kitchen-experience",
+  stories: "stories",
+  signature: "signature-experiences",
+  "guest-journey": "guest-journey",
+  gallery: "gallery",
+};
+
+const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+
 export function AdminDashboard() {
   const [activeView, setActiveView] = useState<AdminView>("content");
   const [sections, setSections] = useState(initialSections);
   const [selectedId, setSelectedId] = useState(initialSections[0].id);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isSavingSection, setIsSavingSection] = useState(false);
+  const [editorError, setEditorError] = useState("");
   const viewTitle =
     activeView === "content"
       ? "Overview"
@@ -52,7 +66,46 @@ export function AdminDashboard() {
 
   function openEditor(sectionId: string) {
     setSelectedId(sectionId);
+    setEditorError("");
     setIsEditorOpen(true);
+  }
+
+  async function saveSelectedSection() {
+    const sectionKey = backendSectionKeyById[selectedSection.id];
+
+    if (!sectionKey) {
+      setEditorError("This section is not mapped to a backend API yet.");
+      return;
+    }
+
+    setIsSavingSection(true);
+    setEditorError("");
+
+    try {
+      const response = await fetch(`${apiOrigin}/api/admin/sections/${sectionKey}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: selectedSection.title,
+          copy: selectedSection.copy,
+          summary: selectedSection.summary,
+          status: selectedSection.status,
+          items: selectedSection.items,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Save failed with status ${response.status}`);
+      }
+
+      setIsEditorOpen(false);
+    } catch (error) {
+      setEditorError(error instanceof Error ? error.message : "Unable to save section.");
+    } finally {
+      setIsSavingSection(false);
+    }
   }
 
   return (
@@ -117,8 +170,10 @@ export function AdminDashboard() {
         {activeView === "media" && isEditorOpen ? (
           <AdminSectionEditorModal
             section={selectedSection}
+            error={editorError}
+            isSaving={isSavingSection}
             onClose={() => setIsEditorOpen(false)}
-            onSave={() => setIsEditorOpen(false)}
+            onSave={saveSelectedSection}
             onUpdate={updateSelectedSection}
           />
         ) : null}

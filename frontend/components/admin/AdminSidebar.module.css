@@ -26,14 +26,30 @@
 .logoMark {
   display: inline-grid;
   place-items: center;
-  width: 58px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgb(var(--ikayi-deep-red-rgb) / 0.1);
-  color: var(--ikayi-deep-red);
+  align-content: center;
+  width: 72px;
+  height: 72px;
+  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-dark-surface);
+  color: var(--ikayi-gold);
+  text-align: center;
+  text-transform: uppercase;
+  box-shadow: 0 14px 26px rgb(var(--ikayi-deep-red-rgb) / 0.12);
+}
+
+.logoMark span {
   font-family: var(--ikayi-font-display);
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.logoMark small {
+  margin-top: 5px;
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.38rem;
+  letter-spacing: 1.6px;
   line-height: 1;
 }
 
@@ -45,15 +61,15 @@
 
 .logoText strong {
   color: var(--ikayi-ink);
-  font-size: 20px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 700;
   line-height: 1;
 }
 
 .logoText small {
   color: var(--ikayi-ink);
-  font-size: 13px;
-  font-weight: 900;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1.18;
 }
 
@@ -74,7 +90,8 @@
   padding: 0 12px;
   color: var(--ikayi-muted-ink);
   font: inherit;
-  font-weight: 900;
+  font-size: 15px;
+  font-weight: 600;
   line-height: 1.1;
   text-align: left;
   text-decoration: none;
