@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getActiveItems, StorySectionData } from "@/lib/homepage-sections";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./StorySection.module.css";
 
 type StorySectionProps = {
@@ -13,8 +14,7 @@ export function StorySection({ section }: StorySectionProps) {
   return (
     <section className={styles.story} id="stories" aria-labelledby="stories-heading">
       <div className={styles.logoBadge} aria-hidden="true">
-        <span>IKAYI</span>
-        <small>Modern Indian</small>
+        <BrandLogo variant="mark" className={styles.logoImage} decorative />
       </div>
 
       <div className={styles.inner}>

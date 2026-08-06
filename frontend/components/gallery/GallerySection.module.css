@@ -18,30 +18,16 @@
   width: 96px;
   height: 96px;
   place-items: center;
-  align-content: center;
   border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
   border-radius: 50%;
   background: var(--ikayi-dark-surface);
-  color: var(--ikayi-gold);
-  text-align: center;
-  text-transform: uppercase;
   box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 16%, transparent);
 }
 
-.logoBadge span {
-  font-family: var(--ikayi-font-display);
-  font-size: 1.2rem;
-  letter-spacing: 4px;
-  line-height: 1;
+.logoImage {
+  width: 70px;
+  height: 70px;
 }
-
-.logoBadge small {
-  margin-top: 5px;
-  font-family: var(--ikayi-font-accent);
-  font-size: 0.42rem;
-  letter-spacing: 1.7px;
-}
-
 .headingBlock {
   display: grid;
   grid-template-columns: minmax(44px, 100px) auto minmax(44px, 100px);
@@ -55,6 +41,25 @@
   text-transform: uppercase;
 }
 
+.logoBadge {
+  position: absolute;
+  left: max(30px, calc((100vw - 1320px) / 2));
+  top: 28px;
+  z-index: 2;
+  display: grid;
+  width: 96px;
+  height: 96px;
+  place-items: center;
+  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-dark-surface);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 16%, transparent);
+}
+
+.logoImage {
+  width: 70px;
+  height: 70px;
+}
 .headingBlock h2 {
   margin: 0;
   font-family: var(--ikayi-font-display);

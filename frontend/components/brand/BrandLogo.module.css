@@ -1,0 +1,7 @@
+.logo {
+  display: block;
+  background-image: var(--brand-logo-src);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

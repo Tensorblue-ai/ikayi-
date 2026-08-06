@@ -471,3 +471,7 @@
     display: none;
   }
 }
+.logoImage {
+  width: 66px;
+  height: 66px;
+}

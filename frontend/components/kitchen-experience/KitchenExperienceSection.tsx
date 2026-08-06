@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getActiveItems, KitchenExperienceSectionData, KitchenImage } from "@/lib/homepage-sections";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./KitchenExperienceSection.module.css";
 
 type KitchenExperienceSectionProps = {
@@ -34,8 +35,7 @@ export function KitchenExperienceSection({ section }: KitchenExperienceSectionPr
         <div className={styles.contentGrid}>
           <div className={styles.copyBlock}>
             <Link className={styles.logoBadge} href="/" aria-label="Ikayi home">
-              <span>IKAYI</span>
-              <small>Modern Indian</small>
+              <BrandLogo variant="mark" className={styles.logoImage} decorative />
             </Link>
 
             <div className={styles.kicker}>

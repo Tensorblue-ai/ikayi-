@@ -1,4 +1,5 @@
-﻿import Link from "next/link";
+import Link from "next/link";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./StickyNavbar.module.css";
 
 const navItems = [
@@ -14,8 +15,7 @@ export function StickyNavbar() {
   return (
     <header className={styles.header}>
       <Link className={styles.logo} href="/" aria-label="Ikayi home">
-        <span>IKAYI</span>
-        <small>Modern Indian</small>
+        <BrandLogo variant="wordmark" className={styles.logoImage} decorative />
       </Link>
 
       <nav className={styles.nav} aria-label="Primary navigation">

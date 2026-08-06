@@ -11,10 +11,6 @@ export function GallerySection({ section }: GallerySectionProps) {
 
   return (
     <section className={styles.gallery} id="gallery" aria-labelledby="gallery-heading">
-      <div className={styles.logoBadge} aria-hidden="true">
-        <span>IKAYI</span>
-        <small>Modern Indian</small>
-      </div>
       <div className={styles.leftLeaf} aria-hidden="true" />
       <div className={styles.rightFloral} aria-hidden="true" />
 
@@ -33,7 +29,7 @@ export function GallerySection({ section }: GallerySectionProps) {
       <div className={styles.collage} aria-label="Ikayi gallery collage">
         {galleryImages.map((image) => (
           <div className={styles.tile} key={image.src}>
-            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 760px) 45vw, 210px" />
+            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 620px) 92vw, (max-width: 980px) 50vw, 32vw" />
           </div>
         ))}
       </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./TestimonialsFooterSection.module.css";
 
 const testimonials = [
@@ -51,8 +52,7 @@ export function TestimonialsFooterSection() {
     <section className={styles.closingSection} id="testimonials" aria-labelledby="testimonials-heading">
       <div className={styles.testimonials}>
         <div className={styles.logoBadge} aria-hidden="true">
-          <span>IKAYI</span>
-          <small>Modern Indian</small>
+          <BrandLogo variant="mark" className={styles.logoImage} decorative />
         </div>
 
         <div className={styles.headingBlock}>
@@ -91,8 +91,7 @@ export function TestimonialsFooterSection() {
         <div className={styles.footerInner}>
           <div className={styles.brandBlock}>
             <div className={styles.footerLogo} aria-hidden="true">
-              <span>IKAYI</span>
-              <small>Modern Indian</small>
+              <BrandLogo variant="wordmark" className={styles.footerLogoImage} decorative />
             </div>
             <p>Rooted in unity, built for meaningful dining experiences in Lucknow.</p>
             <div className={styles.socials} aria-label="Social links">

@@ -1,4 +1,4 @@
-﻿.closingSection {
+.closingSection {
   background: var(--ikayi-surface-start);
   color: var(--ikayi-ink);
 }
@@ -359,7 +359,12 @@
     padding-left: 20px;
   }
 }
+.logoImage {
+  width: 70px;
+  height: 70px;
+}
 
-
-
-
+.footerLogoImage {
+  width: 150px;
+  height: 58px;
+}

@@ -1,4 +1,4 @@
-﻿.kitchenExperience {
+.kitchenExperience {
   position: relative;
   overflow: hidden;
   padding: clamp(52px, 7vw, 82px) 0;
@@ -300,9 +300,7 @@
     display: none;
   }
 }
-
-
-
-
-
-
+.logoImage {
+  width: 74px;
+  height: 74px;
+}

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./ChefSeasonalSection.module.css";
 
 const seasonalMenus = [
@@ -65,7 +66,7 @@ export function ChefSeasonalSection() {
       <div className={styles.inner}>
         <article className={styles.chefStory} aria-labelledby="chef-story-heading">
           <Link className={styles.logoBadge} href="/" aria-label="Ikayi home">
-            <span>IKAYI</span>
+            <BrandLogo variant="mark" className={styles.logoImage} decorative />
           </Link>
 
           <div className={styles.kicker}>

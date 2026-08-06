@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getActiveItems, SignatureExperienceSectionData } from "@/lib/homepage-sections";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./SignatureExperiencesSection.module.css";
 
 type SignatureExperiencesSectionProps = {
@@ -16,8 +17,7 @@ export function SignatureExperiencesSection({ section }: SignatureExperiencesSec
   return (
     <section className={styles.signature} id="signature-experiences" aria-labelledby="signature-heading">
       <div className={styles.logoBadge} aria-hidden="true">
-        <span>IKAYI</span>
-        <small>Modern Indian</small>
+        <BrandLogo variant="mark" className={styles.logoImage} decorative />
       </div>
 
       <div className={styles.headingBlock}>

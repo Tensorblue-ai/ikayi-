@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getActiveItems, GuestJourneySectionData } from "@/lib/homepage-sections";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./PrivateDiningSection.module.css";
 
 type PrivateDiningSectionProps = {
@@ -61,8 +62,7 @@ export function PrivateDiningSection({ section }: PrivateDiningSectionProps) {
       aria-labelledby="private-dining-heading"
     >
       <div className={styles.logoBadge} aria-hidden="true">
-        <span>IKAYI</span>
-        <small>Modern Indian</small>
+        <BrandLogo variant="mark" className={styles.logoImage} decorative />
       </div>
       <div className={styles.dotGrid} aria-hidden="true" />
       <div className={styles.archMark} aria-hidden="true" />
