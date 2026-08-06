@@ -26,3 +26,6 @@ backend/*.log
 
 # Local specs
 spec/
+
+# Local one-time operational scripts
+script.js
