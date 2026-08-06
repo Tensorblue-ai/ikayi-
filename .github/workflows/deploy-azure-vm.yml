@@ -20,7 +20,7 @@ jobs:
             set -e
 
             cd ~/ikayi/ikayi
-            git pull --ff-only origin master
+            git pull --ff-only https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_TOKEN }}@github.com/cumbersomeamir/ikayi.git master
 
             cd backend
             pnpm install --frozen-lockfile
@@ -32,3 +32,4 @@ jobs:
             pm2 restart ikayi-frontend
 
             pm2 save
+
