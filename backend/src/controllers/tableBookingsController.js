@@ -1,4 +1,4 @@
-﻿const crypto = require("crypto");
+const crypto = require("crypto");
 const TableBooking = require("../models/TableBooking");
 const TableSettings = require("../models/TableSettings");
 
@@ -13,6 +13,7 @@ const DEFAULT_SETTINGS = {
 };
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
 const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
+const phonePattern = /^\d{10}$/;
 
 function parsePositiveInteger(value) {
   const parsedValue = Number(value);
@@ -166,8 +167,8 @@ function validateBookingPayload(payload) {
   if (!customerName) {
     errors.push("customerName is required.");
   }
-  if (!phoneNumber) {
-    errors.push("phoneNumber is required.");
+  if (!phonePattern.test(phoneNumber)) {
+    errors.push("phoneNumber must be exactly 10 digits.");
   }
   if (!guestCount) {
     errors.push("guestCount must be an integer greater than 0.");
@@ -278,4 +279,3 @@ module.exports = {
   getAdminBookings,
   getAvailability,
 };
-

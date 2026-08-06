@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import styles from "./page.module.css";
@@ -22,10 +22,12 @@ type BookingSummary = {
   bookingDate: string;
   slotStart: string;
   slotEnd: string;
+  guestCount?: number;
 };
 
 const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
 const reservationTimeZone = "Asia/Kolkata";
+const phonePattern = /^\d{10}$/;
 
 export function ReservationBookingCard() {
   const dateOptions = useMemo(() => getUpcomingReservationDates(), []);
@@ -36,11 +38,14 @@ export function ReservationBookingCard() {
   const [selectedSlot, setSelectedSlot] = useState<AvailabilitySlot | null>(null);
   const [customerName, setCustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneTouched, setPhoneTouched] = useState(false);
   const [bookingSummary, setBookingSummary] = useState<BookingSummary | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const hasAvailableSlots = slots.some((slot) => slot.isAvailable);
+  const isPhoneValid = phonePattern.test(phoneNumber);
+  const phoneWarning = phoneTouched && phoneNumber.length > 0 && !isPhoneValid;
 
   async function checkAvailability() {
     setIsChecking(true);
@@ -66,8 +71,15 @@ export function ReservationBookingCard() {
   async function submitBooking() {
     if (!selectedSlot) return;
 
-    setIsSubmitting(true);
+    setPhoneTouched(true);
     setError("");
+
+    if (!isPhoneValid) {
+      setError("Enter a valid 10 digit mobile number before submitting.");
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(`${apiOrigin}/api/reservations/bookings`, {
@@ -92,6 +104,7 @@ export function ReservationBookingCard() {
       setIsAvailabilityOpen(false);
       setCustomerName("");
       setPhoneNumber("");
+      setPhoneTouched(false);
     } catch (bookingError) {
       setError(bookingError instanceof Error ? bookingError.message : "Unable to create booking.");
     } finally {
@@ -143,9 +156,6 @@ export function ReservationBookingCard() {
         </button>
 
         {error ? <p className={styles.errorText}>{error}</p> : null}
-        {bookingSummary ? (
-          <p className={styles.successText}>Booking confirmed: {bookingSummary.bookingReference}</p>
-        ) : null}
 
         <p className={styles.helperText}>Choose a date and guest count to see live reservation slots.</p>
         <a className={styles.policyLink} href="#cancellation-policy">Cancellation Policy</a>
@@ -229,21 +239,65 @@ export function ReservationBookingCard() {
                   <input
                     type="tel"
                     value={phoneNumber}
-                    onChange={(event) => setPhoneNumber(event.currentTarget.value)}
-                    placeholder="Contact number"
+                    onChange={(event) => {
+                      const nextPhoneNumber = event.currentTarget.value.replace(/\D/g, "").slice(0, 10);
+                      setPhoneNumber(nextPhoneNumber);
+                      if (nextPhoneNumber.length > 0) setPhoneTouched(true);
+                    }}
+                    onBlur={() => setPhoneTouched(true)}
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    aria-invalid={phoneWarning}
+                    aria-describedby="phone-warning"
+                    placeholder="10 digit mobile number"
                   />
                 </label>
+                {phoneWarning ? (
+                  <p className={styles.fieldWarning} id="phone-warning">Enter exactly 10 digits.</p>
+                ) : null}
 
                 <button
                   className={styles.checkButton}
                   type="button"
                   onClick={submitBooking}
-                  disabled={isSubmitting || !selectedSlot || !customerName.trim() || !phoneNumber.trim()}
+                  disabled={isSubmitting || !selectedSlot || !customerName.trim() || !isPhoneValid}
                 >
                   {isSubmitting ? "Confirming..." : "Submit Reservation"}
                 </button>
               </section>
             </div>
+          </div>
+        </div>
+      ) : null}
+
+      {bookingSummary ? (
+        <div className={styles.modalOverlay} role="presentation">
+          <div className={styles.confirmationModal} role="dialog" aria-modal="true" aria-labelledby="confirmation-title">
+            <span className={styles.confirmationEyebrow}>Reservation confirmed</span>
+            <h3 id="confirmation-title">Your table is booked.</h3>
+            <p>Please keep this reservation ID for your visit.</p>
+            <div className={styles.referenceBox} aria-label="Reservation ID">
+              <span>Reservation ID</span>
+              <strong>{bookingSummary.bookingReference}</strong>
+            </div>
+            <dl className={styles.confirmationDetails}>
+              <div>
+                <dt>Date</dt>
+                <dd>{bookingSummary.bookingDate}</dd>
+              </div>
+              <div>
+                <dt>Time</dt>
+                <dd>{formatDisplayTimeRange(bookingSummary.slotStart, bookingSummary.slotEnd)}</dd>
+              </div>
+              <div>
+                <dt>Guests</dt>
+                <dd>{bookingSummary.guestCount ?? guestCount}</dd>
+              </div>
+            </dl>
+            <button className={styles.checkButton} type="button" onClick={() => setBookingSummary(null)}>
+              Done
+            </button>
           </div>
         </div>
       ) : null}
@@ -273,6 +327,18 @@ function getUpcomingReservationDates(count = 7) {
       label: labelFormatter.format(date),
     };
   });
+}
+
+function formatDisplayTimeRange(slotStart: string, slotEnd: string) {
+  return `${formatDisplayTime(slotStart)} - ${formatDisplayTime(slotEnd)}`;
+}
+
+function formatDisplayTime(time: string) {
+  const [hours, minutes] = time.split(":").map(Number);
+  const period = hours >= 12 ? "PM" : "AM";
+  const displayHours = hours % 12 || 12;
+
+  return `${displayHours}:${String(minutes).padStart(2, "0")} ${period}`;
 }
 
 function formatIsoDate(date: Date) {
