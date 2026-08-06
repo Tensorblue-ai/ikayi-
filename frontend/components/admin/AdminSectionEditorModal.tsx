@@ -18,6 +18,22 @@ export function AdminSectionEditorModal({
   onSave,
   onUpdate,
 }: AdminSectionEditorModalProps) {
+  const sectionImages = section.images ?? [];
+  const itemImages = section.items
+    .map((item, index) => ({ ...item, id: `${item.title}-${index}`, index }))
+    .filter((item): item is typeof item & { image: string; index: number } => Boolean(item.image));
+  function updateSectionImage(imageId: string, updates: Partial<NonNullable<HomepageSection["images"]>[number]>) {
+    onUpdate({
+      images: sectionImages.map((image) => (image.id === imageId ? { ...image, ...updates } : image)),
+    });
+  }
+
+  function updateItemImage(itemIndex: number, updates: Partial<HomepageSection["items"][number]>) {
+    onUpdate({
+      items: section.items.map((item, index) => (index === itemIndex ? { ...item, ...updates } : item)),
+    });
+  }
+
   return (
     <div className={styles.overlay} role="presentation">
       <section className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="edit-section-heading">
@@ -74,7 +90,47 @@ export function AdminSectionEditorModal({
             </label>
           </div>
 
+          {sectionImages.length > 0 ? (
+            <div className={styles.imageEditorList} aria-label="Section images">
+              {sectionImages.map((image) => (
+                <article className={styles.imageEditor} key={image.id}>
+                  <div className={styles.imagePreviewWrap} role="img" aria-label={image.alt || image.label} style={{ backgroundImage: `url(${image.src})` }} />
+                  <div className={styles.imageDetails}>
+                    <strong>{image.label}</strong>
+                    <label>
+                      <span>Image description (alt text)</span>
+                      <input value={image.alt ?? ""} onChange={(event) => updateSectionImage(image.id, { alt: event.target.value })} />
+                    </label>
+                    <label>
+                      <span>Image URL</span>
+                      <input value={image.src} onChange={(event) => updateSectionImage(image.id, { src: event.target.value })} />
+                    </label>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : null}
           <div className={styles.itemsHeader}>{section.layout}</div>
+          {itemImages.length > 0 ? (
+            <div className={styles.imageEditorList} aria-label="Item images">
+              {itemImages.map((item) => (
+                <article className={styles.imageEditor} key={item.id}>
+                  <div className={styles.imagePreviewWrap} role="img" aria-label={item.alt || item.title} style={{ backgroundImage: `url(${item.image})` }} />
+                  <div className={styles.imageDetails}>
+                    <strong>{item.title}</strong>
+                    <label>
+                      <span>Image description (alt text)</span>
+                      <input value={item.alt ?? ""} onChange={(event) => updateItemImage(item.index, { alt: event.target.value })} />
+                    </label>
+                    <label>
+                      <span>Image URL</span>
+                      <input value={item.image} onChange={(event) => updateItemImage(item.index, { image: event.target.value })} />
+                    </label>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : null}
           <div className={styles.itemGrid}>
             {section.items.map((item) => (
               <label className={styles.itemChoice} key={item.title}>
@@ -102,3 +158,4 @@ export function AdminSectionEditorModal({
     </div>
   );
 }
+

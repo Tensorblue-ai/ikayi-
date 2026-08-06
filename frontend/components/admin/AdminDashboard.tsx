@@ -6,6 +6,7 @@ import { AdminSectionEditorModal } from "./AdminSectionEditorModal";
 import { AdminSidebar, type AdminView } from "./AdminSidebar";
 import { AdminOverviewPanel } from "./AdminOverviewPanel";
 import { initialSections } from "./adminDashboardData";
+import { mapAdminSectionsResponse, type AdminSectionPayload } from "./adminSectionMapper";
 import styles from "./AdminDashboard.module.css";
 
 export type SectionStatus = "published" | "draft";
@@ -17,7 +18,8 @@ export type HomepageSection = {
   summary: string;
   layout: string;
   status: SectionStatus;
-  items: Array<{ title: string; copy: string }>;
+  images?: Array<{ id: string; label: string; src: string; alt?: string }>;
+  items: Array<{ title: string; copy: string; image?: string; alt?: string }>;
 };
 
 export type Booking = {
@@ -72,6 +74,7 @@ export function AdminDashboard() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isSavingSection, setIsSavingSection] = useState(false);
   const [editorError, setEditorError] = useState("");
+  const [sectionsError, setSectionsError] = useState("");
   const [tableSettings, setTableSettings] = useState<TableSettings>(defaultTableSettings);
   const [hasLoadedTableSettings, setHasLoadedTableSettings] = useState(false);
   const [isLoadingTableSettings, setIsLoadingTableSettings] = useState(false);
@@ -91,6 +94,29 @@ export function AdminDashboard() {
   );
   const availability = Math.max(tableSettings.numberOfTables, 0) * Math.max(tableSettings.chairsPerTable, 0);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadSections() {
+      setSectionsError("");
+
+      try {
+        const response = await fetch(`${apiOrigin}/api/admin/sections`, { signal: controller.signal });
+
+        if (!response.ok) throw new Error(`Sections request failed with status ${response.status}`);
+
+        const payload = (await response.json()) as { sections?: AdminSectionPayload[] };
+        setSections(mapAdminSectionsResponse(payload.sections));
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setSectionsError(error instanceof Error ? error.message : "Unable to load homepage sections.");
+      }
+    }
+
+    loadSections();
+
+    return () => controller.abort();
+  }, []);
   useEffect(() => {
     if (activeView !== "tables" || hasLoadedTableSettings) return;
 
@@ -169,11 +195,22 @@ export function AdminDashboard() {
           copy: selectedSection.copy,
           summary: selectedSection.summary,
           status: selectedSection.status,
+          images: selectedSection.images,
           items: selectedSection.items,
         }),
       });
 
-      if (!response.ok) throw new Error(`Save failed with status ${response.status}`);
+      const payload = (await response.json()) as { summary?: AdminSectionPayload; message?: string };
+
+      if (!response.ok) throw new Error(payload.message ?? `Save failed with status ${response.status}`);
+
+      if (payload.summary) {
+        const savedSection = mapAdminSectionsResponse([payload.summary]).find((section) => section.id === selectedSection.id);
+
+        if (savedSection) {
+          updateSelectedSection(savedSection);
+        }
+      }
 
       setIsEditorOpen(false);
     } catch (error) {
@@ -297,6 +334,8 @@ export function AdminDashboard() {
               </button>
             </div>
 
+            {sectionsError ? <p className={styles.errorText}>{sectionsError}</p> : null}
+
             <div className={styles.sectionList}>
               {sections.map((section, index) => (
                 <article className={styles.sectionRow} key={section.id}>
@@ -342,3 +381,4 @@ export function AdminDashboard() {
     </div>
   );
 }
+
