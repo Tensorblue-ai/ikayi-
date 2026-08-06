@@ -3,19 +3,19 @@ import styles from "./TestimonialsFooterSection.module.css";
 
 const testimonials = [
   {
-    quote: "Welcomed like they were expected, not merely seated.",
+    quote: "They knew our names before we reached the table.",
     name: "Recognition",
-    city: "Guest Feeling",
+    city: "Guest takeaway",
   },
   {
-    quote: "Calm, unhurried, and easy, without performance.",
+    quote: "The evening felt calm, unhurried, and beautifully looked after.",
     name: "Ease",
-    city: "Guest Feeling",
+    city: "Guest takeaway",
   },
   {
-    quote: "Connected to the people they came with, and to something larger.",
+    quote: "We left feeling closer to each other, and to the place.",
     name: "Oneness",
-    city: "Guest Feeling",
+    city: "Guest takeaway",
   },
 ];
 
@@ -96,9 +96,28 @@ export function TestimonialsFooterSection() {
             </div>
             <p>Rooted in unity, built for meaningful dining experiences in Lucknow.</p>
             <div className={styles.socials} aria-label="Social links">
-              <a href="https://www.instagram.com/ikayi_lucknow/" aria-label="Instagram">{"\u25CE"}</a>
-              <a href="#facebook" aria-label="Facebook">f</a>
-              <a href="#tripadvisor" aria-label="Travel reviews">{"\u2615"}</a>
+              <a href="https://www.instagram.com/ikayi_lucknow/" aria-label="Instagram">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <rect x="4" y="4" width="16" height="16" rx="5" />
+                  <circle cx="12" cy="12" r="3.5" />
+                  <circle cx="17" cy="7" r="1" />
+                </svg>
+              </a>
+              <a href="#facebook" aria-label="Facebook">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" />
+                </svg>
+              </a>
+              <a href="#tripadvisor" aria-label="Travel reviews">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M3.5 9.5h3.2A7.5 7.5 0 0 1 12 7.4a7.5 7.5 0 0 1 5.3 2.1h3.2" />
+                  <circle cx="8.2" cy="13.2" r="3.2" />
+                  <circle cx="15.8" cy="13.2" r="3.2" />
+                  <circle cx="8.2" cy="13.2" r="1" />
+                  <circle cx="15.8" cy="13.2" r="1" />
+                  <path d="M11.1 15.3 12 17l.9-1.7" />
+                </svg>
+              </a>
             </div>
           </div>
 

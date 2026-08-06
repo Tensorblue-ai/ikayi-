@@ -235,13 +235,17 @@
   text-align: center;
 }
 
-.storyBanner p span {
+.storyBanner p > span:not(.quoteLine) {
   display: inline-block;
   margin: 0 14px;
   color: color-mix(in srgb, var(--ikayi-terracotta) 72%, transparent);
   font-size: 2rem;
   line-height: 0;
   vertical-align: middle;
+}
+
+.quoteLine {
+  display: inline;
 }
 
 .storyBanner a {
@@ -328,12 +332,18 @@
   }
 
   .storyBanner {
+    gap: 18px;
     padding: 20px;
     text-align: center;
   }
 
   .bannerArt {
     justify-self: center;
+  }
+
+  .storyBanner p {
+    font-size: clamp(1.2rem, 7vw, 1.65rem);
+    line-height: 1.25;
   }
 
   .storyBanner a {

@@ -33,7 +33,7 @@ export function HeroSection() {
         </div>
 
         <div className={styles.actions}>
-          <a className={styles.primaryAction} href="#reservations">
+          <a className={styles.primaryAction} href="/reservations">
             <span>Reserve Your Table</span>
             <span aria-hidden="true">+</span>
           </a>
@@ -41,6 +41,21 @@ export function HeroSection() {
             <span>Discover Ikayi</span>
             <span aria-hidden="true">+</span>
           </a>
+        </div>
+
+        <div className={styles.heroDetails} aria-label="Ikayi dining details">
+          <span>
+            <strong>Lucknow</strong>
+            <small>Modern Indian</small>
+          </span>
+          <span>
+            <strong>Open Kitchen</strong>
+            <small>Seasonal fire-led plates</small>
+          </span>
+          <span>
+            <strong>Hospitality First</strong>
+            <small>Connection before transaction</small>
+          </span>
         </div>
       </div>
     </section>

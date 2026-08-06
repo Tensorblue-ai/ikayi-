@@ -1,9 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { AdminBookingsPanel } from "./AdminBookingsPanel";
 import { AdminSectionEditorModal } from "./AdminSectionEditorModal";
 import { AdminSidebar, type AdminView } from "./AdminSidebar";
-import { bookings, initialSections } from "./adminDashboardData";
+import { AdminOverviewPanel } from "./AdminOverviewPanel";
+import { initialSections } from "./adminDashboardData";
 import styles from "./AdminDashboard.module.css";
 
 export type SectionStatus = "published" | "draft";
@@ -26,6 +28,29 @@ export type Booking = {
   status: "confirmed" | "completed" | "cancelled";
 };
 
+type TableSettings = {
+  numberOfTables: number;
+  chairsPerTable: number;
+  openingTime: string;
+  closingTime: string;
+  slotLengthMinutes: number;
+  timezone: string;
+};
+
+type TableSettingsField = keyof Pick<
+  TableSettings,
+  "numberOfTables" | "chairsPerTable" | "openingTime" | "closingTime" | "slotLengthMinutes"
+>;
+
+const defaultTableSettings: TableSettings = {
+  numberOfTables: 10,
+  chairsPerTable: 4,
+  openingTime: "12:00",
+  closingTime: "00:00",
+  slotLengthMinutes: 60,
+  timezone: "Asia/Kolkata",
+};
+
 const backendSectionKeyById: Record<string, string> = {
   experience: "experience",
   kitchen: "kitchen-experience",
@@ -34,6 +59,9 @@ const backendSectionKeyById: Record<string, string> = {
   "guest-journey": "guest-journey",
   gallery: "gallery",
 };
+const dashboardIdByBackendSectionKey = Object.fromEntries(
+  Object.entries(backendSectionKeyById).map(([dashboardId, backendSectionKey]) => [backendSectionKey, dashboardId])
+) as Record<string, string>;
 
 const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
 
@@ -44,6 +72,12 @@ export function AdminDashboard() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isSavingSection, setIsSavingSection] = useState(false);
   const [editorError, setEditorError] = useState("");
+  const [tableSettings, setTableSettings] = useState<TableSettings>(defaultTableSettings);
+  const [hasLoadedTableSettings, setHasLoadedTableSettings] = useState(false);
+  const [isLoadingTableSettings, setIsLoadingTableSettings] = useState(false);
+  const [isSavingTableSettings, setIsSavingTableSettings] = useState(false);
+  const [tableSettingsError, setTableSettingsError] = useState("");
+  const [tableSettingsStatus, setTableSettingsStatus] = useState("");
   const viewTitle =
     activeView === "content"
       ? "Overview"
@@ -55,6 +89,37 @@ export function AdminDashboard() {
     () => sections.find((section) => section.id === selectedId) ?? sections[0],
     [sections, selectedId]
   );
+  const availability = Math.max(tableSettings.numberOfTables, 0) * Math.max(tableSettings.chairsPerTable, 0);
+
+  useEffect(() => {
+    if (activeView !== "tables" || hasLoadedTableSettings) return;
+
+    const controller = new AbortController();
+
+    async function loadTableSettings() {
+      setIsLoadingTableSettings(true);
+      setTableSettingsError("");
+
+      try {
+        const response = await fetch(`${apiOrigin}/api/admin/tables/settings`, { signal: controller.signal });
+
+        if (!response.ok) throw new Error(`Settings request failed with status ${response.status}`);
+
+        const payload = (await response.json()) as { settings: TableSettings };
+        setTableSettings(payload.settings);
+        setHasLoadedTableSettings(true);
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setTableSettingsError(error instanceof Error ? error.message : "Unable to load table settings.");
+      } finally {
+        setIsLoadingTableSettings(false);
+      }
+    }
+
+    loadTableSettings();
+
+    return () => controller.abort();
+  }, [activeView, hasLoadedTableSettings]);
 
   function updateSelectedSection(updates: Partial<HomepageSection>) {
     setSections((currentSections) =>
@@ -64,10 +129,24 @@ export function AdminDashboard() {
     );
   }
 
+  function updateTableSetting(field: TableSettingsField, value: string | number) {
+    setTableSettingsStatus("");
+    setTableSettings((currentSettings) => ({ ...currentSettings, [field]: value }));
+  }
+
   function openEditor(sectionId: string) {
     setSelectedId(sectionId);
     setEditorError("");
     setIsEditorOpen(true);
+  }
+
+  function openOverviewSection(sectionKey: string) {
+    const sectionId = dashboardIdByBackendSectionKey[sectionKey];
+
+    if (!sectionId) return;
+
+    setActiveView("media");
+    openEditor(sectionId);
   }
 
   async function saveSelectedSection() {
@@ -84,9 +163,7 @@ export function AdminDashboard() {
     try {
       const response = await fetch(`${apiOrigin}/api/admin/sections/${sectionKey}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: selectedSection.title,
           copy: selectedSection.copy,
@@ -96,15 +173,45 @@ export function AdminDashboard() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Save failed with status ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Save failed with status ${response.status}`);
 
       setIsEditorOpen(false);
     } catch (error) {
       setEditorError(error instanceof Error ? error.message : "Unable to save section.");
     } finally {
       setIsSavingSection(false);
+    }
+  }
+
+  async function saveTableSettings() {
+    setIsSavingTableSettings(true);
+    setTableSettingsError("");
+    setTableSettingsStatus("");
+
+    try {
+      const response = await fetch(`${apiOrigin}/api/admin/tables/settings`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          numberOfTables: tableSettings.numberOfTables,
+          chairsPerTable: tableSettings.chairsPerTable,
+          openingTime: tableSettings.openingTime,
+          closingTime: tableSettings.closingTime,
+          slotLengthMinutes: tableSettings.slotLengthMinutes,
+        }),
+      });
+
+      const payload = (await response.json()) as { settings?: TableSettings; message?: string };
+
+      if (!response.ok || !payload.settings) throw new Error(payload.message ?? `Save failed with status ${response.status}`);
+
+      setTableSettings(payload.settings);
+      setHasLoadedTableSettings(true);
+      setTableSettingsStatus("Table settings saved.");
+    } catch (error) {
+      setTableSettingsError(error instanceof Error ? error.message : "Unable to save table settings.");
+    } finally {
+      setIsSavingTableSettings(false);
     }
   }
 
@@ -121,9 +228,59 @@ export function AdminDashboard() {
         </header>
 
         {activeView === "content" ? (
-          <section className={styles.emptyPanel}>
-            <h2>Overview</h2>
-            <p>High-level CMS activity will appear here.</p>
+          <AdminOverviewPanel
+            onEditSection={openOverviewSection}
+            onViewBookings={() => setActiveView("bookings")}
+            onViewTables={() => setActiveView("tables")}
+          />
+        ) : null}
+
+        {activeView === "tables" ? (
+          <section className={styles.tablesPanel} aria-labelledby="tables-heading">
+            <div className={styles.panelHeader}>
+              <div>
+                <h2 id="tables-heading">Tables</h2>
+                <p>Control hourly reservation capacity for customer bookings.</p>
+              </div>
+              <button className={styles.primaryButton} type="button" onClick={saveTableSettings} disabled={isSavingTableSettings}>
+                {isSavingTableSettings ? "Saving..." : "Save table settings"}
+              </button>
+            </div>
+
+            {isLoadingTableSettings ? <p className={styles.emptyText}>Loading table settings...</p> : null}
+            {tableSettingsError ? <p className={styles.errorText}>{tableSettingsError}</p> : null}
+            {tableSettingsStatus ? <p className={styles.successText}>{tableSettingsStatus}</p> : null}
+
+            <div className={styles.tablesGrid}>
+              <div className={styles.formGrid}>
+                <label>
+                  <span>Number of tables</span>
+                  <input min="1" type="number" value={tableSettings.numberOfTables} onChange={(event) => updateTableSetting("numberOfTables", event.currentTarget.valueAsNumber || 0)} />
+                </label>
+                <label>
+                  <span>Number of chairs</span>
+                  <input min="1" type="number" value={tableSettings.chairsPerTable} onChange={(event) => updateTableSetting("chairsPerTable", event.currentTarget.valueAsNumber || 0)} />
+                </label>
+                <label>
+                  <span>Opening time</span>
+                  <input type="time" value={tableSettings.openingTime} onChange={(event) => updateTableSetting("openingTime", event.currentTarget.value)} />
+                </label>
+                <label>
+                  <span>Closing time</span>
+                  <input type="time" value={tableSettings.closingTime} onChange={(event) => updateTableSetting("closingTime", event.currentTarget.value)} />
+                </label>
+                <label className={styles.fieldFull}>
+                  <span>Slot length</span>
+                  <input min="1" type="number" value={tableSettings.slotLengthMinutes} onChange={(event) => updateTableSetting("slotLengthMinutes", event.currentTarget.valueAsNumber || 0)} />
+                </label>
+              </div>
+
+              <aside className={styles.availabilityCard} aria-label="Reservation availability">
+                <span>Availability</span>
+                <strong>{availability}</strong>
+                <small>{tableSettings.numberOfTables} tables x {tableSettings.chairsPerTable} chairs</small>
+              </aside>
+            </div>
           </section>
         ) : null}
 
@@ -152,12 +309,7 @@ export function AdminDashboard() {
                     <span className={section.status === "published" ? styles.published : styles.draft}>
                       {section.status === "published" ? "Published" : "Draft"}
                     </span>
-                    <button
-                      className={styles.iconButton}
-                      type="button"
-                      aria-label={`Edit ${section.title}`}
-                      onClick={() => openEditor(section.id)}
-                    >
+                    <button className={styles.iconButton} type="button" aria-label={`Edit ${section.title}`} onClick={() => openEditor(section.id)}>
                       &gt;
                     </button>
                   </div>
@@ -178,51 +330,7 @@ export function AdminDashboard() {
           />
         ) : null}
 
-        {activeView === "bookings" ? (
-          <section className={styles.bookingsPanel} id="bookings" aria-labelledby="bookings-heading">
-            <div className={styles.panelHeader}>
-              <div>
-                <h2 id="bookings-heading">Bookings</h2>
-                <p>Mark a delivered booking completed to unlock its customer review.</p>
-              </div>
-            </div>
-
-            {bookings.length > 0 ? (
-              <div className={styles.tableWrap}>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Reference</th>
-                      <th>Services</th>
-                      <th>Scheduled</th>
-                      <th>Total</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {bookings.map((booking) => (
-                      <tr key={booking.reference}>
-                        <td>{booking.reference}</td>
-                        <td>{booking.service}</td>
-                        <td>{booking.scheduled}</td>
-                        <td>{booking.total}</td>
-                        <td>
-                          <select defaultValue={booking.status} aria-label={`${booking.reference} status`}>
-                            <option value="confirmed">confirmed</option>
-                            <option value="completed">completed</option>
-                            <option value="cancelled">cancelled</option>
-                          </select>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <p className={styles.emptyText}>No bookings to show.</p>
-            )}
-          </section>
-        ) : null}
+        {activeView === "bookings" ? <AdminBookingsPanel /> : null}
 
         {activeView === "settings" ? (
           <section className={styles.emptyPanel}>

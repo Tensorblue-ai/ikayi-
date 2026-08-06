@@ -23,3 +23,6 @@ backend/*.log
 
 # Local pnpm store
 .pnpm-store/
+
+# Local specs
+spec/

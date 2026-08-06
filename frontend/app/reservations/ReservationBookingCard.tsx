@@ -1,0 +1,290 @@
+﻿"use client";
+
+import { useMemo, useState } from "react";
+import styles from "./page.module.css";
+
+type DateOption = {
+  isoDate: string;
+  day: string;
+  label: string;
+};
+
+type AvailabilitySlot = {
+  slotStart: string;
+  slotEnd: string;
+  label: string;
+  remainingAvailability: number;
+  isAvailable: boolean;
+};
+
+type BookingSummary = {
+  bookingReference: string;
+  bookingDate: string;
+  slotStart: string;
+  slotEnd: string;
+};
+
+const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+const reservationTimeZone = "Asia/Kolkata";
+
+export function ReservationBookingCard() {
+  const dateOptions = useMemo(() => getUpcomingReservationDates(), []);
+  const [selectedDate, setSelectedDate] = useState(dateOptions[0]?.isoDate ?? "");
+  const [guestCount, setGuestCount] = useState(2);
+  const [slots, setSlots] = useState<AvailabilitySlot[]>([]);
+  const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState<AvailabilitySlot | null>(null);
+  const [customerName, setCustomerName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [bookingSummary, setBookingSummary] = useState<BookingSummary | null>(null);
+  const [isChecking, setIsChecking] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const hasAvailableSlots = slots.some((slot) => slot.isAvailable);
+
+  async function checkAvailability() {
+    setIsChecking(true);
+    setError("");
+    setSelectedSlot(null);
+    setBookingSummary(null);
+
+    try {
+      const response = await fetch(`${apiOrigin}/api/reservations/availability?date=${selectedDate}&guestCount=${guestCount}`);
+      const payload = (await response.json()) as { slots?: AvailabilitySlot[]; message?: string };
+
+      if (!response.ok || !payload.slots) throw new Error(payload.message ?? `Availability failed with status ${response.status}`);
+
+      setSlots(payload.slots);
+      setIsAvailabilityOpen(true);
+    } catch (availabilityError) {
+      setError(availabilityError instanceof Error ? availabilityError.message : "Unable to check availability.");
+    } finally {
+      setIsChecking(false);
+    }
+  }
+
+  async function submitBooking() {
+    if (!selectedSlot) return;
+
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const response = await fetch(`${apiOrigin}/api/reservations/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName,
+          phoneNumber,
+          guestCount,
+          bookingDate: selectedDate,
+          slotStart: selectedSlot.slotStart,
+        }),
+      });
+      const payload = (await response.json()) as { booking?: BookingSummary; error?: string; message?: string };
+
+      if (!response.ok || !payload.booking) {
+        throw new Error(payload.error ?? payload.message ?? `Booking failed with status ${response.status}`);
+      }
+
+      setBookingSummary(payload.booking);
+      setSelectedSlot(null);
+      setIsAvailabilityOpen(false);
+      setCustomerName("");
+      setPhoneNumber("");
+    } catch (bookingError) {
+      setError(bookingError instanceof Error ? bookingError.message : "Unable to create booking.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <>
+      <form className={styles.bookingCard} onSubmit={(event) => event.preventDefault()}>
+        <h2>Book Now</h2>
+        <div className={styles.smallDivider} aria-hidden="true">
+          <span />
+        </div>
+
+        <label className={styles.fieldGroup}>
+          <span>Select Date</span>
+          <div className={styles.dateGrid}>
+            {dateOptions.map((option) => (
+              <button
+                className={selectedDate === option.isoDate ? styles.selectedDate : ""}
+                type="button"
+                onClick={() => setSelectedDate(option.isoDate)}
+                key={option.isoDate}
+              >
+                <strong>{option.day}</strong>
+                <small>{option.label}</small>
+              </button>
+            ))}
+          </div>
+        </label>
+
+        <label className={styles.fieldGroup}>
+          <span>Custom Date</span>
+          <input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.currentTarget.value)} />
+        </label>
+
+        <label className={styles.fieldGroup}>
+          <span>Guests</span>
+          <div className={styles.guestControl}>
+            <button type="button" aria-label="Decrease guests" onClick={() => setGuestCount((current) => Math.max(current - 1, 1))}>-</button>
+            <strong>{guestCount} Guests</strong>
+            <button type="button" aria-label="Increase guests" onClick={() => setGuestCount((current) => current + 1)}>+</button>
+          </div>
+        </label>
+
+        <button className={styles.checkButton} type="button" onClick={checkAvailability} disabled={isChecking || !selectedDate}>
+          {isChecking ? "Checking..." : "Check Availability"}
+        </button>
+
+        {error ? <p className={styles.errorText}>{error}</p> : null}
+        {bookingSummary ? (
+          <p className={styles.successText}>Booking confirmed: {bookingSummary.bookingReference}</p>
+        ) : null}
+
+        <p className={styles.helperText}>Choose a date and guest count to see live reservation slots.</p>
+        <a className={styles.policyLink} href="#cancellation-policy">Cancellation Policy</a>
+      </form>
+
+      {isAvailabilityOpen ? (
+        <div className={styles.modalOverlay} role="presentation">
+          <div className={styles.bookingModal} role="dialog" aria-modal="true" aria-labelledby="availability-modal-title">
+            <button
+              className={styles.modalClose}
+              type="button"
+              onClick={() => {
+                setIsAvailabilityOpen(false);
+                setSelectedSlot(null);
+              }}
+              aria-label="Close availability"
+            >
+              x
+            </button>
+            <div className={styles.modalHeader}>
+              <span>Reservation availability</span>
+              <h3 id="availability-modal-title">Select a Slot</h3>
+              <p>{selectedDate} for {guestCount} guests</p>
+            </div>
+
+            <div className={styles.modalContent}>
+              <section className={styles.slotPanel} aria-labelledby="slot-list-heading">
+                <div className={styles.panelHeader}>
+                  <h4 id="slot-list-heading">Available times</h4>
+                  <span>{hasAvailableSlots ? "Choose one" : "No open slots"}</span>
+                </div>
+
+                {slots.length > 0 ? (
+                  <div className={styles.slotGrid} aria-label="Available reservation times">
+                    {slots.map((slot) => {
+                      const isSelected = selectedSlot?.slotStart === slot.slotStart;
+
+                      return (
+                        <button
+                          className={[
+                            slot.isAvailable ? styles.slotButton : styles.slotButtonDisabled,
+                            isSelected ? styles.selectedSlotButton : "",
+                          ].join(" ").trim()}
+                          type="button"
+                          onClick={() => {
+                            if (!slot.isAvailable) return;
+                            setSelectedSlot(slot);
+                          }}
+                          disabled={!slot.isAvailable}
+                          aria-pressed={isSelected}
+                          key={slot.slotStart}
+                        >
+                          <strong>{slot.label}</strong>
+                          <small>{slot.remainingAvailability} seats left</small>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p>No slots are available for this date.</p>
+                )}
+              </section>
+
+              <section className={styles.guestPanel} aria-labelledby="guest-details-heading">
+                <div className={styles.panelHeader}>
+                  <h4 id="guest-details-heading">Guest details</h4>
+                  <span>{selectedSlot ? selectedSlot.label : "Slot required"}</span>
+                </div>
+
+                <label className={styles.fieldGroup}>
+                  <span>Name</span>
+                  <input
+                    type="text"
+                    value={customerName}
+                    onChange={(event) => setCustomerName(event.currentTarget.value)}
+                    placeholder="Guest name"
+                  />
+                </label>
+                <label className={styles.fieldGroup}>
+                  <span>Phone number</span>
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(event) => setPhoneNumber(event.currentTarget.value)}
+                    placeholder="Contact number"
+                  />
+                </label>
+
+                <button
+                  className={styles.checkButton}
+                  type="button"
+                  onClick={submitBooking}
+                  disabled={isSubmitting || !selectedSlot || !customerName.trim() || !phoneNumber.trim()}
+                >
+                  {isSubmitting ? "Confirming..." : "Submit Reservation"}
+                </button>
+              </section>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
+
+function getUpcomingReservationDates(count = 7) {
+  const dayFormatter = new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    timeZone: reservationTimeZone,
+  });
+  const labelFormatter = new Intl.DateTimeFormat("en-IN", {
+    weekday: "short",
+    timeZone: reservationTimeZone,
+  });
+  const today = new Date();
+
+  return Array.from({ length: count }, (_, index): DateOption => {
+    const date = new Date(today);
+    date.setDate(today.getDate() + index + 1);
+
+    return {
+      isoDate: formatIsoDate(date),
+      day: dayFormatter.format(date),
+      label: labelFormatter.format(date),
+    };
+  });
+}
+
+function formatIsoDate(date: Date) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: reservationTimeZone,
+  }).formatToParts(date);
+  const year = parts.find((part) => part.type === "year")?.value;
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+
+  return `${year}-${month}-${day}`;
+}

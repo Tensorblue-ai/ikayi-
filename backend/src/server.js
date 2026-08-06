@@ -4,8 +4,11 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
+const adminBookingsRoutes = require("./routes/adminBookingsRoutes");
 const adminSectionsRoutes = require("./routes/adminSectionsRoutes");
 const assetsRoutes = require("./routes/assetsRoutes");
+const tableBookingsRoutes = require("./routes/tableBookingsRoutes");
+const tableSettingsRoutes = require("./routes/tableSettingsRoutes");
 
 dotenv.config({ quiet: true });
 
@@ -23,7 +26,10 @@ app.use(
 app.use(express.json({ limit: "1mb" }));
 app.use(cookieParser());
 
+app.use("/api/admin/bookings", adminBookingsRoutes);
 app.use("/api/admin/sections", adminSectionsRoutes);
+app.use("/api/admin/tables", tableSettingsRoutes);
+app.use("/api/reservations", tableBookingsRoutes);
 app.use("/api/assets", assetsRoutes);
 
 app.get("/health", (_req, res) => {

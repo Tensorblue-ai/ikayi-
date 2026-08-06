@@ -1,4 +1,4 @@
-﻿.adminLayout {
+.adminLayout {
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
   min-height: 100vh;
@@ -68,7 +68,8 @@
 
 .sectionPanel,
 .editorPanel,
-.bookingsPanel {
+.bookingsPanel,
+.tablesPanel {
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
   max-width: 1120px;
   border-radius: 20px;
@@ -77,7 +78,8 @@
 }
 
 .sectionPanel,
-.bookingsPanel {
+.bookingsPanel,
+.tablesPanel {
   padding: clamp(18px, 2.4vw, 28px);
 }
 
@@ -363,6 +365,71 @@
   color: var(--ikayi-muted-ink);
 }
 
+.errorText,
+.successText {
+  margin: 0 0 16px;
+  font-weight: 800;
+}
+
+.errorText {
+  color: var(--ikayi-deep-red);
+}
+
+.successText {
+  color: var(--ikayi-sage-green);
+}
+
+.tablesGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  align-items: stretch;
+  gap: 22px;
+}
+
+.tablesGrid .formGrid label {
+  font-weight: 600;
+}
+
+.tablesGrid .formGrid label span {
+  color: var(--ikayi-ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.tablesGrid .formGrid input {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.tablesPanel .primaryButton {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.availabilityCard {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
+  border-radius: 18px;
+  padding: 24px;
+  background: rgb(var(--ikayi-peach-rgb) / 0.22);
+}
+
+.availabilityCard span,
+.availabilityCard small {
+  color: var(--ikayi-muted-ink);
+  font-weight: 600;
+}
+
+.availabilityCard strong {
+  font-family: var(--ikayi-font-display);
+  font-size: 54px;
+  font-weight: 400;
+  line-height: 1;
+}
+
 .tableWrap {
   overflow-x: auto;
 }
@@ -392,6 +459,18 @@
   font-weight: 900;
 }
 
+.bookingsPanel .tableWrap th {
+  font-weight: 650;
+}
+
+.bookingsPanel .tableWrap td {
+  font-weight: 400;
+}
+
+.bookingsPanel .tableWrap td:first-child {
+  font-weight: 650;
+}
+
 .tableWrap select {
   max-width: 150px;
   min-height: 36px;
@@ -418,7 +497,8 @@
   }
 
   .formGrid,
-  .itemGrid {
+  .itemGrid,
+  .tablesGrid {
     grid-template-columns: 1fr;
   }
 
@@ -441,7 +521,8 @@
 
   .sectionPanel,
   .editorPanel,
-  .bookingsPanel {
+  .bookingsPanel,
+  .tablesPanel {
     border-radius: 20px;
   }
 

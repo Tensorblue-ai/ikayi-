@@ -111,7 +111,7 @@ export function PrivateDiningSection({ section }: PrivateDiningSectionProps) {
           </div>
 
           <div className={styles.actions}>
-            <a className={styles.primaryAction} href={section.primaryCtaHref}>
+            <a className={styles.primaryAction} href="/reservations">
               <span>{section.primaryCtaLabel}</span>
               <b aria-hidden="true">+</b>
             </a>

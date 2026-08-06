@@ -1,19 +1,20 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import styles from "./AdminSidebar.module.css";
 
-export type AdminView = "content" | "bookings" | "media" | "settings";
+export type AdminView = "content" | "tables" | "bookings" | "media" | "settings";
 
 type AdminSidebarProps = {
   activeView: AdminView;
   onViewChange: (view: AdminView) => void;
 };
 
-type SidebarIconName = "grid" | "document" | "calendar" | "settings" | "pulse" | "external";
+type SidebarIconName = "grid" | "table" | "document" | "calendar" | "settings" | "pulse" | "external";
 
 const sidebarItems: Array<{ label: string; view: AdminView; icon: SidebarIconName }> = [
   { label: "Overview", view: "content", icon: "grid" },
-  { label: "Pages & content", view: "media", icon: "document" },
+  { label: "Tables", view: "tables", icon: "table" },
   { label: "Bookings", view: "bookings", icon: "calendar" },
+  { label: "Pages & content", view: "media", icon: "document" },
   { label: "Settings", view: "settings", icon: "settings" },
 ];
 
@@ -65,6 +66,11 @@ function SidebarIcon({ name }: { name: SidebarIconName }) {
       {name === "grid" ? (
         <svg viewBox="0 0 24 24">
           <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" />
+        </svg>
+      ) : null}
+      {name === "table" ? (
+        <svg viewBox="0 0 24 24">
+          <path d="M4 8h16M6 8v10M18 8v10M8 14h8M7 5h10a3 3 0 0 1 3 3H4a3 3 0 0 1 3-3z" />
         </svg>
       ) : null}
       {name === "document" ? (
