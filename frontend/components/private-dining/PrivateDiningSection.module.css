@@ -23,39 +23,6 @@
   margin: 0 auto;
 }
 
-.logoBadge {
-  position: absolute;
-  left: max(28px, calc((100vw - 1320px) / 2));
-  top: 26px;
-  z-index: 2;
-  display: grid;
-  width: 88px;
-  height: 88px;
-  place-items: center;
-  align-content: center;
-  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
-  border-radius: 50%;
-  background: var(--ikayi-dark-surface);
-  color: var(--ikayi-gold);
-  text-align: center;
-  text-transform: uppercase;
-  box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 16%, transparent);
-}
-
-.logoBadge span {
-  font-family: var(--ikayi-font-display);
-  font-size: 1.05rem;
-  letter-spacing: 4px;
-  line-height: 1;
-}
-
-.logoBadge small {
-  margin-top: 5px;
-  font-family: var(--ikayi-font-accent);
-  font-size: 0.4rem;
-  letter-spacing: 1.8px;
-}
-
 .imagePanel {
   position: relative;
   aspect-ratio: 1.08;
@@ -424,17 +391,9 @@
   .copyPanel {
     max-width: none;
   }
-
-  .logoBadge {
-    left: 22px;
-  }
 }
 
 @media (max-width: 680px) {
-  .privateDining {
-    padding-top: 112px;
-  }
-
   .inner {
     width: min(100% - 32px, 760px);
   }
@@ -469,7 +428,9 @@
     display: none;
   }
 }
-.logoImage {
-  width: 70px;
-  height: 70px;
+
+.iconBadge svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
 }

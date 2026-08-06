@@ -2,13 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { CalendarCheck, Clock, ConciergeBell, type LucideIcon } from "lucide-react";
 import { getActiveItems, GuestJourneySectionData } from "@/lib/homepage-sections";
-import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./PrivateDiningSection.module.css";
 
 type PrivateDiningSectionProps = {
   section: GuestJourneySectionData;
 };
+
+const journeyIcons: LucideIcon[] = [CalendarCheck, ConciergeBell, Clock];
+
+function JourneyIcon({ index }: { index: number }) {
+  const Icon = journeyIcons[index] ?? ConciergeBell;
+
+  return <Icon aria-hidden="true" />;
+}
 
 function splitHeading(heading: string) {
   if (heading.includes(" To ")) {
@@ -35,8 +43,9 @@ export function PrivateDiningSection({ section }: PrivateDiningSectionProps) {
     }
 
     if (!("IntersectionObserver" in window)) {
-      setIsVisible(true);
-      return;
+      const timerId = setTimeout(() => setIsVisible(true), 0);
+
+      return () => clearTimeout(timerId);
     }
 
     const observer = new IntersectionObserver(
@@ -61,10 +70,7 @@ export function PrivateDiningSection({ section }: PrivateDiningSectionProps) {
       id="private-dining"
       aria-labelledby="private-dining-heading"
     >
-      <div className={styles.logoBadge} aria-hidden="true">
-        <BrandLogo variant="mark" className={styles.logoImage} decorative />
-      </div>
-      <div className={styles.dotGrid} aria-hidden="true" />
+<div className={styles.dotGrid} aria-hidden="true" />
       <div className={styles.archMark} aria-hidden="true" />
       <div className={styles.circleAccent} aria-hidden="true" />
 
@@ -98,10 +104,10 @@ export function PrivateDiningSection({ section }: PrivateDiningSectionProps) {
           ))}
 
           <div className={styles.highlights}>
-            {highlights.map((highlight) => (
+            {highlights.map((highlight, index) => (
               <article className={styles.highlightCard} key={highlight.title}>
                 <div className={styles.iconBadge} aria-hidden="true">
-                  {highlight.icon}
+                  <JourneyIcon index={index} />
                 </div>
                 <h3>{highlight.title}</h3>
                 <div className={styles.cardDivider} aria-hidden="true" />

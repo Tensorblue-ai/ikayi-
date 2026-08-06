@@ -1,11 +1,25 @@
 import Image from "next/image";
+import { Compass, HeartHandshake, Leaf, MapPin, Sparkles, type LucideIcon } from "lucide-react";
 import { getActiveItems, StorySectionData } from "@/lib/homepage-sections";
-import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./StorySection.module.css";
 
 type StorySectionProps = {
   section: StorySectionData;
 };
+
+const storyIcons: Record<string, LucideIcon> = {
+  rooted: Leaf,
+  warm: HeartHandshake,
+  refined: Sparkles,
+  curious: Compass,
+  indian: MapPin,
+};
+
+function StoryIcon({ title }: { title: string }) {
+  const Icon = storyIcons[title.toLowerCase()] ?? Sparkles;
+
+  return <Icon aria-hidden="true" />;
+}
 
 export function StorySection({ section }: StorySectionProps) {
   const cards = getActiveItems(section.cards);
@@ -13,11 +27,7 @@ export function StorySection({ section }: StorySectionProps) {
 
   return (
     <section className={styles.story} id="stories" aria-labelledby="stories-heading">
-      <div className={styles.logoBadge} aria-hidden="true">
-        <BrandLogo variant="mark" className={styles.logoImage} decorative />
-      </div>
-
-      <div className={styles.inner}>
+<div className={styles.inner}>
         <div className={styles.headingBlock}>
           <div className={styles.titleRule} aria-hidden="true">
             <span />
@@ -39,7 +49,7 @@ export function StorySection({ section }: StorySectionProps) {
               <div className={styles.imageWrap}>
                 <Image src={card.image} alt={card.imageAlt || `${card.title} at IKAYI`} fill sizes="(max-width: 760px) 82vw, 220px" />
               </div>
-              <div className={styles.iconBadge} aria-hidden="true">{card.icon}</div>
+              <div className={styles.iconBadge} aria-hidden="true"><StoryIcon title={card.title} /></div>
               <h3>{card.title}</h3>
               <div className={styles.cardRule} aria-hidden="true">
                 <span />

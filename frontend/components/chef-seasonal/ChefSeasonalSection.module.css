@@ -30,23 +30,6 @@
   min-width: 0;
 }
 
-.logoBadge {
-  display: grid;
-  width: 92px;
-  height: 92px;
-  place-items: center;
-  margin-bottom: 22px;
-  border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);
-  border-radius: 50%;
-  background: var(--ikayi-dark-surface);
-  color: var(--ikayi-gold);
-  font-family: var(--ikayi-font-display);
-  font-size: 1.08rem;
-  letter-spacing: 1.5px;
-  text-decoration: none;
-  box-shadow: 0 16px 34px color-mix(in srgb, var(--ikayi-ink) 18%, transparent);
-}
-
 .kicker {
   display: flex;
   align-items: center;
@@ -258,44 +241,12 @@
   color: var(--ikayi-terracotta);
 }
 
-.seasonIcon::before {
-  content: "";
-  display: block;
+.seasonIcon svg {
+  width: 17px;
+  height: 17px;
+  stroke-width: 1.8;
 }
 
-.seasonIcon[data-season="sun"]::before {
-  width: 10px;
-  height: 10px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  box-shadow:
-    0 -8px 0 -5px currentColor,
-    0 8px 0 -5px currentColor,
-    8px 0 0 -5px currentColor,
-    -8px 0 0 -5px currentColor,
-    6px 6px 0 -5px currentColor,
-    -6px -6px 0 -5px currentColor,
-    6px -6px 0 -5px currentColor,
-    -6px 6px 0 -5px currentColor;
-}
-
-.seasonIcon[data-season="rain"]::before {
-  width: 8px;
-  height: 12px;
-  border-radius: 8px 8px 8px 0;
-  background: currentColor;
-  transform: rotate(-35deg);
-}
-
-.seasonIcon[data-season="snow"]::before {
-  width: 16px;
-  height: 16px;
-  background:
-    linear-gradient(currentColor, currentColor) center / 2px 16px no-repeat,
-    linear-gradient(90deg, currentColor, currentColor) center / 16px 2px no-repeat,
-    linear-gradient(45deg, currentColor, currentColor) center / 14px 2px no-repeat,
-    linear-gradient(-45deg, currentColor, currentColor) center / 14px 2px no-repeat;
-}
 .menuImage {
   position: relative;
   aspect-ratio: 1.24;
@@ -440,14 +391,7 @@
   .inner {
     width: min(100% - 32px, 820px);
   }
-
-  .logoBadge {
-    width: 78px;
-    height: 78px;
-    font-size: 0.92rem;
-  }
-
-  .chefStory h2,
+.chefStory h2,
   .menuPanel h2 {
     font-size: clamp(2.25rem, 13vw, 3.25rem);
   }
@@ -470,8 +414,4 @@
   .archSketch {
     display: none;
   }
-}
-.logoImage {
-  width: 66px;
-  height: 66px;
 }

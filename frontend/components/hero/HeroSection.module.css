@@ -54,11 +54,11 @@
   text-transform: uppercase;
 }
 
-.star {
+.flowerIcon {
+  width: 22px;
+  height: 22px;
   color: var(--ikayi-gold);
-  font-family: var(--ikayi-font-display);
-  font-size: 1.7rem;
-  line-height: 1;
+  stroke-width: 1.7;
 }
 
 .content h1 {
@@ -93,32 +93,12 @@
   background: rgba(195, 131, 72, 0.5);
 }
 
-.divider span {
-  position: relative;
+.dividerIcon {
   flex: 0 0 38px;
   width: 38px;
   height: 38px;
-  background:
-    radial-gradient(ellipse at 50% 16%, color-mix(in srgb, var(--ikayi-gold) 76%, transparent) 0 20%, transparent 22%),
-    radial-gradient(ellipse at 50% 84%, color-mix(in srgb, var(--ikayi-gold) 76%, transparent) 0 20%, transparent 22%),
-    radial-gradient(ellipse at 16% 50%, color-mix(in srgb, var(--ikayi-terracotta) 68%, transparent) 0 20%, transparent 22%),
-    radial-gradient(ellipse at 84% 50%, color-mix(in srgb, var(--ikayi-terracotta) 68%, transparent) 0 20%, transparent 22%),
-    radial-gradient(circle at 50% 50%, var(--ikayi-deep-red) 0 10%, transparent 11%);
-}
-
-.divider span::before,
-.divider span::after {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border: 1px solid color-mix(in srgb, var(--ikayi-gold) 60%, transparent);
-  border-radius: 50%;
-}
-
-.divider span::after {
-  inset: 13px;
-  border-color: color-mix(in srgb, var(--ikayi-terracotta) 66%, transparent);
-  transform: rotate(45deg);
+  color: var(--ikayi-deep-red);
+  stroke-width: 1.35;
 }
 
 .actions {
@@ -331,12 +311,3 @@
     border-top: 0;
   }
 }
-
-
-
-
-
-
-
-
-

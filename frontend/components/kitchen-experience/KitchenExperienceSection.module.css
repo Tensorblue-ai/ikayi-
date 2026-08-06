@@ -31,36 +31,6 @@
   max-width: 390px;
 }
 
-.logoBadge {
-  display: grid;
-  width: 100px;
-  height: 100px;
-  place-items: center;
-  align-content: center;
-  margin-bottom: 42px;
-  border: 2px solid rgba(191, 143, 74, 0.8);
-  border-radius: 50%;
-  background: var(--ikayi-dark-surface);
-  color: var(--ikayi-gold);
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  box-shadow: 0 14px 32px rgba(47, 26, 15, 0.24);
-}
-
-.logoBadge span {
-  font-size: 1.45rem;
-  letter-spacing: 1px;
-  line-height: 1;
-}
-
-.logoBadge small {
-  margin-top: 4px;
-  color: var(--ikayi-gold);
-  font-size: 0.45rem;
-  letter-spacing: 1.4px;
-}
-
 .kicker {
   display: flex;
   align-items: center;
@@ -262,14 +232,7 @@
     padding: 34px 16px;
     border-radius: 18px;
   }
-
-  .logoBadge {
-    width: 82px;
-    height: 82px;
-    margin-bottom: 28px;
-  }
-
-  .copyBlock h2 {
+.copyBlock h2 {
     font-size: clamp(2.15rem, 11vw, 3.25rem);
     white-space: normal;
   }
@@ -299,8 +262,4 @@
   .leafMark {
     display: none;
   }
-}
-.logoImage {
-  width: 74px;
-  height: 74px;
 }

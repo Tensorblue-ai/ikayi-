@@ -1,4 +1,5 @@
-﻿import Image from "next/image";
+import Image from "next/image";
+import { Flower } from "lucide-react";
 import styles from "./HeroSection.module.css";
 
 export function HeroSection() {
@@ -19,7 +20,7 @@ export function HeroSection() {
 
       <div className={styles.content}>
         <div className={styles.eyebrow}>
-          <span className={styles.star}>*</span>
+          <Flower className={styles.flowerIcon} aria-hidden="true" />
           <span>Rooted in Unity</span>
         </div>
 
@@ -29,7 +30,7 @@ export function HeroSection() {
         </h1>
 
         <div className={styles.divider} aria-hidden="true">
-          <span />
+          <Flower className={styles.dividerIcon} aria-hidden="true" />
         </div>
 
         <div className={styles.actions}>

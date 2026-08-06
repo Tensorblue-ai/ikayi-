@@ -2,9 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { BrandLogo } from "@/components/brand/BrandLogo";
+import { CloudRain, Snowflake, Sun, type LucideIcon } from "lucide-react";
 import styles from "./ChefSeasonalSection.module.css";
+
+const seasonIcons: Record<string, LucideIcon> = {
+  sun: Sun,
+  rain: CloudRain,
+  snow: Snowflake,
+};
+
+function SeasonIcon({ name }: { name: string }) {
+  const Icon = seasonIcons[name] ?? Sun;
+
+  return <Icon aria-hidden="true" />;
+}
 
 const seasonalMenus = [
   {
@@ -65,11 +76,7 @@ export function ChefSeasonalSection() {
 
       <div className={styles.inner}>
         <article className={styles.chefStory} aria-labelledby="chef-story-heading">
-          <Link className={styles.logoBadge} href="/" aria-label="Ikayi home">
-            <BrandLogo variant="mark" className={styles.logoImage} decorative />
-          </Link>
-
-          <div className={styles.kicker}>
+<div className={styles.kicker}>
             <span aria-hidden="true">*</span>
             <p>Our Kitchen</p>
           </div>
@@ -122,7 +129,7 @@ export function ChefSeasonalSection() {
           <div className={styles.menuCards}>
             {seasonalMenus.map((item) => (
               <article className={styles.menuCard} key={item.title}>
-                <div className={styles.seasonIcon} data-season={item.icon} aria-hidden="true" />
+                <div className={styles.seasonIcon} aria-hidden="true"><SeasonIcon name={item.icon} /></div>
                 <div className={styles.menuImage}>
                   <Image src={item.image} alt={item.title} fill sizes="(max-width: 900px) 82vw, 220px" />
                 </div>
@@ -135,9 +142,6 @@ export function ChefSeasonalSection() {
                 </div>
               </article>
             ))}
-
-
-            
           </div>
         </article>
       </div>

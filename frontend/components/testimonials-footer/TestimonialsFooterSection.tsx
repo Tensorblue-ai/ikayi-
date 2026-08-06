@@ -51,11 +51,7 @@ export function TestimonialsFooterSection() {
   return (
     <section className={styles.closingSection} id="testimonials" aria-labelledby="testimonials-heading">
       <div className={styles.testimonials}>
-        <div className={styles.logoBadge} aria-hidden="true">
-          <BrandLogo variant="mark" className={styles.logoImage} decorative />
-        </div>
-
-        <div className={styles.headingBlock}>
+<div className={styles.headingBlock}>
           <div className={styles.titleRule} aria-hidden="true">
             <span />
           </div>
