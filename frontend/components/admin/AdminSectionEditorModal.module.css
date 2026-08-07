@@ -377,3 +377,23 @@
   opacity: 0.68;
 }
 
+.uploadControls { display: grid; gap: 6px; }
+
+.uploadButton {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  width: fit-content; min-height: 36px; overflow: hidden; cursor: pointer;
+  border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.18); border-radius: 10px; padding: 0 12px;
+  background: rgb(var(--ikayi-terracotta-rgb) / 0.12); color: var(--ikayi-deep-red);
+  font-size: 13px; font-weight: 700;
+}
+
+.uploadButton input {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.uploadButtonDisabled { cursor: wait; opacity: 0.68; }
+
+.uploadError {
+  margin: 0; color: var(--ikayi-deep-red); font-size: 12px; font-weight: 600; line-height: 1.35;
+}

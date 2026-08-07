@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { type HomepageSection, type SectionStatus } from "./AdminDashboard";
 import styles from "./AdminSectionEditorModal.module.css";
 
@@ -8,7 +9,10 @@ type AdminSectionEditorModalProps = {
   onClose: () => void;
   onSave: () => void | Promise<void>;
   onUpdate: (updates: Partial<HomepageSection>) => void;
+  onUploadImage?: (file: File) => Promise<string>;
 };
+
+const acceptedImageTypes = "image/png,image/jpeg,image/webp";
 
 export function AdminSectionEditorModal({
   section,
@@ -17,11 +21,15 @@ export function AdminSectionEditorModal({
   onClose,
   onSave,
   onUpdate,
+  onUploadImage,
 }: AdminSectionEditorModalProps) {
+  const [uploadingTarget, setUploadingTarget] = useState<string | null>(null);
+  const [uploadErrors, setUploadErrors] = useState<Record<string, string>>({});
   const sectionImages = section.images ?? [];
   const itemImages = section.items
     .map((item, index) => ({ ...item, id: `${item.title}-${index}`, index }))
     .filter((item): item is typeof item & { image: string; index: number } => Boolean(item.image));
+
   function updateSectionImage(imageId: string, updates: Partial<NonNullable<HomepageSection["images"]>[number]>) {
     onUpdate({
       images: sectionImages.map((image) => (image.id === imageId ? { ...image, ...updates } : image)),
@@ -32,6 +40,30 @@ export function AdminSectionEditorModal({
     onUpdate({
       items: section.items.map((item, index) => (index === itemIndex ? { ...item, ...updates } : item)),
     });
+  }
+
+  async function uploadImage(targetId: string, file: File | undefined, applyUrl: (url: string) => void) {
+    if (!file) return;
+
+    if (!onUploadImage) {
+      setUploadErrors((current) => ({ ...current, [targetId]: "Image upload is not available." }));
+      return;
+    }
+
+    setUploadingTarget(targetId);
+    setUploadErrors((current) => ({ ...current, [targetId]: "" }));
+
+    try {
+      const url = await onUploadImage(file);
+      applyUrl(url);
+    } catch (uploadError) {
+      setUploadErrors((current) => ({
+        ...current,
+        [targetId]: uploadError instanceof Error ? uploadError.message : "Unable to upload image.",
+      }));
+    } finally {
+      setUploadingTarget(null);
+    }
   }
 
   return (
@@ -92,43 +124,87 @@ export function AdminSectionEditorModal({
 
           {sectionImages.length > 0 ? (
             <div className={styles.imageEditorList} aria-label="Section images">
-              {sectionImages.map((image) => (
-                <article className={styles.imageEditor} key={image.id}>
-                  <div className={styles.imagePreviewWrap} role="img" aria-label={image.alt || image.label} style={{ backgroundImage: `url(${image.src})` }} />
-                  <div className={styles.imageDetails}>
-                    <strong>{image.label}</strong>
-                    <label>
-                      <span>Image description (alt text)</span>
-                      <input value={image.alt ?? ""} onChange={(event) => updateSectionImage(image.id, { alt: event.target.value })} />
-                    </label>
-                    <label>
-                      <span>Image URL</span>
-                      <input value={image.src} onChange={(event) => updateSectionImage(image.id, { src: event.target.value })} />
-                    </label>
-                  </div>
-                </article>
-              ))}
+              {sectionImages.map((image) => {
+                const targetId = `section:${image.id}`;
+                const isUploading = uploadingTarget === targetId;
+
+                return (
+                  <article className={styles.imageEditor} key={image.id}>
+                    <div className={styles.imagePreviewWrap} role="img" aria-label={image.alt || image.label} style={{ backgroundImage: `url(${image.src})` }} />
+                    <div className={styles.imageDetails}>
+                      <strong>{image.label}</strong>
+                      <label>
+                        <span>Image description (alt text)</span>
+                        <input value={image.alt ?? ""} onChange={(event) => updateSectionImage(image.id, { alt: event.target.value })} />
+                      </label>
+                      <label>
+                        <span>Image URL</span>
+                        <input value={image.src} onChange={(event) => updateSectionImage(image.id, { src: event.target.value })} />
+                      </label>
+                      <div className={styles.uploadControls}>
+                        <label className={`${styles.uploadButton} ${isUploading ? styles.uploadButtonDisabled : ""}`}>
+                          <input
+                            accept={acceptedImageTypes}
+                            disabled={isUploading}
+                            type="file"
+                            onChange={(event) => {
+                              const input = event.currentTarget;
+                              const file = input.files?.[0];
+                              input.value = "";
+                              void uploadImage(targetId, file, (url) => updateSectionImage(image.id, { src: url }));
+                            }}
+                          />
+                          {isUploading ? "Uploading..." : "Upload image"}
+                        </label>
+                        {uploadErrors[targetId] ? <p className={styles.uploadError}>{uploadErrors[targetId]}</p> : null}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           ) : null}
           <div className={styles.itemsHeader}>{section.layout}</div>
           {itemImages.length > 0 ? (
             <div className={styles.imageEditorList} aria-label="Item images">
-              {itemImages.map((item) => (
-                <article className={styles.imageEditor} key={item.id}>
-                  <div className={styles.imagePreviewWrap} role="img" aria-label={item.alt || item.title} style={{ backgroundImage: `url(${item.image})` }} />
-                  <div className={styles.imageDetails}>
-                    <strong>{item.title}</strong>
-                    <label>
-                      <span>Image description (alt text)</span>
-                      <input value={item.alt ?? ""} onChange={(event) => updateItemImage(item.index, { alt: event.target.value })} />
-                    </label>
-                    <label>
-                      <span>Image URL</span>
-                      <input value={item.image} onChange={(event) => updateItemImage(item.index, { image: event.target.value })} />
-                    </label>
-                  </div>
-                </article>
-              ))}
+              {itemImages.map((item) => {
+                const targetId = `item:${item.index}`;
+                const isUploading = uploadingTarget === targetId;
+
+                return (
+                  <article className={styles.imageEditor} key={item.id}>
+                    <div className={styles.imagePreviewWrap} role="img" aria-label={item.alt || item.title} style={{ backgroundImage: `url(${item.image})` }} />
+                    <div className={styles.imageDetails}>
+                      <strong>{item.title}</strong>
+                      <label>
+                        <span>Image description (alt text)</span>
+                        <input value={item.alt ?? ""} onChange={(event) => updateItemImage(item.index, { alt: event.target.value })} />
+                      </label>
+                      <label>
+                        <span>Image URL</span>
+                        <input value={item.image} onChange={(event) => updateItemImage(item.index, { image: event.target.value })} />
+                      </label>
+                      <div className={styles.uploadControls}>
+                        <label className={`${styles.uploadButton} ${isUploading ? styles.uploadButtonDisabled : ""}`}>
+                          <input
+                            accept={acceptedImageTypes}
+                            disabled={isUploading}
+                            type="file"
+                            onChange={(event) => {
+                              const input = event.currentTarget;
+                              const file = input.files?.[0];
+                              input.value = "";
+                              void uploadImage(targetId, file, (url) => updateItemImage(item.index, { image: url }));
+                            }}
+                          />
+                          {isUploading ? "Uploading..." : "Upload image"}
+                        </label>
+                        {uploadErrors[targetId] ? <p className={styles.uploadError}>{uploadErrors[targetId]}</p> : null}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           ) : null}
           <div className={styles.itemGrid}>
@@ -158,4 +234,3 @@ export function AdminSectionEditorModal({
     </div>
   );
 }
-

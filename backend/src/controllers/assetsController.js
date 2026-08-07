@@ -1,5 +1,12 @@
+const crypto = require("crypto");
 const path = require("path");
-const { createR2Client, getObjectFromR2, getR2Config } = require("../lib/r2Assets");
+const { createR2Client, getObjectFromR2, getR2Config, uploadFileToR2 } = require("../lib/r2Assets");
+
+const allowedImageTypes = new Map([
+  ["image/jpeg", "jpg"],
+  ["image/png", "png"],
+  ["image/webp", "webp"],
+]);
 
 let cachedR2;
 
@@ -17,6 +24,88 @@ function getR2() {
 
 function isUnsafeKey(key) {
   return !key || key.includes("..") || path.isAbsolute(key) || key.startsWith("/");
+}
+
+function getAssetBaseUrl() {
+  return (process.env.API_ASSET_BASE_URL || "http://localhost:5000/api/assets").replace(/\/+$/, "");
+}
+
+function buildAdminAssetKey(contentType) {
+  const extension = allowedImageTypes.get(contentType);
+  const prefix = (process.env.R2_ASSET_PREFIX || "assets").replace(/^\/+|\/+$/g, "");
+  const now = new Date();
+  const year = String(now.getUTCFullYear());
+  const month = String(now.getUTCMonth() + 1).padStart(2, "0");
+  const fileName = `${crypto.randomUUID()}.${extension}`;
+
+  return `${prefix}/admin/${year}/${month}/${fileName}`;
+}
+
+function createUnsupportedImageError() {
+  const error = new Error("Only JPEG, PNG, and WebP image uploads are allowed.");
+  error.code = "UNSUPPORTED_IMAGE_TYPE";
+  return error;
+}
+
+function handleUploadError(error, _req, res, next) {
+  if (!error) return next();
+
+  if (error.code === "LIMIT_FILE_SIZE") {
+    return res.status(400).json({ message: "Image must be 5 MB or smaller." });
+  }
+
+  if (error.code === "LIMIT_FILE_COUNT" || error.code === "LIMIT_UNEXPECTED_FILE") {
+    return res.status(400).json({ message: "Upload exactly one image file in the file field." });
+  }
+
+  if (error.code === "UNSUPPORTED_IMAGE_TYPE") {
+    return res.status(400).json({ message: error.message });
+  }
+
+  return next(error);
+}
+
+function validateUploadedImage(file) {
+  if (!file) {
+    return "Upload exactly one image file in the file field.";
+  }
+
+  if (!allowedImageTypes.has(file.mimetype)) {
+    return "Only JPEG, PNG, and WebP image uploads are allowed.";
+  }
+
+  return "";
+}
+
+async function uploadAdminAsset(req, res, next) {
+  try {
+    const validationError = validateUploadedImage(req.file);
+
+    if (validationError) {
+      return res.status(400).json({ message: validationError });
+    }
+
+    const file = req.file;
+    const key = buildAdminAssetKey(file.mimetype);
+    const r2 = getR2();
+
+    await uploadFileToR2({
+      client: r2.client,
+      bucket: r2.bucket,
+      key,
+      body: file.buffer,
+      contentType: file.mimetype,
+    });
+
+    return res.status(201).json({
+      url: `${getAssetBaseUrl()}/${key}`,
+      key,
+      contentType: file.mimetype,
+      size: file.size,
+    });
+  } catch (error) {
+    return next(error);
+  }
 }
 
 async function streamAssetByKey(req, res, next) {
@@ -51,5 +140,9 @@ async function streamAssetByKey(req, res, next) {
 }
 
 module.exports = {
+  allowedImageTypes,
+  createUnsupportedImageError,
+  handleUploadError,
   streamAssetByKey,
+  uploadAdminAsset,
 };

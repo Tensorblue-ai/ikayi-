@@ -44,6 +44,11 @@ type TableSettingsField = keyof Pick<
   "numberOfTables" | "chairsPerTable" | "openingTime" | "closingTime" | "slotLengthMinutes"
 >;
 
+type UploadAssetResponse = {
+  url?: string;
+  message?: string;
+};
+
 const defaultTableSettings: TableSettings = {
   numberOfTables: 10,
   chairsPerTable: 4,
@@ -173,6 +178,23 @@ export function AdminDashboard() {
 
     setActiveView("media");
     openEditor(sectionId);
+  }
+
+  async function uploadAdminImage(file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(`${apiOrigin}/api/assets/admin/upload`, {
+      method: "POST",
+      body: formData,
+    });
+    const payload = (await response.json()) as UploadAssetResponse;
+
+    if (!response.ok || !payload.url) {
+      throw new Error(payload.message ?? `Upload failed with status ${response.status}`);
+    }
+
+    return payload.url;
   }
 
   async function saveSelectedSection() {
@@ -366,6 +388,7 @@ export function AdminDashboard() {
             onClose={() => setIsEditorOpen(false)}
             onSave={saveSelectedSection}
             onUpdate={updateSelectedSection}
+            onUploadImage={uploadAdminImage}
           />
         ) : null}
 
@@ -381,4 +404,3 @@ export function AdminDashboard() {
     </div>
   );
 }
-
