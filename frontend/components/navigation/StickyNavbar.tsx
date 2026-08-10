@@ -15,7 +15,7 @@ export function StickyNavbar() {
   return (
     <header className={styles.header}>
       <Link className={styles.logo} href="/" aria-label="Ikayi home">
-        <Image className={styles.logoImage} src="/api/assets/assets/IKAYI%20LOGO2.png" alt="" width={156} height={58} priority unoptimized />
+        <Image className={styles.logoImage} src="/assets/IKAYI%20LOGO2.png" alt="" width={156} height={58} priority />
         <span className={styles.logoFallback}>IKAYI</span>
       </Link>
 
