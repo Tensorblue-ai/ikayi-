@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
+const apiOrigin = (process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000").replace(/\/+$/, "");
+
 const nextConfig: NextConfig = {
   output: "standalone",
+  async rewrites() {
+    return [
+      {
+        source: "/api/assets/:path*",
+        destination: `${apiOrigin}/api/assets/:path*`,
+      },
+    ];
+  },
   images: {
     unoptimized: true,
     dangerouslyAllowLocalIP: true,

@@ -27,7 +27,13 @@ function isUnsafeKey(key) {
 }
 
 function getAssetBaseUrl() {
-  return (process.env.API_ASSET_BASE_URL || "http://localhost:5000/api/assets").replace(/\/+$/, "");
+  const configuredBaseUrl = (process.env.API_ASSET_BASE_URL || "/api/assets").replace(/\/+$/, "");
+
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/api\/assets$/i.test(configuredBaseUrl)) {
+    return "/api/assets";
+  }
+
+  return configuredBaseUrl;
 }
 
 function buildAdminAssetKey(contentType) {
