@@ -16,7 +16,7 @@ export function StickyNavbar() {
     <header className={styles.header}>
       <Link className={styles.logo} href="/" aria-label="Ikayi home">
         <BrandLogo variant="mark" className={styles.logoMark} decorative />
-        <span className={styles.logoText}>IKAYI</span>
+        <BrandLogo variant="wordmark" className={styles.logoWordmark} decorative />
       </Link>
 
       <nav className={styles.nav} aria-label="Primary navigation">
