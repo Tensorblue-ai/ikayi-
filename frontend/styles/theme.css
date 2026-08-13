@@ -8,13 +8,13 @@
   --ikayi-background-blue: #1B3370;
   --ikayi-gold: #DDB078;
 
-  --ikayi-ink: #312A26;
-  --ikayi-muted-ink: #4F443D;
+  --ikayi-ink: var(--ikayi-deep-red);
+  --ikayi-muted-ink: var(--ikayi-deep-red);
   --ikayi-dark-surface: #17140F;
-  --ikayi-hero-surface: #F4EADF;
-  --ikayi-surface-start: #F3DFCA;
-  --ikayi-surface-end: #EAD2BB;
-  --ikayi-nav-surface: #F8E8D6;
+  --ikayi-hero-surface: var(--ikayi-reservation-bg);
+  --ikayi-surface-start: var(--ikayi-reservation-bg);
+  --ikayi-surface-end: var(--ikayi-reservation-bg);
+  --ikayi-nav-surface: var(--ikayi-reservation-bg);
   --ikayi-peach-rgb: 250 216 181;
   --ikayi-terracotta-rgb: 230 156 118;
   --ikayi-reservation-bg-rgb: 240 186 150;
@@ -28,6 +28,6 @@
   --ikayi-font-body: Avenir, "Avenir Next", sans-serif;
   --ikayi-font-accent: "Avenir Next Thai Traditional", Optima, Avenir, sans-serif;
 
-  --background: var(--ikayi-hero-surface);
-  --foreground: var(--ikayi-ink);
+  --background: var(--ikayi-reservation-bg);
+  --foreground: var(--ikayi-deep-red);
 }

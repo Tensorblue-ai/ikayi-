@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Flower } from "lucide-react";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import styles from "./HeroSection.module.css";
 
 export function HeroSection() {
@@ -20,7 +20,7 @@ export function HeroSection() {
 
       <div className={styles.content}>
         <div className={styles.eyebrow}>
-          <Flower className={styles.flowerIcon} aria-hidden="true" />
+          <BrandLogo variant="mark" className={styles.eyebrowLogo} decorative />
           <span>Rooted in Unity</span>
         </div>
 
@@ -30,7 +30,7 @@ export function HeroSection() {
         </h1>
 
         <div className={styles.divider} aria-hidden="true">
-          <Flower className={styles.dividerIcon} aria-hidden="true" />
+          <BrandLogo variant="mark" className={styles.dividerLogo} decorative />
         </div>
 
         <div className={styles.actions}>

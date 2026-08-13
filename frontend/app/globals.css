@@ -22,3 +22,56 @@ body {
   color: var(--foreground);
   font-family: var(--ikayi-font-body);
 }
+/* site-wide-palette-applied */
+body {
+  background: var(--ikayi-reservation-bg) !important;
+  color: var(--ikayi-deep-red) !important;
+  text-transform: lowercase !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6, label, th, button, nav a, [class*="title"], [class*="Title"], [class*="heading"], [class*="Heading"], [class*="kicker"], [class*="Kicker"], [class*="eyebrow"], [class*="Eyebrow"], [class*="badge"], [class*="Badge"]) {
+  text-transform: uppercase !important;
+}
+
+body :where(p, li, small, dd, figcaption, address, input, textarea, select, option, [class*="copy"], [class*="Copy"], [class*="intro"], [class*="Intro"], [class*="body"], [class*="Body"], [class*="helper"], [class*="Helper"]) {
+  text-transform: lowercase !important;
+}
+
+body :where(*, *::before, *::after) {
+  color: var(--ikayi-deep-red) !important;
+}
+
+body :where(input, textarea, select)::placeholder {
+  color: var(--ikayi-deep-red) !important;
+  text-transform: lowercase !important;
+}
+
+body :where(main, section, footer, header) {
+  background: var(--ikayi-reservation-bg) !important;
+}
+
+body :where(a[class*="cta"], a[class*="Cta"], a[class*="action"], a[class*="Action"], a[class*="reservation"], a[class*="Reservation"], a[href="/reservations"], a[href="#reservations"], a[href*="reservation"], button[class*="primary"], button[class*="Primary"], button[class*="check"], button[class*="Check"], button[class*="submit"], button[class*="Submit"], button[class*="save"], button[class*="Save"], button[class*="more"], button[class*="More"]) {
+  border-color: var(--ikayi-sage-green) !important;
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
+  text-transform: uppercase !important;
+}
+
+body :where(a[class*="cta"] *, a[class*="Cta"] *, a[class*="action"] *, a[class*="Action"] *, a[class*="reservation"] *, a[class*="Reservation"] *, a[href="/reservations"] *, a[href="#reservations"] *, a[href*="reservation"] *, button[class*="primary"] *, button[class*="Primary"] *, button[class*="check"] *, button[class*="Check"] *, button[class*="submit"] *, button[class*="Submit"] *, button[class*="save"] *, button[class*="Save"] *, button[class*="more"] *, button[class*="More"] *) {
+  color: var(--ikayi-white) !important;
+}
+
+body :where(a[class*="cta"]:hover, a[class*="Cta"]:hover, a[class*="action"]:hover, a[class*="Action"]:hover, a[class*="reservation"]:hover, a[class*="Reservation"]:hover, a[href="/reservations"]:hover, a[href="#reservations"]:hover, a[href*="reservation"]:hover, button[class*="primary"]:hover, button[class*="Primary"]:hover, button[class*="check"]:hover, button[class*="Check"]:hover, button[class*="submit"]:hover, button[class*="Submit"]:hover, button[class*="save"]:hover, button[class*="Save"]:hover, button[class*="more"]:hover, button[class*="More"]:hover) {
+  background: color-mix(in srgb, var(--ikayi-sage-green) 86%, var(--ikayi-deep-red)) !important;
+  color: var(--ikayi-white) !important;
+}
+body main :where(section > a, [class*="actions"] a, [class*="Actions"] a, [class*="footerPanel"] a, [class*="FooterPanel"] a, [class*="storyBanner"] a, [class*="StoryBanner"] a) {
+  border-color: var(--ikayi-sage-green) !important;
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
+  text-transform: uppercase !important;
+}
+
+body main :where(section > a *, [class*="actions"] a *, [class*="Actions"] a *, [class*="footerPanel"] a *, [class*="FooterPanel"] a *, [class*="storyBanner"] a *, [class*="StoryBanner"] a *) {
+  color: var(--ikayi-white) !important;
+}

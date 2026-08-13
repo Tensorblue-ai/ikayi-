@@ -54,11 +54,10 @@
   text-transform: uppercase;
 }
 
-.flowerIcon {
-  width: 22px;
-  height: 22px;
-  color: var(--ikayi-gold);
-  stroke-width: 1.7;
+.eyebrowLogo {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
 }
 
 .content h1 {
@@ -93,12 +92,10 @@
   background: rgba(195, 131, 72, 0.5);
 }
 
-.dividerIcon {
-  flex: 0 0 38px;
-  width: 38px;
-  height: 38px;
-  color: var(--ikayi-deep-red);
-  stroke-width: 1.35;
+.dividerLogo {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
 }
 
 .actions {
