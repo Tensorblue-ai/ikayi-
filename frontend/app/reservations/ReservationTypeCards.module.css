@@ -235,3 +235,88 @@
   line-height: 1.5;
   text-align: center;
 }
+.groups,
+.group,
+.card,
+.headingBlock h1,
+.headingBlock h2,
+.headingBlock p,
+.card strong,
+.card em,
+.card p,
+.card small,
+.guestPill,
+.badge,
+.morePrompt p {
+  color: var(--ikayi-deep-red);
+}
+
+.headingBlock h1,
+.headingBlock h2,
+.badge,
+.guestPill,
+.moreButton {
+  text-transform: uppercase;
+}
+
+.headingBlock p,
+.card em,
+.card p,
+.card small,
+.morePrompt p {
+  text-transform: lowercase;
+}
+
+.card {
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 30%, transparent);
+}
+
+.iconWrap {
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 28%, transparent);
+  color: var(--ikayi-deep-red);
+}
+
+.badge,
+.guestPill {
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
+}
+
+.moreButton {
+  border-color: var(--ikayi-sage-green);
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white);
+}
+
+.moreButton:hover,
+.moreButton:focus-visible {
+  background: color-mix(in srgb, var(--ikayi-sage-green) 86%, var(--ikayi-deep-red));
+  color: var(--ikayi-white);
+}
+
+.moreButton svg {
+  color: var(--ikayi-white);
+}
+
+.selectedCard {
+  border-color: var(--ikayi-deep-red);
+  background: var(--ikayi-deep-red);
+}
+
+.selectedCard,
+.selectedCard strong,
+.selectedCard em,
+.selectedCard p,
+.selectedCard small,
+.selectedCard .guestPill,
+.selectedCard .badge,
+.selectedCard .iconWrap {
+  color: var(--ikayi-white);
+}
+
+.selectedCard .guestPill,
+.selectedCard .badge,
+.selectedCard .iconWrap {
+  border-color: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
+}

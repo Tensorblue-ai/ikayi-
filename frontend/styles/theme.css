@@ -1,6 +1,7 @@
-﻿:root {
+:root {
   --ikayi-peach: #FAD8B5;
   --ikayi-terracotta: #E69C76;
+  --ikayi-reservation-bg: #F0BA96;
   --ikayi-deep-red: #A42828;
   --ikayi-white: #FFFFFF;
   --ikayi-sage-green: #7D9270;
@@ -16,6 +17,7 @@
   --ikayi-nav-surface: #F8E8D6;
   --ikayi-peach-rgb: 250 216 181;
   --ikayi-terracotta-rgb: 230 156 118;
+  --ikayi-reservation-bg-rgb: 240 186 150;
   --ikayi-deep-red-rgb: 164 40 40;
   --ikayi-white-rgb: 255 255 255;
   --ikayi-sage-green-rgb: 125 146 112;
@@ -29,5 +31,3 @@
   --background: var(--ikayi-hero-surface);
   --foreground: var(--ikayi-ink);
 }
-
-

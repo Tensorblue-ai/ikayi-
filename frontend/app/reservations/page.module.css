@@ -861,3 +861,117 @@
     padding: 38px 28px 28px;
   }
 }
+.page {
+  background: var(--ikayi-reservation-bg);
+  color: var(--ikayi-deep-red);
+}
+
+.page :is(h1, h2, h3, h4, label, button, a, span, strong, em, small, p, dt, dd, input, select, textarea) {
+  color: var(--ikayi-deep-red);
+}
+
+.tabs,
+.bookingCard,
+.slotPanel,
+.guestPanel,
+.confirmationModal,
+.referenceBox,
+.breakfastNote,
+.visualPanel {
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+}
+
+.tabs a,
+.fieldGroup > span,
+.orRule,
+.modalHeader > span,
+.panelHeader span,
+.confirmationEyebrow,
+.referenceBox span,
+.confirmationDetails dt,
+.policyLink {
+  text-transform: uppercase;
+}
+
+.bookingCard h2,
+.bookingModal h3,
+.confirmationModal h3,
+.panelHeader h4 {
+  text-transform: uppercase;
+}
+
+.helperText,
+.bookingModal p,
+.confirmationModal p,
+.breakfastNote p,
+.confirmationDetails dd,
+.slotButton small,
+.slotButtonDisabled small,
+.fieldWarning,
+.errorText,
+.successText {
+  text-transform: lowercase;
+}
+
+.fieldGroup input,
+.fieldGroup select,
+.dateGrid button,
+.guestControl,
+.guestControl button,
+.slotButton,
+.slotButtonDisabled,
+.modalClose {
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+  color: var(--ikayi-deep-red);
+}
+
+.fieldGroup input::placeholder {
+  color: var(--ikayi-deep-red);
+  text-transform: lowercase;
+}
+
+.checkButton,
+.inquiryButton,
+.mealToggle .selectedMeal {
+  border-color: var(--ikayi-sage-green);
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white);
+}
+
+.checkButton:disabled {
+  color: var(--ikayi-white);
+}
+
+.dateGrid .selectedDate,
+.selectedSlotButton {
+  border-color: var(--ikayi-deep-red);
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+}
+
+.dateGrid .selectedDate strong,
+.dateGrid .selectedDate small,
+.selectedSlotButton strong,
+.selectedSlotButton small,
+.checkButton *,
+.inquiryButton *,
+.mealToggle .selectedMeal * {
+  color: var(--ikayi-white);
+}
+
+.smallDivider,
+.divider,
+.breakfastNote > span {
+  color: var(--ikayi-deep-red);
+}
+
+.smallDivider::before,
+.smallDivider::after,
+.divider::before,
+.divider::after,
+.orRule::before,
+.orRule::after {
+  background: color-mix(in srgb, var(--ikayi-deep-red) 50%, transparent);
+}
