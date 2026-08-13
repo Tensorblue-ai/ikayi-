@@ -733,3 +733,131 @@
   color: var(--ikayi-muted-ink);
   font-size: 0.78rem;
 }
+
+.content {
+  display: grid;
+  gap: 26px;
+}
+
+.breakfastNote {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(100%, 720px);
+  margin-top: -2px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  border-left: 4px solid var(--ikayi-deep-red);
+  border-radius: 8px;
+  padding: 18px 22px;
+  background: color-mix(in srgb, var(--ikayi-white) 32%, transparent);
+  color: var(--ikayi-muted-ink);
+}
+
+.breakfastNote > span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--ikayi-deep-red);
+  border-radius: 50%;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-display);
+  font-size: 1.15rem;
+}
+
+.breakfastNote strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.8rem;
+}
+
+.breakfastNote p {
+  margin: 0;
+  color: var(--ikayi-muted-ink);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.confirmationDetails {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .bookingPanel {
+    position: static;
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .breakfastNote {
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .confirmationDetails {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.mealToggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mealToggle button,
+.inquiryButton {
+  min-height: 42px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 36%, transparent);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--ikayi-white) 48%, transparent);
+  color: var(--ikayi-muted-ink);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.mealToggle button {
+  cursor: pointer;
+}
+
+.mealToggle button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.mealToggle .selectedMeal {
+  border-color: var(--ikayi-deep-red);
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+}
+
+.inquiryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red);
+}
+
+@media (min-width: 981px) {
+  .page {
+    padding-top: 118px;
+  }
+
+  .shell {
+    grid-template-columns: minmax(0, 1.48fr) minmax(320px, 0.68fr);
+    gap: 28px;
+  }
+
+  .bookingCard {
+    padding: 38px 28px 28px;
+  }
+}

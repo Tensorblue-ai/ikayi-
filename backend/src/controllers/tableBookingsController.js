@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const TableBooking = require("../models/TableBooking");
 const TableSettings = require("../models/TableSettings");
+const ReservationType = require("../models/ReservationType");
 
 const RESTAURANT_KEY = "ikayi";
 const DEFAULT_SETTINGS = {
@@ -131,6 +132,9 @@ function serializeAdminBooking(booking) {
     bookingDate: booking.bookingDate,
     slotStart: booking.slotStart,
     slotEnd: booking.slotEnd,
+    reservationTypeSlug: booking.reservationTypeSlug,
+    reservationTypeTitle: booking.reservationTypeTitle,
+    mealPeriod: booking.mealPeriod,
     status: booking.status,
     createdAt: booking.createdAt,
   };
@@ -145,6 +149,9 @@ function serializeBooking(booking) {
     bookingDate: booking.bookingDate,
     slotStart: booking.slotStart,
     slotEnd: booking.slotEnd,
+    reservationTypeSlug: booking.reservationTypeSlug,
+    reservationTypeTitle: booking.reservationTypeTitle,
+    mealPeriod: booking.mealPeriod,
     status: booking.status,
   };
 }
@@ -162,6 +169,9 @@ function validateBookingPayload(payload) {
   const guestCount = parsePositiveInteger(payload.guestCount);
   const bookingDate = typeof payload.bookingDate === "string" ? payload.bookingDate.trim() : "";
   const slotStart = typeof payload.slotStart === "string" ? payload.slotStart.trim() : "";
+  const reservationTypeSlug =
+    typeof payload.reservationTypeSlug === "string" ? payload.reservationTypeSlug.trim().toLowerCase() : "";
+  const mealPeriod = typeof payload.mealPeriod === "string" ? payload.mealPeriod.trim().toLowerCase() : "";
   const errors = [];
 
   if (!customerName) {
@@ -180,8 +190,12 @@ function validateBookingPayload(payload) {
     errors.push("slotStart must be a valid HH:mm time.");
   }
 
+  if (mealPeriod && mealPeriod !== "lunch" && mealPeriod !== "dinner") {
+    errors.push("mealPeriod must be lunch or dinner.");
+  }
+
   return {
-    data: { customerName, phoneNumber, guestCount, bookingDate, slotStart },
+    data: { customerName, phoneNumber, guestCount, bookingDate, slotStart, reservationTypeSlug, mealPeriod },
     errors,
   };
 }
@@ -234,6 +248,14 @@ async function createBooking(req, res, next) {
       return res.status(400).json({ message: "Selected slot is not available for booking." });
     }
 
+    const reservationType = data.reservationTypeSlug
+      ? await ReservationType.findOne({ slug: data.reservationTypeSlug, isActive: true }).lean()
+      : null;
+
+    if (data.reservationTypeSlug && !reservationType) {
+      return res.status(400).json({ message: "Selected reservation type is not available." });
+    }
+
     const totalAvailability = settings.numberOfTables * settings.chairsPerTable;
     const bookedGuests = await getBookedGuestsBySlot(data.bookingDate, data.slotStart);
     const remainingAvailability = Math.max(totalAvailability - bookedGuests, 0);
@@ -250,6 +272,9 @@ async function createBooking(req, res, next) {
       bookingDate: data.bookingDate,
       slotStart: selectedSlot.slotStart,
       slotEnd: selectedSlot.slotEnd,
+      reservationTypeSlug: reservationType?.slug ?? "",
+      reservationTypeTitle: reservationType?.title ?? "",
+      mealPeriod: data.mealPeriod,
       status: "confirmed",
       source: "website",
     });

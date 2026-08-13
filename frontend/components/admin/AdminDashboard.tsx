@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AdminBookingsPanel } from "./AdminBookingsPanel";
+import { AdminReservationTypesPanel } from "./AdminReservationTypesPanel";
 import { AdminSectionEditorModal } from "./AdminSectionEditorModal";
 import { AdminSidebar, type AdminView } from "./AdminSidebar";
 import { AdminOverviewPanel } from "./AdminOverviewPanel";
@@ -91,7 +92,9 @@ export function AdminDashboard() {
       ? "Overview"
       : activeView === "media"
         ? "Pages & content"
-        : activeView[0].toUpperCase() + activeView.slice(1);
+        : activeView === "reservation-types"
+          ? "Reservation types"
+          : activeView[0].toUpperCase() + activeView.slice(1);
 
   const selectedSection = useMemo(
     () => sections.find((section) => section.id === selectedId) ?? sections[0],
@@ -393,6 +396,8 @@ export function AdminDashboard() {
         ) : null}
 
         {activeView === "bookings" ? <AdminBookingsPanel /> : null}
+
+        {activeView === "reservation-types" ? <AdminReservationTypesPanel /> : null}
 
         {activeView === "settings" ? (
           <section className={styles.emptyPanel}>

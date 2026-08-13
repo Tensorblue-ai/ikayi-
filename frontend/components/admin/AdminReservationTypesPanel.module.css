@@ -1,0 +1,207 @@
+.panel {
+  display: grid;
+  gap: 22px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  border-radius: 8px;
+  padding: 28px;
+  background: color-mix(in srgb, var(--ikayi-white) 74%, transparent);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.panelHeader h2 {
+  margin: 0 0 6px;
+  color: var(--ikayi-ink);
+  font-family: var(--ikayi-font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.panelHeader p,
+.emptyText,
+.errorText,
+.successText {
+  margin: 0;
+  color: var(--ikayi-muted-ink);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.errorText {
+  color: var(--ikayi-deep-red);
+  font-weight: 700;
+}
+
+.successText {
+  color: var(--ikayi-sage-green);
+  font-weight: 700;
+}
+
+.editorGrid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1.45fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.typeList {
+  display: grid;
+  gap: 10px;
+}
+
+.typeButton,
+.typeButtonActive {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
+  color: var(--ikayi-muted-ink);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.typeButtonActive {
+  border-color: var(--ikayi-deep-red);
+  box-shadow: inset 3px 0 0 var(--ikayi-deep-red);
+}
+
+.typeButton span,
+.typeButtonActive span,
+.typeButton small,
+.typeButtonActive small {
+  color: var(--ikayi-terracotta);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.typeButton strong,
+.typeButtonActive strong {
+  overflow: hidden;
+  color: var(--ikayi-ink);
+  font-size: 0.86rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.formGrid label,
+.checkboxGroup,
+.actions {
+  min-width: 0;
+}
+
+.formGrid label {
+  display: grid;
+  gap: 7px;
+}
+
+.formGrid label > span,
+.checkboxGroup span,
+.checkboxField span {
+  color: var(--ikayi-muted-ink);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.formGrid input,
+.formGrid select,
+.formGrid textarea {
+  min-height: 42px;
+  width: 100%;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--ikayi-white) 72%, transparent);
+  color: var(--ikayi-ink);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0 12px;
+}
+
+.formGrid textarea {
+  min-height: 92px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.fieldFull,
+.checkboxField,
+.checkboxGroup,
+.actions {
+  grid-column: 1 / -1;
+}
+
+.checkboxField,
+.checkboxGroup label {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkboxField input,
+.checkboxGroup input {
+  width: 16px;
+  min-height: 16px;
+}
+
+.checkboxGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton {
+  min-height: 42px;
+  border-radius: 7px;
+  padding: 0 16px;
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.primaryButton {
+  border: 1px solid var(--ikayi-deep-red);
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+}
+
+.secondaryButton,
+.dangerButton {
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 42%, transparent);
+  background: transparent;
+  color: var(--ikayi-deep-red);
+}
+
+@media (max-width: 980px) {
+  .editorGrid,
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

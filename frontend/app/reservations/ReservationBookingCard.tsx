@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import type { ReservationType } from "@/lib/reservation-types";
 import styles from "./page.module.css";
 
 type DateOption = {
@@ -17,21 +18,42 @@ type AvailabilitySlot = {
   isAvailable: boolean;
 };
 
+type ReservationBookingCardProps = {
+  reservationTypes?: ReservationType[];
+  selectedReservationTypeSlug?: string;
+  onReservationTypeChange?: (slug: string) => void;
+  inquiryHref?: string;
+  inquiryLabel?: string;
+  policyHref?: string;
+  policyLabel?: string;
+};
+
 type BookingSummary = {
   bookingReference: string;
   bookingDate: string;
   slotStart: string;
   slotEnd: string;
   guestCount?: number;
+  reservationTypeTitle?: string;
 };
 
 const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
 const reservationTimeZone = "Asia/Kolkata";
 const phonePattern = /^\d{10}$/;
 
-export function ReservationBookingCard() {
+export function ReservationBookingCard({
+  reservationTypes = [],
+  selectedReservationTypeSlug = "",
+  onReservationTypeChange,
+  inquiryHref = "/#reservations",
+  inquiryLabel = "Send Inquiry",
+  policyHref = "#cancellation-policy",
+  policyLabel = "Cancellation Policy",
+}: ReservationBookingCardProps) {
   const dateOptions = useMemo(() => getUpcomingReservationDates(), []);
   const [selectedDate, setSelectedDate] = useState(dateOptions[0]?.isoDate ?? "");
+  const [reservationTypeSlug, setReservationTypeSlug] = useState(selectedReservationTypeSlug || reservationTypes[0]?.slug || "");
+  const [mealPeriod, setMealPeriod] = useState<"lunch" | "dinner">("lunch");
   const [guestCount, setGuestCount] = useState(2);
   const [slots, setSlots] = useState<AvailabilitySlot[]>([]);
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
@@ -43,9 +65,32 @@ export function ReservationBookingCard() {
   const [isChecking, setIsChecking] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const selectedReservationType = reservationTypes.find((type) => type.slug === reservationTypeSlug);
   const hasAvailableSlots = slots.some((slot) => slot.isAvailable);
   const isPhoneValid = phonePattern.test(phoneNumber);
   const phoneWarning = phoneTouched && phoneNumber.length > 0 && !isPhoneValid;
+  const minGuests = selectedReservationType?.minGuests ?? 1;
+  const maxGuests = selectedReservationType?.maxGuests ?? 12;
+
+  useEffect(() => {
+    if (selectedReservationTypeSlug) {
+      setReservationTypeSlug(selectedReservationTypeSlug);
+    }
+  }, [selectedReservationTypeSlug]);
+
+  useEffect(() => {
+    if (!selectedReservationType) return;
+
+    setGuestCount((current) => Math.min(Math.max(current, selectedReservationType.minGuests), selectedReservationType.maxGuests));
+    if (selectedReservationType.mealPeriods.length > 0 && !selectedReservationType.mealPeriods.includes(mealPeriod)) {
+      setMealPeriod(selectedReservationType.mealPeriods[0]);
+    }
+  }, [mealPeriod, selectedReservationType]);
+
+  function updateReservationType(nextSlug: string) {
+    setReservationTypeSlug(nextSlug);
+    onReservationTypeChange?.(nextSlug);
+  }
 
   async function checkAvailability() {
     setIsChecking(true);
@@ -91,6 +136,8 @@ export function ReservationBookingCard() {
           guestCount,
           bookingDate: selectedDate,
           slotStart: selectedSlot.slotStart,
+          reservationTypeSlug,
+          mealPeriod,
         }),
       });
       const payload = (await response.json()) as { booking?: BookingSummary; error?: string; message?: string };
@@ -121,6 +168,18 @@ export function ReservationBookingCard() {
         </div>
 
         <label className={styles.fieldGroup}>
+          <span>Reservation Type</span>
+          <select value={reservationTypeSlug} onChange={(event) => updateReservationType(event.currentTarget.value)}>
+            <option value="">Select reservation type</option>
+            {reservationTypes.map((type) => (
+              <option value={type.slug} key={type.slug}>
+                {type.title}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className={styles.fieldGroup}>
           <span>Select Date</span>
           <div className={styles.dateGrid}>
             {dateOptions.map((option) => (
@@ -143,22 +202,44 @@ export function ReservationBookingCard() {
         </label>
 
         <label className={styles.fieldGroup}>
-          <span>Guests</span>
-          <div className={styles.guestControl}>
-            <button type="button" aria-label="Decrease guests" onClick={() => setGuestCount((current) => Math.max(current - 1, 1))}>-</button>
-            <strong>{guestCount} Guests</strong>
-            <button type="button" aria-label="Increase guests" onClick={() => setGuestCount((current) => current + 1)}>+</button>
+          <span>Meal</span>
+          <div className={styles.mealToggle}>
+            {(["lunch", "dinner"] as const).map((period) => (
+              <button
+                className={mealPeriod === period ? styles.selectedMeal : ""}
+                type="button"
+                onClick={() => setMealPeriod(period)}
+                disabled={Boolean(selectedReservationType?.mealPeriods.length) && !selectedReservationType?.mealPeriods.includes(period)}
+                key={period}
+              >
+                {period === "lunch" ? "Lunch" : "Dinner"}
+              </button>
+            ))}
           </div>
         </label>
 
-        <button className={styles.checkButton} type="button" onClick={checkAvailability} disabled={isChecking || !selectedDate}>
+        <label className={styles.fieldGroup}>
+          <span>Guests</span>
+          <div className={styles.guestControl}>
+            <button type="button" aria-label="Decrease guests" onClick={() => setGuestCount((current) => Math.max(current - 1, minGuests))}>-</button>
+            <strong>{guestCount} Guests</strong>
+            <button type="button" aria-label="Increase guests" onClick={() => setGuestCount((current) => Math.min(current + 1, maxGuests))}>+</button>
+          </div>
+        </label>
+
+        <button className={styles.checkButton} type="button" onClick={checkAvailability} disabled={isChecking || !selectedDate || !reservationTypeSlug}>
           {isChecking ? "Checking..." : "Check Availability"}
         </button>
 
         {error ? <p className={styles.errorText}>{error}</p> : null}
 
-        <p className={styles.helperText}>Choose a date and guest count to see live reservation slots.</p>
-        <a className={styles.policyLink} href="#cancellation-policy">Cancellation Policy</a>
+        <p className={styles.helperText}>
+          {selectedReservationType
+            ? `${selectedReservationType.title} reservations can be reviewed and confirmed on the next step.`
+            : "Choose a reservation type, date, and guest count to see live slots."}
+        </p>
+        <a className={styles.inquiryButton} href={inquiryHref}>{inquiryLabel}</a>
+        <a className={styles.policyLink} href={policyHref}>{policyLabel}</a>
       </form>
 
       {isAvailabilityOpen ? (
@@ -178,7 +259,7 @@ export function ReservationBookingCard() {
             <div className={styles.modalHeader}>
               <span>Reservation availability</span>
               <h3 id="availability-modal-title">Select a Slot</h3>
-              <p>{selectedDate} for {guestCount} guests</p>
+              <p>{selectedReservationType?.title ?? "Reservation"} on {selectedDate} for {guestCount} guests, {mealPeriod}</p>
             </div>
 
             <div className={styles.modalContent}>
@@ -282,6 +363,10 @@ export function ReservationBookingCard() {
               <strong>{bookingSummary.bookingReference}</strong>
             </div>
             <dl className={styles.confirmationDetails}>
+              <div>
+                <dt>Type</dt>
+                <dd>{bookingSummary.reservationTypeTitle || selectedReservationType?.title || "Reservation"}</dd>
+              </div>
               <div>
                 <dt>Date</dt>
                 <dd>{bookingSummary.bookingDate}</dd>

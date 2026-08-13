@@ -1,4 +1,4 @@
-﻿const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
@@ -28,6 +28,9 @@ const tableBookingSchema = new mongoose.Schema(
       trim: true,
       match: timePattern,
     },
+    reservationTypeSlug: { type: String, default: "", trim: true, lowercase: true },
+    reservationTypeTitle: { type: String, default: "", trim: true },
+    mealPeriod: { type: String, enum: ["lunch", "dinner", ""], default: "", trim: true },
     status: { type: String, enum: bookingStatuses, default: "confirmed", required: true },
     source: { type: String, default: "website", required: true, trim: true },
     notes: { type: String, default: "", trim: true },
