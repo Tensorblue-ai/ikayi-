@@ -279,7 +279,7 @@ const sections = [
     key: "reservations",
     data: {
       sectionKey: "reservations",
-      image: "/api/assets/assets/reservation%20(2).png",
+      image: "/assets/reservation%20(2).png",
       imageAlt: "Ikayi reservation experience collage",
       tabs: ["Overview", "Reservations", "More Information", "Location"],
       details: ["The City Palace, Lucknow", "90-120 Minutes", "Tasting Experience"],

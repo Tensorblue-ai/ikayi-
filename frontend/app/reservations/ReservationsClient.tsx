@@ -16,7 +16,7 @@ type ReservationsClientProps = {
 
 const fallbackTabs = ["Overview", "Reservations", "More Information", "Location"];
 const tabIcons = [Home, CalendarDays, Info, MapPin];
-const fallbackCollageSrc = "/api/assets/assets/reservation%20(2).png";
+const fallbackCollageSrc = "/assets/reservation%20(2).png";
 
 export function ReservationsClient({ section, reservationTypes }: ReservationsClientProps) {
   const defaultSlug = reservationTypes[0]?.slug ?? "";
@@ -79,7 +79,7 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
 function getReservationCollageSrc(src?: string) {
   const imageSrc = src?.trim();
 
-  if (!imageSrc || imageSrc.includes("/assets/reservation.png")) {
+  if (!imageSrc || imageSrc.includes("/assets/reservation.png") || imageSrc.includes("/api/assets/assets/reservation%20(2).png")) {
     return fallbackCollageSrc;
   }
 
