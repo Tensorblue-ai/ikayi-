@@ -54,7 +54,7 @@
 
 .copyBlock h2 {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-white) !important;
   font-size: clamp(2.6rem, 4.5vw, 4.55rem);
   font-weight: 400;
   line-height: 0.96;
@@ -90,7 +90,7 @@
 
 .copyBlock p:not(.kicker p) {
   margin: 0 0 28px;
-  color: var(--ikayi-ink);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.95rem;
   line-height: 1.75;
 }

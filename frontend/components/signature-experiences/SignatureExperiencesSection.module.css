@@ -25,6 +25,7 @@
 
 .headingBlock h2 {
   margin: 0;
+  color: var(--ikayi-white) !important;
   font-family: var(--ikayi-font-display);
   font-size: clamp(2rem, 3.8vw, 3.5rem);
   font-weight: 400;
@@ -57,7 +58,7 @@
 .intro {
   width: min(100% - 64px, 620px);
   margin: 22px auto 32px;
-  color: var(--ikayi-muted-ink);
+  color: var(--ikayi-deep-red) !important;
   text-align: center;
   font-family: var(--ikayi-font-body);
   font-size: 0.92rem;
@@ -168,7 +169,7 @@
 
 .footerPanel p {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-white) !important;
   font-family: var(--ikayi-font-display);
   font-size: clamp(1.6rem, 2.4vw, 2.35rem);
   font-weight: 400;

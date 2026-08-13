@@ -29,6 +29,7 @@
 
 .headingBlock h2 {
   margin: 0;
+  color: var(--ikayi-white) !important;
   font-family: var(--ikayi-font-display);
   font-size: clamp(2.4rem, 4.8vw, 4rem);
   font-weight: 400;
@@ -60,7 +61,7 @@
 .intro {
   width: min(100%, 610px);
   margin: 18px auto 36px;
-  color: var(--ikayi-muted-ink);
+  color: var(--ikayi-deep-red) !important;
   text-align: center;
   font-family: var(--ikayi-font-body);
   font-size: 0.86rem;

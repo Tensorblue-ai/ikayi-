@@ -67,6 +67,7 @@
 
 .copyPanel {
   max-width: 560px;
+  min-width: 0;
 }
 
 .kicker {
@@ -88,16 +89,18 @@
 
 .copyPanel h2 {
   margin: 0;
-  color: var(--ikayi-ink);
+  max-width: 620px;
+  color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-display);
-  font-size: clamp(3.1rem, 5.2vw, 5.25rem);
+  font-size: clamp(2.45rem, 3.85vw, 3.85rem);
   font-weight: 400;
   line-height: 0.98;
+  overflow-wrap: anywhere;
 }
 
 .copyPanel h2 span {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .divider {
@@ -123,7 +126,7 @@
 .copyPanel > p {
   max-width: 500px;
   margin: 0 0 16px;
-  color: var(--ikayi-muted-ink);
+  color: var(--ikayi-white) !important;
   font-family: var(--ikayi-font-body);
   font-size: 0.92rem;
   line-height: 1.68;

@@ -16,10 +16,10 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(220px, 300px) minmax(360px, 540px);
+  grid-template-columns: minmax(220px, 300px) minmax(560px, 690px);
   align-items: center;
   gap: clamp(48px, 7vw, 82px);
-  width: min(100% - 128px, 940px);
+  width: min(100% - 128px, 1120px);
   margin: 0 auto;
 }
 
@@ -78,15 +78,20 @@
 }
 
 .copyBlock h2 {
-  max-width: 560px;
+  max-width: 690px;
   margin: 0;
   font-family: var(--ikayi-font-display);
-  font-size: clamp(1.85rem, 2.65vw, 2.75rem);
+  font-size: clamp(1.75rem, 2.2vw, 2.45rem);
   font-weight: 400;
   line-height: 1.04;
   color: var(--ikayi-white) !important;
   text-transform: none !important;
   white-space: normal;
+}
+
+.headingLine {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .copyBlock h2 span {
@@ -400,6 +405,11 @@
 
   .copyBlock h2 {
     font-size: clamp(1.55rem, 7.8vw, 2.35rem);
+  }
+
+  .headingLine {
+    display: inline;
+    white-space: normal;
   }
 
   .cta {
