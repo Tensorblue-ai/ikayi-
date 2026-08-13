@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { CalendarDays, Home, Info, MapPin } from "lucide-react";
 import type { ReservationSectionData } from "@/lib/homepage-sections";
@@ -15,6 +16,7 @@ type ReservationsClientProps = {
 
 const fallbackTabs = ["Overview", "Reservations", "More Information", "Location"];
 const tabIcons = [Home, CalendarDays, Info, MapPin];
+const fallbackCollageSrc = "/api/assets/assets/reservation%20(2).png";
 
 export function ReservationsClient({ section, reservationTypes }: ReservationsClientProps) {
   const defaultSlug = reservationTypes[0]?.slug ?? "";
@@ -24,11 +26,17 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
     [reservationTypes, selectedSlug]
   );
   const tabs = section?.tabs?.length ? section.tabs : fallbackTabs;
+  const collageSrc = getReservationCollageSrc(section?.image);
+  const collageAlt = section?.imageAlt?.trim() || "Ikayi reservation experience collage";
 
   return (
     <main className={styles.page}>
       <section className={styles.shell} aria-labelledby="reservation-heading">
         <div className={styles.content}>
+          <div className={styles.visualPanel}>
+            <Image src={collageSrc} alt={collageAlt} fill sizes="(max-width: 980px) 100vw, 760px" priority />
+          </div>
+
           <nav className={styles.tabs} aria-label="Reservation details">
             {tabs.map((tab, index) => {
               const Icon = tabIcons[index] ?? Info;
@@ -67,4 +75,13 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
       </section>
     </main>
   );
+}
+function getReservationCollageSrc(src?: string) {
+  const imageSrc = src?.trim();
+
+  if (!imageSrc || imageSrc.includes("/assets/reservation.png")) {
+    return fallbackCollageSrc;
+  }
+
+  return imageSrc.replace(/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/api\/assets/i, "/api/assets");
 }

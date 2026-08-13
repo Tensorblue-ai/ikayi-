@@ -40,7 +40,7 @@
 
 .visualPanel {
   position: relative;
-  min-height: 690px;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 44%, transparent);
   border-radius: 10px;

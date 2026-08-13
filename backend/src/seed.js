@@ -11,8 +11,6 @@ const Reservation = require("./models/Reservation");
 
 dotenv.config({ quiet: true });
 
-const apiAssetBaseUrl = (process.env.API_ASSET_BASE_URL || "http://localhost:5000/api/assets").replace(/\/+$/, "");
-
 const sections = [
   {
     model: Experience,
@@ -281,7 +279,7 @@ const sections = [
     key: "reservations",
     data: {
       sectionKey: "reservations",
-      image: `${apiAssetBaseUrl}/assets/reservation.png`,
+      image: "/api/assets/assets/reservation%20(2).png",
       imageAlt: "Ikayi reservation experience collage",
       tabs: ["Overview", "Reservations", "More Information", "Location"],
       details: ["The City Palace, Lucknow", "90-120 Minutes", "Tasting Experience"],
