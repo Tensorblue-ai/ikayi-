@@ -312,7 +312,7 @@
 .selectedCard .guestPill,
 .selectedCard .badge,
 .selectedCard .iconWrap {
-  color: var(--ikayi-white);
+  color: var(--ikayi-white) !important;
 }
 
 .selectedCard .guestPill,
