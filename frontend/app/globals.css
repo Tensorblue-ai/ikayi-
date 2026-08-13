@@ -24,7 +24,7 @@ body {
 }
 /* site-wide-palette-applied */
 body {
-  background: var(--ikayi-reservation-bg) !important;
+  background: var(--ikayi-site-background-gradient) !important;
   color: var(--ikayi-deep-red) !important;
   text-transform: lowercase !important;
 }
@@ -47,7 +47,7 @@ body :where(input, textarea, select)::placeholder {
 }
 
 body :where(main, section, footer, header) {
-  background: var(--ikayi-reservation-bg) !important;
+  background: var(--ikayi-site-background-gradient) !important;
 }
 
 body :where(a[class*="cta"], a[class*="Cta"], a[class*="action"], a[class*="Action"], a[class*="reservation"], a[class*="Reservation"], a[href="/reservations"], a[href="#reservations"], a[href*="reservation"], button[class*="primary"], button[class*="Primary"], button[class*="check"], button[class*="Check"], button[class*="submit"], button[class*="Submit"], button[class*="save"], button[class*="Save"], button[class*="more"], button[class*="More"]) {

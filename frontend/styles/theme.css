@@ -15,6 +15,7 @@
   --ikayi-surface-start: var(--ikayi-reservation-bg);
   --ikayi-surface-end: var(--ikayi-reservation-bg);
   --ikayi-nav-surface: var(--ikayi-reservation-bg);
+  --ikayi-site-background-gradient: linear-gradient(180deg, #F0BA96 0%, rgb(240 186 150) 100%);
   --ikayi-peach-rgb: 250 216 181;
   --ikayi-terracotta-rgb: 230 156 118;
   --ikayi-reservation-bg-rgb: 240 186 150;
