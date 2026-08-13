@@ -196,3 +196,42 @@
     justify-self: start;
   }
 }
+.morePrompt {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-top: -10px;
+}
+
+.moreButton {
+  display: inline-flex;
+  min-height: 44px;
+  width: min(100%, 320px);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--ikayi-deep-red);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--ikayi-white) 44%, transparent);
+  color: var(--ikayi-deep-red);
+  cursor: pointer;
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.moreButton:hover,
+.moreButton:focus-visible {
+  background: var(--ikayi-deep-red);
+  color: var(--ikayi-white);
+  outline: none;
+}
+
+.morePrompt p {
+  margin: 0;
+  color: var(--ikayi-muted-ink);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  text-align: center;
+}

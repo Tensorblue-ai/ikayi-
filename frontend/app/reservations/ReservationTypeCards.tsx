@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   BriefcaseBusiness,
   Handshake,
@@ -6,6 +9,7 @@ import {
   Sprout,
   SunMedium,
   Coffee,
+  Sparkles,
 } from "lucide-react";
 import type { ReservationType } from "@/lib/reservation-types";
 import styles from "./ReservationTypeCards.module.css";
@@ -27,6 +31,7 @@ const iconMap = {
 };
 
 export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect }: ReservationTypeCardsProps) {
+  const [isMoreVisible, setIsMoreVisible] = useState(false);
   const primaryTypes = reservationTypes.filter((type) => type.pageGroup === "primary");
   const moreTypes = reservationTypes.filter((type) => type.pageGroup === "more");
 
@@ -43,16 +48,28 @@ export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect 
         <ReservationTypeGrid reservationTypes={primaryTypes} selectedSlug={selectedSlug} onSelect={onSelect} />
       </section>
 
-      <section className={styles.group} aria-labelledby="more-reservations-heading">
-        <div className={styles.headingBlock}>
-          <h2 id="more-reservations-heading">More Reservation Types</h2>
-          <div className={styles.rule} aria-hidden="true">
-            <span />
-          </div>
-          <p>Choose from our signature experiences, seasonal gatherings, and curated occasions.</p>
+      {moreTypes.length > 0 && !isMoreVisible ? (
+        <div className={styles.morePrompt}>
+          <button className={styles.moreButton} type="button" onClick={() => setIsMoreVisible(true)}>
+            <Sparkles aria-hidden="true" size={16} strokeWidth={1.7} />
+            View More Experiences
+          </button>
+          <p>Discover more curated experiences on the next page.</p>
         </div>
-        <ReservationTypeGrid reservationTypes={moreTypes} selectedSlug={selectedSlug} onSelect={onSelect} />
-      </section>
+      ) : null}
+
+      {isMoreVisible ? (
+        <section className={styles.group} aria-labelledby="more-reservations-heading">
+          <div className={styles.headingBlock}>
+            <h2 id="more-reservations-heading">More Reservation Types</h2>
+            <div className={styles.rule} aria-hidden="true">
+              <span />
+            </div>
+            <p>Choose from our signature experiences, seasonal gatherings, and curated occasions.</p>
+          </div>
+          <ReservationTypeGrid reservationTypes={moreTypes} selectedSlug={selectedSlug} onSelect={onSelect} />
+        </section>
+      ) : null}
     </div>
   );
 }
