@@ -68,7 +68,7 @@
   background: color-mix(in srgb, var(--ikayi-white) 48%, transparent);
 }
 
-.tabs a {
+.tabs button {
   display: flex;
   min-height: 42px;
   align-items: center;
@@ -79,7 +79,9 @@
   font-family: var(--ikayi-font-accent);
   font-size: 0.72rem;
   font-weight: 700;
-  text-decoration: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
 .tabs span {
@@ -882,7 +884,7 @@
   background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
 }
 
-.tabs a,
+.tabs button,
 .fieldGroup > span,
 .orRule,
 .modalHeader > span,

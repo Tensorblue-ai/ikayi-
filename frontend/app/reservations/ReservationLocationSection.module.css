@@ -1,0 +1,132 @@
+.locationSection {
+  display: grid;
+  gap: 18px;
+  color: var(--ikayi-deep-red);
+}
+
+.headingBlock {
+  display: grid;
+  gap: 12px;
+}
+
+.headingBlock h1 {
+  margin: 0;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(2.35rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.headingBlock p {
+  margin: 0;
+  color: var(--ikayi-deep-red);
+  font-size: 0.86rem;
+  line-height: 1.7;
+  text-transform: lowercase;
+}
+
+.rule {
+  display: flex;
+  width: min(100%, 320px);
+  align-items: center;
+  gap: 10px;
+}
+
+.rule::before,
+.rule::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: color-mix(in srgb, var(--ikayi-deep-red) 50%, transparent);
+}
+
+.rule span {
+  width: 18px;
+  height: 12px;
+  background:
+    radial-gradient(circle at 50% 50%, var(--ikayi-deep-red) 0 18%, transparent 20%),
+    radial-gradient(ellipse at 18% 50%, var(--ikayi-deep-red) 0 24%, transparent 26%),
+    radial-gradient(ellipse at 82% 50%, var(--ikayi-deep-red) 0 24%, transparent 26%);
+}
+
+.mapPanel {
+  position: relative;
+  min-height: 190px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+}
+
+.mapPanel img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.infoCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent);
+  border-radius: 8px;
+  padding: 20px;
+  background: color-mix(in srgb, var(--ikayi-white) 32%, transparent);
+}
+
+.locationSection .infoCard svg {
+  color: var(--ikayi-deep-red);
+}
+
+.infoCard h2 {
+  margin: 0 0 8px;
+  color: var(--ikayi-deep-red);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.infoCard p {
+  margin: 0;
+  color: var(--ikayi-deep-red);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  text-transform: lowercase;
+}
+
+.locationSection .infoCard a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  border: 1px solid var(--ikayi-sage-green);
+  border-radius: 6px;
+  padding: 0 14px;
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white);
+  font-family: var(--ikayi-font-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mapPanel {
+    min-height: 220px;
+  }
+}

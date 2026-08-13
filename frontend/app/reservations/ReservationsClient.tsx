@@ -6,6 +6,7 @@ import { CalendarDays, Home, Info, MapPin } from "lucide-react";
 import type { ReservationSectionData } from "@/lib/homepage-sections";
 import type { ReservationType } from "@/lib/reservation-types";
 import { ReservationBookingCard } from "./ReservationBookingCard";
+import { ReservationLocationSection } from "./ReservationLocationSection";
 import { ReservationTypeCards } from "./ReservationTypeCards";
 import styles from "./page.module.css";
 
@@ -21,6 +22,7 @@ const fallbackCollageSrc = "/assets/reservation%20(2).png";
 export function ReservationsClient({ section, reservationTypes }: ReservationsClientProps) {
   const defaultSlug = reservationTypes[0]?.slug ?? "";
   const [selectedSlug, setSelectedSlug] = useState(defaultSlug);
+  const [activeTab, setActiveTab] = useState("Reservations");
   const selectedType = useMemo(
     () => reservationTypes.find((type) => type.slug === selectedSlug) ?? reservationTypes[0],
     [reservationTypes, selectedSlug]
@@ -28,6 +30,7 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
   const tabs = section?.tabs?.length ? section.tabs : fallbackTabs;
   const collageSrc = getReservationCollageSrc(section?.image);
   const collageAlt = section?.imageAlt?.trim() || "Ikayi reservation experience collage";
+  const activeTabLabel = tabs.find((tab) => tab.toLowerCase() === activeTab.toLowerCase()) ?? "Reservations";
 
   return (
     <main className={styles.page}>
@@ -42,15 +45,19 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
               const Icon = tabIcons[index] ?? Info;
 
               return (
-                <a className={index === 1 ? styles.activeTab : ""} href={`#${tab.toLowerCase().replaceAll(" ", "-")}`} key={tab}>
+                <button className={activeTabLabel === tab ? styles.activeTab : ""} type="button" onClick={() => setActiveTab(tab)} key={tab}>
                   <Icon aria-hidden="true" size={15} strokeWidth={1.6} />
                   {tab}
-                </a>
+                </button>
               );
             })}
           </nav>
 
-          <ReservationTypeCards reservationTypes={reservationTypes} selectedSlug={selectedType?.slug ?? ""} onSelect={setSelectedSlug} />
+          {activeTabLabel.toLowerCase() === "location" ? (
+            <ReservationLocationSection />
+          ) : (
+            <ReservationTypeCards reservationTypes={reservationTypes} selectedSlug={selectedType?.slug ?? ""} onSelect={setSelectedSlug} />
+          )}
 
           <aside className={styles.breakfastNote}>
             <span aria-hidden="true">i</span>
