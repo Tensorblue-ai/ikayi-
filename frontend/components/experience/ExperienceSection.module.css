@@ -2,9 +2,9 @@
   position: relative;
   overflow: hidden;
   min-height: 100svh;
-  padding: clamp(52px, 7vw, 84px) 0 42px;
+  padding: clamp(44px, 5.8vw, 70px) 0 42px;
   background:
-    radial-gradient(circle at 22% 14%, rgba(255, 255, 255, 0.72) 0, rgba(255, 255, 255, 0) 28%),
+    radial-gradient(circle at 22% 14%, color-mix(in srgb, var(--ikayi-white) 42%, transparent) 0, transparent 28%),
     linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-surface-end) 100%);
   color: var(--ikayi-ink);
   border-top: 1px solid rgba(183, 118, 66, 0.22);
@@ -16,10 +16,10 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(230px, 340px) minmax(440px, 640px);
+  grid-template-columns: minmax(220px, 300px) minmax(360px, 540px);
   align-items: center;
-  gap: clamp(76px, 9vw, 130px);
-  width: min(100% - 128px, 1080px);
+  gap: clamp(48px, 7vw, 82px);
+  width: min(100% - 128px, 940px);
   margin: 0 auto;
 }
 
@@ -78,25 +78,28 @@
 }
 
 .copyBlock h2 {
-  max-width: 760px;
+  max-width: 560px;
   margin: 0;
-  font-size: clamp(1.95rem, 3.35vw, 3rem);
+  font-family: var(--ikayi-font-display);
+  font-size: clamp(1.85rem, 2.65vw, 2.75rem);
   font-weight: 400;
-  line-height: 1.08;
-  color: var(--ikayi-ink);
-  white-space: nowrap;
+  line-height: 1.04;
+  color: var(--ikayi-white) !important;
+  text-transform: none !important;
+  white-space: normal;
 }
 
 .copyBlock h2 span {
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-white) !important;
+  text-transform: none !important;
 }
 
 .copyBlock h2 .headingLine {
-  color: var(--ikayi-ink);
+  color: var(--ikayi-white) !important;
 }
 
 .copyBlock h2 .headingLine > span {
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-white) !important;
 }
 
 .smallDivider {
@@ -123,14 +126,14 @@
 
 .lede {
   margin: 0 0 12px;
-  color: var(--ikayi-terracotta);
+  color: var(--ikayi-deep-red) !important;
   font-size: 1.05rem;
 }
 
 .bodyCopy {
   max-width: 480px;
   margin: 0 0 22px;
-  color: var(--ikayi-ink);
+  color: var(--ikayi-white) !important;
   font-size: 0.9rem;
   line-height: 1.65;
 }
@@ -397,7 +400,6 @@
 
   .copyBlock h2 {
     font-size: clamp(1.55rem, 7.8vw, 2.35rem);
-    white-space: normal;
   }
 
   .cta {

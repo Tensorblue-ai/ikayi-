@@ -176,8 +176,9 @@
   position: relative;
   overflow: hidden;
   padding: 30px 0 18px;
-  background: var(--ikayi-deep-red);
-  color: var(--ikayi-white);
+  background: var(--ikayi-reservation-bg) !important;
+  color: var(--ikayi-deep-red) !important;
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 18%, transparent);
 }
 
 .footerInner {
@@ -199,7 +200,7 @@
 .brandBlock p {
   max-width: 230px;
   margin: 0 0 18px;
-  color: color-mix(in srgb, var(--ikayi-white) 86%, transparent);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.78rem;
   line-height: 1.45;
 }
@@ -235,7 +236,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-left: 1px solid color-mix(in srgb, var(--ikayi-gold) 38%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 14%, transparent);
   padding-left: 34px;
   font-style: normal;
 }
@@ -243,7 +244,7 @@
 .linkColumn h3,
 .contactBlock h3 {
   margin: 0 0 4px;
-  color: var(--ikayi-gold);
+  color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-accent);
   font-size: 1rem;
   font-weight: 700;
@@ -253,9 +254,16 @@
 
 .linkColumn a,
 .contactBlock a {
-  color: color-mix(in srgb, var(--ikayi-white) 88%, transparent);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.78rem;
   text-decoration: none;
+}
+
+.linkColumn a[href="#reservations"] {
+  width: fit-content;
+  padding: 1px 8px;
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
 }
 
 .footerArt {
@@ -277,8 +285,8 @@
   width: min(100% - 64px, 1280px);
   margin: 26px auto 0;
   padding-top: 16px;
-  border-top: 1px solid color-mix(in srgb, var(--ikayi-gold) 46%, transparent);
-  color: color-mix(in srgb, var(--ikayi-white) 82%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 14%, transparent);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.72rem;
 }
 
