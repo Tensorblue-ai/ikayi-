@@ -283,9 +283,9 @@
 
 .primaryButton {
   border: 0;
-  background: var(--ikayi-deep-red);
-  color: var(--ikayi-white);
-  box-shadow: 0 14px 22px rgb(var(--ikayi-deep-red-rgb) / 0.16);
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
+  box-shadow: 0 14px 22px rgb(var(--ikayi-sage-green-rgb) / 0.18);
 }
 
 .cancelButton {

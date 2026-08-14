@@ -30,8 +30,20 @@
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(255, 249, 241, 0.98) 0%, rgba(255, 247, 237, 0.88) 22%, rgba(255, 243, 229, 0.52) 45%, rgba(255, 239, 222, 0.12) 68%, rgba(255, 235, 216, 0.02) 100%),
-    linear-gradient(180deg, rgba(118, 60, 33, 0.12) 0%, transparent 42%, rgba(68, 30, 18, 0.08) 100%);
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ikayi-white) 96%, var(--ikayi-peach)) 0%,
+      color-mix(in srgb, var(--ikayi-white) 82%, var(--ikayi-peach)) 24%,
+      color-mix(in srgb, var(--ikayi-reservation-bg) 42%, transparent) 50%,
+      color-mix(in srgb, var(--ikayi-reservation-bg) 10%, transparent) 72%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ikayi-gold) 12%, transparent) 0%,
+      transparent 44%,
+      color-mix(in srgb, var(--ikayi-deep-red) 10%, transparent) 100%
+    );
 }
 
 .content {
@@ -122,9 +134,10 @@
 }
 
 .primaryAction {
-  background: var(--ikayi-deep-red);
-  color: var(--ikayi-white);
-  box-shadow: 0 18px 34px color-mix(in srgb, var(--ikayi-deep-red) 20%, transparent);
+  border-color: var(--ikayi-sage-green) !important;
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
+  box-shadow: 0 18px 34px color-mix(in srgb, var(--ikayi-sage-green) 24%, transparent);
   transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -136,9 +149,9 @@
 .primaryAction:focus-visible {
   transform: translateY(-3px);
   border-color: color-mix(in srgb, var(--ikayi-gold) 72%, transparent);
-  background: color-mix(in srgb, var(--ikayi-deep-red) 72%, var(--ikayi-terracotta));
+  background: color-mix(in srgb, var(--ikayi-sage-green) 86%, var(--ikayi-deep-red)) !important;
   box-shadow:
-    0 22px 38px color-mix(in srgb, var(--ikayi-deep-red) 24%, transparent),
+    0 22px 38px color-mix(in srgb, var(--ikayi-sage-green) 28%, transparent),
     inset 0 0 0 1px color-mix(in srgb, var(--ikayi-gold) 64%, transparent);
 }
 
@@ -148,8 +161,20 @@
 }
 
 .secondaryAction {
-  background: rgba(255, 255, 255, 0.74);
-  color: var(--ikayi-ink);
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent) !important;
+  background: color-mix(in srgb, var(--ikayi-white) 76%, var(--ikayi-peach)) !important;
+  color: var(--ikayi-deep-red) !important;
+  box-shadow: none !important;
+}
+
+.secondaryAction span {
+  color: var(--ikayi-deep-red) !important;
+}
+
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+  background: color-mix(in srgb, var(--ikayi-white) 62%, var(--ikayi-peach)) !important;
+  color: var(--ikayi-deep-red) !important;
 }
 
 .heroDetails {

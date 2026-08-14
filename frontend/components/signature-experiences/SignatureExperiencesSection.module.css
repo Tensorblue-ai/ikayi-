@@ -3,8 +3,13 @@
   overflow: hidden;
   padding: clamp(56px, 7vw, 82px) 0 48px;
   background:
-    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--ikayi-white) 58%, transparent) 0, transparent 28%),
-    linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-surface-end) 100%);
+    radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--ikayi-white) 72%, transparent) 0, transparent 30%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ikayi-white) 18%, var(--ikayi-reservation-bg)) 0%,
+      var(--ikayi-reservation-bg) 48%,
+      color-mix(in srgb, var(--ikayi-terracotta) 28%, var(--ikayi-reservation-bg)) 100%
+    );
   color: var(--ikayi-ink);
   border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 35%, transparent);
 }
@@ -94,10 +99,13 @@
   position: relative;
   aspect-ratio: 1.45;
   overflow: hidden;
-  border-radius: 8px 8px 0 0;
+  margin: -1px -1px 0;
+  border-radius: 10px 10px 0 0;
+  background: var(--ikayi-reservation-bg);
 }
 
 .imageWrap img {
+  display: block;
   object-fit: cover;
 }
 
@@ -106,6 +114,8 @@
   width: 52px;
   height: 52px;
   place-items: center;
+  position: relative;
+  z-index: 1;
   margin: -28px auto 14px;
   border: 1px solid color-mix(in srgb, var(--ikayi-white) 70%, transparent);
   border-radius: 50%;
@@ -260,6 +270,7 @@
 }
 
 .iconBadge svg {
+  display: block;
   width: 20px;
   height: 20px;
   stroke-width: 1.8;

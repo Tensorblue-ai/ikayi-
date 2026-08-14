@@ -282,7 +282,7 @@ const sections = [
       image: "/assets/reservation%20(2).png",
       imageAlt: "Ikayi reservation experience collage",
       tabs: ["Overview", "Reservations", "More Information", "Location"],
-      details: ["The City Palace, Lucknow", "90-120 Minutes", "Tasting Experience"],
+      details: ["The City Palace, Lucknow", "90 Minutes", "Tasting Experience"],
       title: "Six-Course Tasting Menu",
       priceLabel: "INR 4,800 ++",
       description:

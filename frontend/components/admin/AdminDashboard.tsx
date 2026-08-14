@@ -55,7 +55,7 @@ const defaultTableSettings: TableSettings = {
   chairsPerTable: 4,
   openingTime: "12:00",
   closingTime: "00:00",
-  slotLengthMinutes: 60,
+  slotLengthMinutes: 90,
   timezone: "Asia/Kolkata",
 };
 

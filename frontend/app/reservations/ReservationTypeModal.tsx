@@ -50,7 +50,7 @@ export function ReservationTypeModal({ reservationType, onClose }: ReservationTy
           </span>
           <span>
             <Clock aria-hidden="true" size={17} strokeWidth={1.7} />
-            90-120 minutes
+            90 minutes
           </span>
           <span>
             <Utensils aria-hidden="true" size={17} strokeWidth={1.7} />

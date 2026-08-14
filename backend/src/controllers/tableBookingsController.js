@@ -9,7 +9,7 @@ const DEFAULT_SETTINGS = {
   chairsPerTable: 4,
   openingTime: "12:00",
   closingTime: "00:00",
-  slotLengthMinutes: 60,
+  slotLengthMinutes: 90,
   timezone: "Asia/Kolkata",
 };
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;

@@ -21,7 +21,7 @@ const tableSettingsSchema = new mongoose.Schema(
       trim: true,
       match: timePattern,
     },
-    slotLengthMinutes: { type: Number, default: 60, required: true, min: 1, validate: Number.isInteger },
+    slotLengthMinutes: { type: Number, default: 90, required: true, min: 1, validate: Number.isInteger },
     timezone: { type: String, default: "Asia/Kolkata", required: true, trim: true },
     isActive: { type: Boolean, default: true },
   },

@@ -46,7 +46,7 @@ body :where(input, textarea, select)::placeholder {
   text-transform: lowercase !important;
 }
 
-body :where(main, section, footer, header) {
+body :where(main) {
   background: var(--ikayi-site-background-gradient) !important;
 }
 

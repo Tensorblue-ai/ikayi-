@@ -187,16 +187,16 @@
 }
 
 .primaryButton {
-  border: 1px solid var(--ikayi-deep-red);
-  background: var(--ikayi-deep-red);
-  color: var(--ikayi-white);
+  border: 1px solid var(--ikayi-sage-green) !important;
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
 }
 
 .secondaryButton,
 .dangerButton {
   border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 42%, transparent);
-  background: transparent;
-  color: var(--ikayi-deep-red);
+  background: color-mix(in srgb, var(--ikayi-white) 74%, var(--ikayi-peach)) !important;
+  color: var(--ikayi-deep-red) !important;
 }
 
 @media (max-width: 980px) {

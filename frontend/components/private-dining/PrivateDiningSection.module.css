@@ -3,8 +3,14 @@
   overflow: hidden;
   padding: clamp(62px, 7vw, 92px) 0;
   background:
-    radial-gradient(circle at 24% 12%, color-mix(in srgb, var(--ikayi-white) 56%, transparent) 0, transparent 30%),
-    linear-gradient(180deg, var(--ikayi-surface-start) 0%, var(--ikayi-surface-end) 100%);
+    radial-gradient(circle at 24% 12%, color-mix(in srgb, var(--ikayi-white) 72%, transparent) 0, transparent 32%),
+    radial-gradient(circle at 92% 82%, color-mix(in srgb, var(--ikayi-terracotta) 42%, transparent) 0, transparent 28%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ikayi-white) 20%, var(--ikayi-reservation-bg)) 0%,
+      var(--ikayi-reservation-bg) 50%,
+      color-mix(in srgb, var(--ikayi-terracotta) 30%, var(--ikayi-reservation-bg)) 100%
+    );
   color: var(--ikayi-ink);
   border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
   opacity: 0;
@@ -214,14 +220,28 @@
 }
 
 .primaryAction {
-  background: var(--ikayi-deep-red);
-  color: var(--ikayi-white);
+  border-color: var(--ikayi-sage-green) !important;
+  background: var(--ikayi-sage-green) !important;
+  color: var(--ikayi-white) !important;
   box-shadow: 0 0 0 color-mix(in srgb, var(--ikayi-gold) 0%, transparent);
 }
 
 .secondaryAction {
-  background: color-mix(in srgb, var(--ikayi-white) 42%, transparent);
-  color: var(--ikayi-deep-red);
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent) !important;
+  background: color-mix(in srgb, var(--ikayi-white) 76%, var(--ikayi-peach)) !important;
+  color: var(--ikayi-deep-red) !important;
+  box-shadow: none !important;
+}
+
+.secondaryAction span,
+.secondaryAction b {
+  color: var(--ikayi-deep-red) !important;
+}
+
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+  background: color-mix(in srgb, var(--ikayi-white) 62%, var(--ikayi-peach)) !important;
+  color: var(--ikayi-deep-red) !important;
 }
 
 .primaryAction::after,
