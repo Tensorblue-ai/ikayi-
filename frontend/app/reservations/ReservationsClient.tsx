@@ -9,6 +9,7 @@ import { ReservationBookingCard } from "./ReservationBookingCard";
 import { ReservationLocationSection } from "./ReservationLocationSection";
 import { ReservationOverviewSection } from "./ReservationOverviewSection";
 import { ReservationTypeCards } from "./ReservationTypeCards";
+import { ReservationTypeModal } from "./ReservationTypeModal";
 import styles from "./page.module.css";
 
 type ReservationsClientProps = {
@@ -16,22 +17,27 @@ type ReservationsClientProps = {
   reservationTypes: ReservationType[];
 };
 
-const fallbackTabs = ["Overview", "Reservations", "More Information", "Location"];
-const tabIcons = [Home, CalendarDays, Info, MapPin];
+const fallbackTabs = ["Overview", "Reservations", "Location"];
+const tabIconByLabel = {
+  overview: Home,
+  reservations: CalendarDays,
+  location: MapPin,
+};
 const fallbackCollageSrc = "/assets/reservation%20(2).png";
 
 export function ReservationsClient({ section, reservationTypes }: ReservationsClientProps) {
   const defaultSlug = reservationTypes[0]?.slug ?? "";
   const [selectedSlug, setSelectedSlug] = useState(defaultSlug);
   const [activeTab, setActiveTab] = useState("Overview");
+  const [detailsType, setDetailsType] = useState<ReservationType | null>(null);
   const selectedType = useMemo(
     () => reservationTypes.find((type) => type.slug === selectedSlug) ?? reservationTypes[0],
     [reservationTypes, selectedSlug]
   );
-  const tabs = section?.tabs?.length ? section.tabs : fallbackTabs;
+  const tabs = (section?.tabs?.length ? section.tabs : fallbackTabs).filter((tab) => tab.toLowerCase() !== "more information");
   const collageSrc = getReservationCollageSrc(section?.image);
   const collageAlt = section?.imageAlt?.trim() || "Ikayi reservation experience collage";
-  const activeTabLabel = tabs.find((tab) => tab.toLowerCase() === activeTab.toLowerCase()) ?? "Overview";
+  const activeTabLabel = tabs.find((tab) => tab.toLowerCase() === activeTab.toLowerCase()) ?? tabs[0] ?? "Overview";
 
   return (
     <main className={styles.page}>
@@ -42,8 +48,8 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
           </div>
 
           <nav className={styles.tabs} aria-label="Reservation details">
-            {tabs.map((tab, index) => {
-              const Icon = tabIcons[index] ?? Info;
+            {tabs.map((tab) => {
+              const Icon = tabIconByLabel[tab.toLowerCase() as keyof typeof tabIconByLabel] ?? Info;
 
               return (
                 <button className={activeTabLabel === tab ? styles.activeTab : ""} type="button" onClick={() => setActiveTab(tab)} key={tab}>
@@ -59,7 +65,12 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
           ) : activeTabLabel.toLowerCase() === "location" ? (
             <ReservationLocationSection />
           ) : (
-            <ReservationTypeCards reservationTypes={reservationTypes} selectedSlug={selectedType?.slug ?? ""} onSelect={setSelectedSlug} />
+            <ReservationTypeCards
+              reservationTypes={reservationTypes}
+              selectedSlug={selectedType?.slug ?? ""}
+              onSelect={setSelectedSlug}
+              onOpenDetails={setDetailsType}
+            />
           )}
 
           <aside className={styles.breakfastNote}>
@@ -83,9 +94,11 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
           />
         </aside>
       </section>
+      <ReservationTypeModal reservationType={detailsType} onClose={() => setDetailsType(null)} />
     </main>
   );
 }
+
 function getReservationCollageSrc(src?: string) {
   const imageSrc = src?.trim();
 

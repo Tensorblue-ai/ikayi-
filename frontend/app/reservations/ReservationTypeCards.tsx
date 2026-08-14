@@ -1,16 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  BriefcaseBusiness,
-  Handshake,
-  Leaf,
-  Soup,
-  Sprout,
-  SunMedium,
-  Coffee,
-  Sparkles,
-} from "lucide-react";
+import { BriefcaseBusiness, Handshake, Leaf, Soup, Sprout, SunMedium, Coffee, Sparkles } from "lucide-react";
 import type { ReservationType } from "@/lib/reservation-types";
 import styles from "./ReservationTypeCards.module.css";
 
@@ -18,6 +9,7 @@ type ReservationTypeCardsProps = {
   reservationTypes: ReservationType[];
   selectedSlug: string;
   onSelect: (slug: string) => void;
+  onOpenDetails?: (reservationType: ReservationType) => void;
 };
 
 const iconMap = {
@@ -30,7 +22,7 @@ const iconMap = {
   tractor: Sprout,
 };
 
-export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect }: ReservationTypeCardsProps) {
+export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect, onOpenDetails }: ReservationTypeCardsProps) {
   const [isMoreVisible, setIsMoreVisible] = useState(false);
   const primaryTypes = reservationTypes.filter((type) => type.pageGroup === "primary");
   const moreTypes = reservationTypes.filter((type) => type.pageGroup === "more");
@@ -45,7 +37,7 @@ export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect 
           </div>
           <p>Reserve your preferred experience and let us curate unforgettable moments for you.</p>
         </div>
-        <ReservationTypeGrid reservationTypes={primaryTypes} selectedSlug={selectedSlug} onSelect={onSelect} />
+        <ReservationTypeGrid reservationTypes={primaryTypes} selectedSlug={selectedSlug} onSelect={onSelect} onOpenDetails={onOpenDetails} />
       </section>
 
       {moreTypes.length > 0 && !isMoreVisible ? (
@@ -67,14 +59,14 @@ export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect 
             </div>
             <p>Choose from our signature experiences, seasonal gatherings, and curated occasions.</p>
           </div>
-          <ReservationTypeGrid reservationTypes={moreTypes} selectedSlug={selectedSlug} onSelect={onSelect} />
+          <ReservationTypeGrid reservationTypes={moreTypes} selectedSlug={selectedSlug} onSelect={onSelect} onOpenDetails={onOpenDetails} />
         </section>
       ) : null}
     </div>
   );
 }
 
-function ReservationTypeGrid({ reservationTypes, selectedSlug, onSelect }: ReservationTypeCardsProps) {
+function ReservationTypeGrid({ reservationTypes, selectedSlug, onSelect, onOpenDetails }: ReservationTypeCardsProps) {
   return (
     <div className={styles.grid}>
       {reservationTypes.map((type) => {
@@ -87,7 +79,10 @@ function ReservationTypeGrid({ reservationTypes, selectedSlug, onSelect }: Reser
               .join(" ")
               .trim()}
             type="button"
-            onClick={() => onSelect(type.slug)}
+            onClick={() => {
+              onSelect(type.slug);
+              onOpenDetails?.(type);
+            }}
             aria-pressed={isSelected}
             key={type.slug}
           >
@@ -98,9 +93,7 @@ function ReservationTypeGrid({ reservationTypes, selectedSlug, onSelect }: Reser
             <strong>{type.title}</strong>
             {type.eyebrow ? <em>{type.eyebrow}</em> : null}
             <p>{type.description}</p>
-            {type.details.length > 0 ? (
-              <small>{type.details.join(" ")}</small>
-            ) : null}
+            {type.details.length > 0 ? <small>{type.details.join(" ")}</small> : null}
             <span className={styles.guestPill}>{type.defaultGuests} Guests</span>
           </button>
         );
