@@ -176,9 +176,9 @@
   position: relative;
   overflow: hidden;
   padding: 30px 0 18px;
-  background: var(--ikayi-reservation-bg) !important;
-  color: var(--ikayi-deep-red) !important;
-  border-top: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 18%, transparent);
+  background: var(--ikayi-deep-red) !important;
+  color: var(--ikayi-white) !important;
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-gold) 44%, transparent);
 }
 
 .footerInner {
@@ -200,7 +200,7 @@
 .brandBlock p {
   max-width: 230px;
   margin: 0 0 18px;
-  color: var(--ikayi-deep-red) !important;
+  color: color-mix(in srgb, var(--ikayi-white) 86%, var(--ikayi-gold)) !important;
   font-size: 0.78rem;
   line-height: 1.45;
 }
@@ -215,7 +215,7 @@
   width: 32px;
   height: 32px;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--ikayi-gold) 58%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ikayi-gold) 68%, transparent);
   border-radius: 50%;
   color: var(--ikayi-gold);
   text-decoration: none;
@@ -236,7 +236,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-left: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 14%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--ikayi-gold) 30%, transparent);
   padding-left: 34px;
   font-style: normal;
 }
@@ -244,7 +244,7 @@
 .linkColumn h3,
 .contactBlock h3 {
   margin: 0 0 4px;
-  color: var(--ikayi-deep-red) !important;
+  color: var(--ikayi-gold) !important;
   font-family: var(--ikayi-font-accent);
   font-size: 1rem;
   font-weight: 700;
@@ -254,7 +254,7 @@
 
 .linkColumn a,
 .contactBlock a {
-  color: var(--ikayi-deep-red) !important;
+  color: color-mix(in srgb, var(--ikayi-white) 88%, var(--ikayi-gold)) !important;
   font-size: 0.78rem;
   text-decoration: none;
 }
@@ -269,7 +269,8 @@
 .footerArt {
   position: relative;
   min-height: 240px;
-  opacity: 0.68;
+  opacity: 0.46;
+  filter: brightness(1.35) saturate(0.82);
 }
 
 .footerArt img {
@@ -285,8 +286,8 @@
   width: min(100% - 64px, 1280px);
   margin: 26px auto 0;
   padding-top: 16px;
-  border-top: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 14%, transparent);
-  color: var(--ikayi-deep-red) !important;
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-gold) 30%, transparent);
+  color: color-mix(in srgb, var(--ikayi-white) 82%, var(--ikayi-gold)) !important;
   font-size: 0.72rem;
 }
 
