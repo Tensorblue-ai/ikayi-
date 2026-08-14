@@ -122,11 +122,13 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 10px;
-  height: 10px;
-  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 70%, transparent);
-  transform: translate(-50%, -50%) rotate(45deg);
-  background: var(--ikayi-surface-start);
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  background-image: url("/api/assets/assets/IKAYI%20LOGO1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .copyPanel > p {

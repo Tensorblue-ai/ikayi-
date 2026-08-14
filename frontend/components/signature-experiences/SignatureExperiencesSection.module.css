@@ -54,10 +54,13 @@
 }
 
 .titleRule span {
-  width: 9px;
-  height: 9px;
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 62%, transparent);
-  transform: rotate(45deg);
+  width: 22px;
+  height: 22px;
+  background-image: url("/api/assets/assets/IKAYI%20LOGO1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: drop-shadow(0 1px 0 color-mix(in srgb, var(--ikayi-white) 28%, transparent));
 }
 
 .intro {

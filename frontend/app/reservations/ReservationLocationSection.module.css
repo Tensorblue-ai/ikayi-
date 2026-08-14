@@ -43,12 +43,12 @@
 }
 
 .rule span {
-  width: 18px;
-  height: 12px;
-  background:
-    radial-gradient(circle at 50% 50%, var(--ikayi-deep-red) 0 18%, transparent 20%),
-    radial-gradient(ellipse at 18% 50%, var(--ikayi-deep-red) 0 24%, transparent 26%),
-    radial-gradient(ellipse at 82% 50%, var(--ikayi-deep-red) 0 24%, transparent 26%);
+  width: 24px;
+  height: 24px;
+  background-image: url("/api/assets/assets/IKAYI%20LOGO1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .mapPanel {

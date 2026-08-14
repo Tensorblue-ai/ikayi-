@@ -87,10 +87,12 @@
 .fineRule span,
 .bottomRule span,
 .cardRule span {
-  width: 8px;
-  height: 8px;
-  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 72%, transparent);
-  transform: rotate(45deg);
+  width: 18px;
+  height: 18px;
+  background-image: url("/api/assets/assets/IKAYI%20LOGO1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .chefGrid {

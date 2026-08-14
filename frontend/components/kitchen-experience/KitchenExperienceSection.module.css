@@ -82,10 +82,12 @@
 }
 
 .divider span {
-  width: 12px;
-  height: 12px;
-  border: 1px solid rgba(177, 42, 37, 0.55);
-  transform: rotate(45deg);
+  width: 24px;
+  height: 24px;
+  background-image: url("/api/assets/assets/IKAYI%20LOGO1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .copyBlock p:not(.kicker p) {
