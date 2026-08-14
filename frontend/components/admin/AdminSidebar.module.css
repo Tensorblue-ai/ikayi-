@@ -8,10 +8,12 @@
   height: calc(100vh - 48px);
   margin: 24px 0 24px 20px;
   padding: 28px 18px 18px;
-  border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
-  border-radius: 22px;
-  background: rgb(var(--ikayi-white-rgb) / 0.82);
-  box-shadow: 0 24px 70px rgb(var(--ikayi-deep-red-rgb) / 0.08);
+  border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgb(var(--ikayi-white-rgb) / 0.58), rgb(var(--ikayi-peach-rgb) / 0.34)),
+    var(--ikayi-reservation-bg);
+  box-shadow: 0 20px 52px rgb(var(--ikayi-deep-red-rgb) / 0.07);
 }
 
 .sidebarLogo {
@@ -19,8 +21,8 @@
   align-items: center;
   gap: 12px;
   padding: 0 10px 24px;
-  border-bottom: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
-  color: var(--ikayi-deep-red);
+  border-bottom: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.1);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 76%, var(--ikayi-dark-surface));
 }
 
 .logoMark {
@@ -60,14 +62,14 @@
 }
 
 .logoText strong {
-  color: var(--ikayi-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 78%, var(--ikayi-dark-surface));
   font-size: 18px;
   font-weight: 700;
   line-height: 1;
 }
 
 .logoText small {
-  color: var(--ikayi-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 68%, var(--ikayi-dark-surface));
   font-size: 12px;
   font-weight: 600;
   line-height: 1.18;
@@ -88,7 +90,7 @@
   min-height: 48px;
   border-radius: 10px;
   padding: 0 12px;
-  color: var(--ikayi-muted-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 70%, var(--ikayi-dark-surface));
   font: inherit;
   font-size: 15px;
   font-weight: 600;
@@ -109,8 +111,8 @@
 }
 
 .sidebarLinkActive {
-  background: rgb(var(--ikayi-deep-red-rgb) / 0.08);
-  color: var(--ikayi-deep-red);
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white);
 }
 
 .sidebarIcon {
@@ -141,21 +143,26 @@
 .viewSiteLink {
   justify-content: flex-start;
   min-height: 48px;
-  border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.18);
-  background: rgb(var(--ikayi-white-rgb) / 0.76);
-  color: var(--ikayi-deep-red);
+  border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
+  background: color-mix(in srgb, var(--ikayi-white) 48%, var(--ikayi-peach));
+  color: color-mix(in srgb, var(--ikayi-deep-red) 74%, var(--ikayi-dark-surface));
 }
 
 .viewSiteLink {
   justify-content: center;
-  color: var(--ikayi-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 74%, var(--ikayi-dark-surface));
 }
 
 .sidebarLink:hover,
 .monitorLink:hover,
 .viewSiteLink:hover {
-  background: rgb(var(--ikayi-deep-red-rgb) / 0.08);
-  color: var(--ikayi-deep-red);
+  background: color-mix(in srgb, var(--ikayi-white) 42%, var(--ikayi-peach));
+  color: color-mix(in srgb, var(--ikayi-deep-red) 84%, var(--ikayi-dark-surface));
+}
+
+.sidebarLinkActive:hover {
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white);
 }
 
 @media (max-width: 900px) {

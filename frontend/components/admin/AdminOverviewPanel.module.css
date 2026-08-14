@@ -15,7 +15,7 @@
 .panelHeader h2,
 .cardHeader h3 {
   margin: 0 0 8px;
-  color: var(--ikayi-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 78%, var(--ikayi-dark-surface));
   line-height: 1.15;
 }
 
@@ -32,7 +32,7 @@
 .helperText,
 .errorText {
   margin: 0;
-  color: var(--ikayi-muted-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 66%, var(--ikayi-dark-surface));
   line-height: 1.5;
 }
 
@@ -52,9 +52,9 @@
 .setupCard,
 .contentStatusCard {
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
-  border-radius: 20px;
-  background: rgb(var(--ikayi-white-rgb) / 0.86);
-  box-shadow: 0 18px 48px rgb(var(--ikayi-deep-red-rgb) / 0.07);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--ikayi-white) 74%, var(--ikayi-peach));
+  box-shadow: 0 18px 42px rgb(var(--ikayi-deep-red-rgb) / 0.06);
 }
 
 .metricCard {
@@ -70,7 +70,7 @@
 .setupList dt,
 .bookingRow span,
 .sectionGrid small {
-  color: var(--ikayi-muted-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 64%, var(--ikayi-dark-surface));
 }
 
 .metricCard span,
@@ -81,7 +81,7 @@
 }
 
 .metricCard strong {
-  color: var(--ikayi-deep-red);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 82%, var(--ikayi-dark-surface));
   font-family: var(--ikayi-font-display);
   font-size: 46px;
   font-weight: 400;
@@ -111,8 +111,8 @@
   min-height: 38px;
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
   border-radius: 12px;
-  background: var(--ikayi-white);
-  color: var(--ikayi-deep-red);
+  background: color-mix(in srgb, var(--ikayi-white) 58%, var(--ikayi-peach));
+  color: color-mix(in srgb, var(--ikayi-deep-red) 78%, var(--ikayi-dark-surface));
   font: inherit;
   font-size: 14px;
   font-weight: 800;
@@ -175,7 +175,7 @@
 }
 
 .setupList dd {
-  color: var(--ikayi-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 74%, var(--ikayi-dark-surface));
   font-weight: 600;
   text-align: right;
 }
@@ -192,8 +192,8 @@
   gap: 8px;
   min-height: 136px;
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
-  border-radius: 16px;
-  background: rgb(var(--ikayi-peach-rgb) / 0.16);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ikayi-white) 54%, var(--ikayi-peach));
   color: inherit;
   padding: 16px;
   text-align: left;
@@ -202,12 +202,13 @@
 
 .sectionGrid button:hover,
 .sectionGrid button:focus-visible {
-  border-color: rgb(var(--ikayi-deep-red-rgb) / 0.34);
+  border-color: rgb(var(--ikayi-sage-green-rgb) / 0.6);
+  background: color-mix(in srgb, var(--ikayi-white) 42%, var(--ikayi-peach));
   outline: none;
 }
 
 .sectionGrid span {
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-sage-green);
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;

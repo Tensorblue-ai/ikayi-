@@ -64,8 +64,10 @@ export function ReservationBookingCard({
   const [bookingSummary, setBookingSummary] = useState<BookingSummary | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTypeMenuOpen, setIsTypeMenuOpen] = useState(false);
   const [error, setError] = useState("");
   const selectedReservationType = reservationTypes.find((type) => type.slug === reservationTypeSlug);
+  const selectedReservationLabel = selectedReservationType?.title ?? "Select reservation type";
   const hasAvailableSlots = slots.some((slot) => slot.isAvailable);
   const isPhoneValid = phonePattern.test(phoneNumber);
   const phoneWarning = phoneTouched && phoneNumber.length > 0 && !isPhoneValid;
@@ -167,17 +169,59 @@ export function ReservationBookingCard({
           <span />
         </div>
 
-        <label className={styles.fieldGroup}>
-          <span>Reservation Type</span>
-          <select value={reservationTypeSlug} onChange={(event) => updateReservationType(event.currentTarget.value)}>
-            <option value="">Select reservation type</option>
-            {reservationTypes.map((type) => (
-              <option value={type.slug} key={type.slug}>
-                {type.title}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className={styles.fieldGroup}>
+          <span id="reservation-type-label">Reservation Type</span>
+          <div
+            className={styles.customSelect}
+            onBlur={(event) => {
+              const nextFocus = event.relatedTarget;
+              if (!(nextFocus instanceof Node) || !event.currentTarget.contains(nextFocus)) {
+                setIsTypeMenuOpen(false);
+              }
+            }}
+          >
+            <button
+              className={styles.selectButton}
+              type="button"
+              aria-labelledby="reservation-type-label"
+              aria-haspopup="listbox"
+              aria-expanded={isTypeMenuOpen}
+              onClick={() => setIsTypeMenuOpen((isOpen) => !isOpen)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setIsTypeMenuOpen(false);
+                }
+              }}
+            >
+              <span>{selectedReservationLabel}</span>
+              <b className={styles.selectChevron} aria-hidden="true" />
+            </button>
+
+            {isTypeMenuOpen ? (
+              <div className={styles.selectMenu} role="listbox" aria-labelledby="reservation-type-label">
+                {reservationTypes.map((type) => {
+                  const isSelected = reservationTypeSlug === type.slug;
+
+                  return (
+                    <button
+                      className={isSelected ? styles.selectOptionActive : styles.selectOption}
+                      type="button"
+                      role="option"
+                      aria-selected={isSelected}
+                      onClick={() => {
+                        updateReservationType(type.slug);
+                        setIsTypeMenuOpen(false);
+                      }}
+                      key={type.slug}
+                    >
+                      {type.title}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
+        </div>
 
         <label className={styles.fieldGroup}>
           <span>Select Date</span>

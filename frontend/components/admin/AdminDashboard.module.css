@@ -3,8 +3,9 @@
   grid-template-columns: 300px minmax(0, 1fr);
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgb(var(--ikayi-white-rgb) / 0.78), rgb(var(--ikayi-peach-rgb) / 0.22)),
-    var(--ikayi-hero-surface);
+    radial-gradient(circle at 82% 8%, rgb(var(--ikayi-white-rgb) / 0.28), transparent 26%),
+    linear-gradient(180deg, rgb(var(--ikayi-white-rgb) / 0.14), rgb(var(--ikayi-peach-rgb) / 0.18)),
+    var(--ikayi-reservation-bg);
 }
 
 @media (max-width: 900px) {
@@ -16,7 +17,7 @@
   min-width: 0;
   min-height: 100vh;
   padding: 28px clamp(18px, 3vw, 36px) 44px;
-  color: var(--ikayi-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 78%, var(--ikayi-dark-surface));
 }
 
 .header {
@@ -30,7 +31,7 @@
 
 .eyebrow {
   margin: 0 0 10px;
-  color: var(--ikayi-deep-red);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 82%, var(--ikayi-dark-surface));
   font-family: var(--ikayi-font-accent);
   font-size: 12px;
   font-weight: 800;
@@ -41,6 +42,7 @@
 .header h1,
 .editorHeader h2 {
   margin: 0;
+  color: color-mix(in srgb, var(--ikayi-deep-red) 84%, var(--ikayi-dark-surface));
   font-family: var(--ikayi-font-display);
   font-size: clamp(34px, 3.6vw, 48px);
   font-weight: 400;
@@ -54,8 +56,8 @@
   place-items: center;
   flex: 0 0 auto;
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.16);
-  background: rgb(var(--ikayi-white-rgb) / 0.82);
-  color: var(--ikayi-ink);
+  background: color-mix(in srgb, var(--ikayi-white) 66%, var(--ikayi-peach));
+  color: color-mix(in srgb, var(--ikayi-deep-red) 84%, var(--ikayi-dark-surface));
 }
 
 .avatar {
@@ -72,9 +74,9 @@
 .tablesPanel {
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
   max-width: 1120px;
-  border-radius: 20px;
-  background: rgb(var(--ikayi-white-rgb) / 0.86);
-  box-shadow: 0 18px 48px rgb(var(--ikayi-deep-red-rgb) / 0.07);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
+  box-shadow: 0 18px 44px rgb(var(--ikayi-deep-red-rgb) / 0.06);
 }
 
 .sectionPanel,
@@ -113,7 +115,7 @@
 .panelHeader p,
 .editorHeader p {
   margin: 0;
-  color: var(--ikayi-muted-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 68%, var(--ikayi-dark-surface));
   line-height: 1.5;
 }
 
@@ -139,8 +141,8 @@
 .secondaryButton,
 .cancelButton {
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.14);
-  background: var(--ikayi-white);
-  color: var(--ikayi-ink);
+  background: color-mix(in srgb, var(--ikayi-white) 68%, var(--ikayi-peach));
+  color: color-mix(in srgb, var(--ikayi-deep-red) 78%, var(--ikayi-dark-surface));
 }
 
 .secondaryButton {
@@ -153,9 +155,9 @@
 
 .primaryButton {
   border: 0;
-  background: var(--ikayi-deep-red);
+  background: var(--ikayi-sage-green);
   color: var(--ikayi-white);
-  box-shadow: 0 18px 28px rgb(var(--ikayi-deep-red-rgb) / 0.2);
+  box-shadow: 0 16px 28px rgb(var(--ikayi-sage-green-rgb) / 0.22);
 }
 
 .deleteButton {
@@ -206,7 +208,7 @@
 }
 
 .sectionSummary span {
-  color: var(--ikayi-muted-ink);
+  color: color-mix(in srgb, var(--ikayi-deep-red) 64%, var(--ikayi-dark-surface));
   font-size: 14px;
 }
 
@@ -344,10 +346,10 @@
 .emptyPanel {
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
   max-width: 1120px;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: clamp(18px, 2.4vw, 28px);
-  background: rgb(var(--ikayi-white-rgb) / 0.86);
-  box-shadow: 0 18px 48px rgb(var(--ikayi-deep-red-rgb) / 0.07);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
+  box-shadow: 0 18px 44px rgb(var(--ikayi-deep-red-rgb) / 0.06);
 }
 
 .emptyPanel h2 {
@@ -412,9 +414,9 @@
   align-content: center;
   gap: 10px;
   border: 1px solid rgb(var(--ikayi-deep-red-rgb) / 0.12);
-  border-radius: 18px;
+  border-radius: 14px;
   padding: 24px;
-  background: rgb(var(--ikayi-peach-rgb) / 0.22);
+  background: color-mix(in srgb, var(--ikayi-white) 52%, var(--ikayi-peach));
 }
 
 .availabilityCard span,

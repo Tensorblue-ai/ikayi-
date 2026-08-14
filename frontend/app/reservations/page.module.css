@@ -327,6 +327,110 @@
   padding: 0 14px;
 }
 
+.customSelect {
+  position: relative;
+  min-width: 0;
+}
+
+.selectButton {
+  display: flex;
+  min-height: 46px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 44%, transparent);
+  border-radius: 9px;
+  padding: 0 14px 0 16px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ikayi-white) 62%, transparent),
+      color-mix(in srgb, var(--ikayi-white) 34%, transparent)
+    );
+  color: var(--ikayi-deep-red);
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ikayi-white) 72%, transparent);
+}
+
+.selectButton:hover,
+.selectButton:focus-visible {
+  border-color: color-mix(in srgb, var(--ikayi-deep-red) 54%, transparent);
+  outline: none;
+  box-shadow:
+    0 10px 24px color-mix(in srgb, var(--ikayi-deep-red) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ikayi-white) 76%, transparent);
+}
+
+.selectButton span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ikayi-deep-red);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectChevron {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  color: var(--ikayi-deep-red);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.selectMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: grid;
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 42%, transparent);
+  border-radius: 10px;
+  padding: 6px;
+  background: color-mix(in srgb, var(--ikayi-white) 86%, var(--ikayi-reservation-bg));
+  box-shadow: 0 20px 42px color-mix(in srgb, var(--ikayi-deep-red) 18%, transparent);
+}
+
+.selectOption,
+.selectOptionActive {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  border: 0;
+  border-radius: 7px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--ikayi-deep-red);
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.selectOption:hover,
+.selectOption:focus-visible {
+  background: color-mix(in srgb, var(--ikayi-terracotta) 20%, var(--ikayi-white));
+  outline: none;
+}
+
+.selectOptionActive {
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white);
+}
+
+.selectOptionActive:hover,
+.selectOptionActive:focus-visible {
+  background: color-mix(in srgb, var(--ikayi-sage-green) 86%, var(--ikayi-deep-red));
+}
+
 .guestControl {
   display: grid;
   grid-template-columns: 36px 1fr 36px;
@@ -939,6 +1043,9 @@
 
 .fieldGroup input,
 .fieldGroup select,
+.selectButton,
+.selectOption,
+.selectOptionActive,
 .dateGrid button,
 .guestControl,
 .guestControl button,
@@ -960,7 +1067,7 @@
 .mealToggle .selectedMeal {
   border-color: var(--ikayi-sage-green);
   background: var(--ikayi-sage-green);
-  color: var(--ikayi-white);
+  color: var(--ikayi-white) !important;
 }
 
 .checkButton:disabled {
@@ -971,17 +1078,24 @@
 .selectedSlotButton {
   border-color: var(--ikayi-deep-red);
   background: var(--ikayi-deep-red);
-  color: var(--ikayi-white);
+  color: var(--ikayi-white) !important;
+}
+
+.selectOptionActive {
+  border-color: var(--ikayi-sage-green);
+  background: var(--ikayi-sage-green);
+  color: var(--ikayi-white) !important;
 }
 
 .dateGrid .selectedDate strong,
 .dateGrid .selectedDate small,
 .selectedSlotButton strong,
 .selectedSlotButton small,
+.selectOptionActive,
 .checkButton *,
 .inquiryButton *,
 .mealToggle .selectedMeal * {
-  color: var(--ikayi-white);
+  color: var(--ikayi-white) !important;
 }
 
 .smallDivider,
