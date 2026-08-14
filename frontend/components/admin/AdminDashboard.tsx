@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { AdminBookingsPanel } from "./AdminBookingsPanel";
 import { AdminReservationTypesPanel } from "./AdminReservationTypesPanel";
 import { AdminSectionEditorModal } from "./AdminSectionEditorModal";
@@ -286,7 +287,9 @@ export function AdminDashboard() {
             <p className={styles.eyebrow}>IKAYI CMS</p>
             <h1>{viewTitle}</h1>
           </div>
-          <div className={styles.avatar} aria-label="Admin profile">IK</div>
+          <div className={styles.avatar} aria-label="Admin profile">
+            <BrandLogo variant="mark" className={styles.avatarLogo} decorative />
+          </div>
         </header>
 
         {activeView === "content" ? (

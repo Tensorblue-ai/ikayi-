@@ -61,11 +61,17 @@
 }
 
 .avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 700;
+  width: 58px;
+  height: 58px;
+  border-color: color-mix(in srgb, var(--ikayi-gold) 72%, transparent);
+  border-radius: 50%;
+  background: var(--ikayi-dark-surface);
+  box-shadow: 0 12px 24px rgb(var(--ikayi-deep-red-rgb) / 0.14);
+}
+
+.avatarLogo {
+  width: 44px;
+  height: 44px;
 }
 
 .sectionPanel,

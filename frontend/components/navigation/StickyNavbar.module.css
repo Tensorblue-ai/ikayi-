@@ -18,12 +18,13 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   width: fit-content;
   min-height: 54px;
-  padding: 3px 12px 3px 4px;
+  padding: 4px 16px 4px 4px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+  background: color-mix(in srgb, var(--ikayi-dark-surface) 92%, var(--ikayi-deep-red));
+  box-shadow: 0 14px 30px color-mix(in srgb, var(--ikayi-dark-surface) 18%, transparent);
   text-decoration: none;
 }
 
@@ -34,7 +35,7 @@
   border: 1px solid color-mix(in srgb, var(--ikayi-gold) 72%, transparent);
   border-radius: 50%;
   background-color: var(--ikayi-dark-surface);
-  box-shadow: 0 10px 22px color-mix(in srgb, var(--ikayi-dark-surface) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ikayi-white) 8%, transparent);
 }
 
 .logoWordmark {
@@ -42,8 +43,8 @@
   height: 54px;
   flex: 0 0 auto;
   filter:
-    drop-shadow(0 1px 0 color-mix(in srgb, var(--ikayi-dark-surface) 34%, transparent))
-    drop-shadow(0 6px 12px color-mix(in srgb, var(--ikayi-dark-surface) 12%, transparent));
+    drop-shadow(0 1px 0 color-mix(in srgb, var(--ikayi-gold) 42%, transparent))
+    drop-shadow(0 0 10px color-mix(in srgb, var(--ikayi-white) 14%, transparent));
 }
 
 .nav {

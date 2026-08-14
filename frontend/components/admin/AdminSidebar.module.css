@@ -112,7 +112,13 @@
 
 .sidebarLinkActive {
   background: var(--ikayi-sage-green);
-  color: var(--ikayi-white);
+  color: var(--ikayi-white) !important;
+}
+
+.sidebarLinkActive,
+.sidebarLinkActive span,
+.sidebarLinkActive svg {
+  color: var(--ikayi-white) !important;
 }
 
 .sidebarIcon {
@@ -162,7 +168,7 @@
 
 .sidebarLinkActive:hover {
   background: var(--ikayi-sage-green);
-  color: var(--ikayi-white);
+  color: var(--ikayi-white) !important;
 }
 
 @media (max-width: 900px) {
