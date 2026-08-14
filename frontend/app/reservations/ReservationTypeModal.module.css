@@ -7,19 +7,22 @@
   justify-items: center;
   overflow-y: auto;
   padding: 110px 18px 28px;
-  background: color-mix(in srgb, var(--ikayi-deep-red) 42%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--ikayi-dark-surface) 28%, transparent), color-mix(in srgb, var(--ikayi-dark-surface) 34%, transparent)),
+    color-mix(in srgb, var(--ikayi-reservation-bg) 38%, transparent);
+  backdrop-filter: blur(3px);
 }
 
 .modal {
   position: relative;
   display: grid;
   gap: 24px;
-  width: min(100%, 760px);
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent);
+  width: min(100%, 820px);
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 36%, transparent);
   border-radius: 12px;
   padding: clamp(26px, 5vw, 46px);
-  background: color-mix(in srgb, var(--ikayi-reservation-bg) 54%, var(--ikayi-white));
-  box-shadow: 0 28px 80px color-mix(in srgb, var(--ikayi-deep-red) 22%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-reservation-bg));
+  box-shadow: 0 28px 80px color-mix(in srgb, var(--ikayi-dark-surface) 26%, transparent);
 }
 
 .closeButton {
@@ -32,8 +35,8 @@
   place-items: center;
   border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--ikayi-white) 42%, transparent);
-  color: var(--ikayi-deep-red);
+  background: color-mix(in srgb, var(--ikayi-white) 86%, var(--ikayi-reservation-bg));
+  color: var(--ikayi-deep-red) !important;
   cursor: pointer;
 }
 
@@ -41,11 +44,12 @@
   display: grid;
   gap: 8px;
   padding-right: 42px;
+  background: transparent !important;
 }
 
 .header h2 {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-display);
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 400;
@@ -55,7 +59,7 @@
 
 .header p {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-terracotta) !important;
   font-family: var(--ikayi-font-accent);
   font-size: clamp(0.95rem, 2vw, 1.2rem);
   line-height: 1.45;
@@ -73,11 +77,11 @@
   min-height: 48px;
   align-items: center;
   gap: 8px;
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 36%, transparent);
   border-radius: 6px;
-  padding: 10px 12px;
-  background: color-mix(in srgb, var(--ikayi-white) 28%, transparent);
-  color: var(--ikayi-deep-red);
+  padding: 10px 14px;
+  background: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
+  color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-accent);
   font-size: 0.72rem;
   font-weight: 700;
@@ -86,6 +90,9 @@
 .sectionBlock {
   display: grid;
   gap: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 28%, transparent);
+  padding-top: 22px;
+  background: transparent !important;
 }
 
 .sectionHeading {
@@ -98,12 +105,12 @@
 .sectionHeading::after {
   content: "";
   height: 1px;
-  background: color-mix(in srgb, var(--ikayi-deep-red) 36%, transparent);
+  background: color-mix(in srgb, var(--ikayi-terracotta) 42%, transparent);
 }
 
 .sectionHeading h3 {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-display);
   font-size: 1.38rem;
   font-weight: 400;
@@ -112,12 +119,12 @@
 
 .sectionHeading span,
 .sectionHeading svg {
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-terracotta) !important;
 }
 
 .sectionBlock p {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.82rem;
   line-height: 1.7;
   text-transform: lowercase;
@@ -125,8 +132,9 @@
 
 .infoTable {
   display: grid;
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 24%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 32%, transparent);
   border-radius: 8px;
+  background: color-mix(in srgb, var(--ikayi-white) 46%, transparent);
   overflow: hidden;
 }
 
@@ -137,7 +145,7 @@
 }
 
 .infoTable div + div {
-  border-top: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 20%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 28%, transparent);
 }
 
 .infoTable dt,
@@ -145,7 +153,7 @@
   margin: 0;
   min-width: 0;
   padding: 12px 14px;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.76rem;
   line-height: 1.5;
 }
@@ -154,7 +162,8 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  border-right: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 20%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 28%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
   font-family: var(--ikayi-font-accent);
   font-weight: 700;
   text-transform: uppercase;
@@ -168,10 +177,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
   border-radius: 8px;
   padding: 14px 16px;
-  background: color-mix(in srgb, var(--ikayi-white) 28%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
 }
 
 .note span {
@@ -182,13 +191,13 @@
   place-items: center;
   border: 1px solid var(--ikayi-deep-red);
   border-radius: 50%;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-display);
 }
 
 .note p {
   margin: 0;
-  color: var(--ikayi-deep-red);
+  color: var(--ikayi-deep-red) !important;
   font-size: 0.75rem;
   line-height: 1.45;
   text-transform: lowercase;
