@@ -57,7 +57,8 @@
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--ikayi-deep-red) 6%, transparent);
 }
 
 .mapPanel img {
@@ -79,7 +80,8 @@
   border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent);
   border-radius: 8px;
   padding: 20px;
-  background: color-mix(in srgb, var(--ikayi-white) 32%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--ikayi-deep-red) 6%, transparent);
 }
 
 .locationSection .infoCard svg {

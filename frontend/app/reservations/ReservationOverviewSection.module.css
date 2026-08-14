@@ -56,9 +56,10 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 24%, transparent);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--ikayi-white) 30%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--ikayi-deep-red) 6%, transparent);
 }
 
 .summaryItem {
@@ -71,7 +72,7 @@
 }
 
 .summaryItem + .summaryItem {
-  border-left: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 26%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 18%, transparent);
 }
 
 .summaryItem svg,
@@ -110,10 +111,11 @@
   justify-items: center;
   gap: 8px;
   min-width: 0;
-  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 34%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ikayi-deep-red) 24%, transparent);
   border-radius: 8px;
   padding: 20px 14px;
-  background: color-mix(in srgb, var(--ikayi-white) 30%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--ikayi-deep-red) 6%, transparent);
   text-align: center;
 }
 

@@ -80,7 +80,7 @@
   border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 36%, transparent);
   border-radius: 6px;
   padding: 10px 14px;
-  background: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
   color: var(--ikayi-deep-red) !important;
   font-family: var(--ikayi-font-accent);
   font-size: 0.72rem;
@@ -134,7 +134,7 @@
   display: grid;
   border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 32%, transparent);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--ikayi-white) 46%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
   overflow: hidden;
 }
 
@@ -163,7 +163,7 @@
   align-items: center;
   gap: 7px;
   border-right: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 28%, transparent);
-  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 58%, var(--ikayi-peach));
   font-family: var(--ikayi-font-accent);
   font-weight: 700;
   text-transform: uppercase;
@@ -180,7 +180,7 @@
   border: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
   border-radius: 8px;
   padding: 14px 16px;
-  background: color-mix(in srgb, var(--ikayi-white) 58%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
 }
 
 .note span {

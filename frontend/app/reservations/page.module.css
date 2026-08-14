@@ -1006,7 +1006,7 @@
 .breakfastNote,
 .visualPanel {
   border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
-  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
 }
 
 .tabs button,
@@ -1053,7 +1053,7 @@
 .slotButtonDisabled,
 .modalClose {
   border-color: color-mix(in srgb, var(--ikayi-deep-red) 38%, transparent);
-  background: color-mix(in srgb, var(--ikayi-white) 34%, transparent);
+  background: color-mix(in srgb, var(--ikayi-white) 72%, var(--ikayi-peach));
   color: var(--ikayi-deep-red);
 }
 
