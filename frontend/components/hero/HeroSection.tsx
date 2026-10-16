@@ -7,7 +7,7 @@ export function HeroSection() {
     <section className={styles.hero} aria-label="Ikayi restaurant hero">
       <Image
         className={styles.backgroundImage}
-        src="/assets/hero.png"
+        src="/assets/ikayi/dining-room.jpg"
         alt=""
         fill
         priority

@@ -2,8 +2,8 @@ import type { CSSProperties } from "react";
 import styles from "./BrandLogo.module.css";
 
 const logoSources = {
-  mark: "/api/assets/assets/IKAYI%20LOGO1.png",
-  wordmark: "/api/assets/assets/IKAYI%20LOGO2.png",
+  mark: "/assets/IKAYI%20LOGO1.png",
+  wordmark: "/assets/IKAYI%20LOGO2.png",
 };
 
 type BrandLogoProps = {

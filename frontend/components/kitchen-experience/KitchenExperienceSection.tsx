@@ -1,21 +1,10 @@
 import Image from "next/image";
-import { getActiveItems, KitchenExperienceSectionData, KitchenImage } from "@/lib/homepage-sections";
+import { getActiveItems, KitchenExperienceSectionData } from "@/lib/homepage-sections";
 import styles from "./KitchenExperienceSection.module.css";
 
 type KitchenExperienceSectionProps = {
   section: KitchenExperienceSectionData;
 };
-
-function getTileClass(image: KitchenImage) {
-  const slotClasses = {
-    large: styles.largeTile,
-    top: styles.topTile,
-    middle: styles.middleTile,
-    bottom: styles.bottomTile,
-  };
-
-  return slotClasses[image.layoutSlot];
-}
 
 export function KitchenExperienceSection({ section }: KitchenExperienceSectionProps) {
   const images = getActiveItems(section.images);
@@ -56,8 +45,8 @@ export function KitchenExperienceSection({ section }: KitchenExperienceSectionPr
 
           <div className={styles.collage} aria-label="Ikayi open kitchen collage">
             {images.map((image) => (
-              <div className={`${styles.tile} ${getTileClass(image)}`} key={image.src}>
-                <Image src={image.src} alt={image.alt} fill sizes="(max-width: 900px) 82vw, 620px" />
+              <div className={styles.tile} key={image.src}>
+                <Image src={image.src} alt={image.alt} width={1200} height={1800} sizes="(max-width: 620px) 82vw, (max-width: 980px) 42vw, 310px" />
               </div>
             ))}
           </div>

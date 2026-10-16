@@ -169,6 +169,42 @@ type ApiSectionsResponse = {
   sections?: ApiSection[];
 };
 
+const sectionPhotos: Record<string, [string, string]> = {
+  "exp1.png": ["table-setting", "A table set for guests in Ikayi's dining room"],
+  "exp2.png": ["welcome", "A member of Ikayi's hospitality team"],
+  "exp3.png": ["table-details", "Floral tableware and flowers at Ikayi"],
+  "exp4.png": ["arched-dining", "An intimate dining corner framed by warm arches"],
+  "exp5.png": ["hospitality-team", "Ikayi's hospitality team in the dining room"],
+  "3a74090f-1488-4026-a5ae-8a1e845600e2.png": ["ikayi-team", "The Ikayi team gathered by the open kitchen"],
+  "kitch1.png": ["chef-at-work", "An Ikayi chef preparing a dish in the open kitchen"],
+  "kitch2.png": ["finishing-touches", "An Ikayi chef adding finishing touches to small bites"],
+  "kitch3.png": ["open-kitchen", "Ikayi's open kitchen overlooking the dining room"],
+  "kitch4.png": ["kitchen-preparation", "An Ikayi chef preparing ingredients at the counter"],
+  "story1.png": ["kitchen-team", "Ikayi's kitchen team together before service"],
+  "story2.png": ["hospitality-team", "A warm welcome from Ikayi's hospitality team"],
+  "story3.png": ["intimate-table", "A carefully set table beneath Ikayi's arches"],
+  "story4.png": ["dining-corner", "Warm lighting and thoughtful details in Ikayi's dining room"],
+  "chef5.png": ["small-bites", "A selection of small bites served at Ikayi"],
+  "chef7.png": ["shared-dining", "Tables ready for a shared meal at Ikayi"],
+  "chef9.png": ["dining-perspective", "Ikayi's dining room set for arriving guests"],
+  "reservation.png": ["intimate-table", "A table ready for an intimate dining experience at Ikayi"],
+};
+
+function replaceSectionPhotos(_key: string, value: unknown): unknown {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return value;
+
+  const item = value as Record<string, unknown>;
+  for (const [imageKey, altKey] of [["image", "imageAlt" in item ? "imageAlt" : "alt"], ["src", "alt"], ["heroImage", "heroImageAlt"]]) {
+    const source = item[imageKey];
+    if (typeof source !== "string" || !source.includes("/api/assets/assets/")) continue;
+    const photo = sectionPhotos[source.split("/").pop() ?? ""];
+    if (!photo) continue;
+    item[imageKey] = `/assets/ikayi/${photo[0]}.jpg`;
+    item[altKey] = photo[1];
+  }
+  return item;
+}
+
 export function getActiveItems<T extends SortableItem>(items: T[] = []): T[] {
   return items
     .filter((item) => item.isActive !== false)
@@ -183,7 +219,7 @@ export async function getHomepageSections(): Promise<HomepageSections> {
     throw new Error(`Homepage sections request failed with ${response.status}`);
   }
 
-  const payload = (await response.json()) as ApiSectionsResponse;
+  const payload = JSON.parse(await response.text(), replaceSectionPhotos) as ApiSectionsResponse;
   const homepageSections: HomepageSections = {};
 
   for (const entry of payload.sections ?? []) {
@@ -231,6 +267,6 @@ export async function getReservationSection(): Promise<ReservationSectionData | 
     throw new Error(`Reservation section request failed with ${response.status}`);
   }
 
-  const payload = (await response.json()) as ApiSectionResponse<ReservationSectionData>;
+  const payload = JSON.parse(await response.text(), replaceSectionPhotos) as ApiSectionResponse<ReservationSectionData>;
   return payload.section && payload.section.isPublished !== false ? payload.section : null;
 }

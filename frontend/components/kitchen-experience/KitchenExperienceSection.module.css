@@ -115,10 +115,9 @@
 }
 
 .collage {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  grid-template-rows: repeat(3, minmax(118px, 1fr));
-  gap: 8px;
+  columns: 2;
+  column-gap: 8px;
+  align-self: center;
   overflow: hidden;
   padding: 8px;
   border: 1px solid rgba(176, 91, 42, 0.34);
@@ -129,25 +128,17 @@
 
 .tile {
   position: relative;
-  min-height: 0;
+  break-inside: avoid;
+  margin-bottom: 8px;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--ikayi-dark-surface);
 }
 
 .tile img {
-  object-fit: cover;
-}
-
-.largeTile {
-  grid-row: 1 / span 3;
-  min-height: 520px;
-}
-
-.topTile,
-.middleTile,
-.bottomTile {
-  min-height: 166px;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .dotCluster {
@@ -208,20 +199,6 @@
     max-width: 620px;
   }
 
-  .collage {
-    grid-template-rows: repeat(3, minmax(92px, 1fr));
-  }
-
-  .largeTile {
-    min-height: 390px;
-  }
-
-  .topTile,
-  .middleTile,
-  .bottomTile {
-    min-height: 124px;
-  }
-
 }
 
 @media (max-width: 620px) {
@@ -247,17 +224,7 @@
   }
 
   .collage {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-  }
-
-  .largeTile,
-  .topTile,
-  .middleTile,
-  .bottomTile {
-    grid-row: auto;
-    min-height: auto;
-    aspect-ratio: 1.45;
+    columns: 1;
   }
 
   .dotCluster,

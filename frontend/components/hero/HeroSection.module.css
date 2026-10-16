@@ -14,10 +14,11 @@
 }
 
 .leftBlurLayer {
+  display: none;
   position: absolute;
   inset: -24px 24% -24px -24px;
   z-index: -3;
-  background-image: url("/assets/hero.png");
+  background-image: url("/assets/ikayi/dining-room.jpg");
   background-size: cover;
   background-position: center right;
   filter: blur(11px);

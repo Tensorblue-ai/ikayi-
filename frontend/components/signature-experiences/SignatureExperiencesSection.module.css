@@ -112,6 +112,10 @@
   object-fit: cover;
 }
 
+.imageWrap img[src$="/small-bites.jpg"] {
+  object-position: center 75%;
+}
+
 .iconBadge {
   display: grid;
   width: 52px;

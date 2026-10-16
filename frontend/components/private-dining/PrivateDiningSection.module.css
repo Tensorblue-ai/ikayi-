@@ -35,7 +35,7 @@
   min-height: 520px;
   overflow: hidden;
   border: 3px solid color-mix(in srgb, var(--ikayi-white) 62%, transparent);
-  border-radius: 82px 12px 12px 12px;
+  border-radius: 12px;
   box-shadow: 0 22px 48px color-mix(in srgb, var(--ikayi-ink) 18%, transparent);
 }
 
@@ -67,7 +67,7 @@
 
 .heroImage {
   object-fit: cover;
-  object-position: center;
+  object-position: center 65%;
   transform: scale(1);
 }
 
@@ -307,7 +307,7 @@
 }
 
 .isVisible .heroImage {
-  animation: privateDiningPhotoZoom 7.5s ease-out both;
+  animation: none;
 }
 
 .isVisible .imagePanel::before {

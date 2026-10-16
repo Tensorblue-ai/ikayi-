@@ -103,6 +103,21 @@
   object-fit: cover;
 }
 
+.tile img[src$="/small-bites.jpg"] {
+  object-position: center 75%;
+}
+
+.tile img[src$="/chef-at-work.jpg"],
+.tile img[src$="/welcome.jpg"],
+.tile img[src$="/hospitality-team.jpg"] {
+  object-position: center 35%;
+}
+
+.tile img[src$="/finishing-touches.jpg"],
+.tile img[src$="/dining-perspective.jpg"] {
+  object-position: center 65%;
+}
+
 .cta {
   position: relative;
   z-index: 1;
