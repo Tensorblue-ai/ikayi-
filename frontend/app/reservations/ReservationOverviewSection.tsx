@@ -24,7 +24,7 @@ export function ReservationOverviewSection() {
   return (
     <section className={styles.overviewSection} aria-labelledby="overview-heading">
       <div className={styles.headingBlock}>
-        <h1 id="overview-heading">Overview</h1>
+        <h2 id="overview-heading">Overview</h2>
         <div className={styles.rule} aria-hidden="true">
           <span />
         </div>

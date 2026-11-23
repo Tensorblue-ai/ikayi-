@@ -1,3 +1,5 @@
+import { connection } from "next/server";
+import { handleApi } from "@/server/api";
 export type SortableItem = {
   sortOrder?: number;
   isActive?: boolean;
@@ -69,6 +71,7 @@ export type SignatureCard = SortableItem & {
   title: string;
   copy: string;
   image: string;
+  imageAlt?: string;
   icon: string;
 };
 
@@ -191,6 +194,9 @@ const sectionPhotos: Record<string, [string, string]> = {
 };
 
 function replaceSectionPhotos(_key: string, value: unknown): unknown {
+  if (typeof value === "string") {
+    return value.replace(/^https?:\/\/((localhost|127\.0\.0\.1)(:\d+)?|[a-z0-9-]+\.trycloudflare\.com)\/api\/assets\//i, "/api/assets/");
+  }
   if (!value || typeof value !== "object" || Array.isArray(value)) return value;
 
   const item = value as Record<string, unknown>;
@@ -205,15 +211,9 @@ function replaceSectionPhotos(_key: string, value: unknown): unknown {
   return item;
 }
 
-export function getActiveItems<T extends SortableItem>(items: T[] = []): T[] {
-  return items
-    .filter((item) => item.isActive !== false)
-    .sort((first, second) => (first.sortOrder ?? 0) - (second.sortOrder ?? 0));
-}
-
 export async function getHomepageSections(): Promise<HomepageSections> {
-  const apiOrigin = process.env.IKAYI_API_ORIGIN || process.env.NEXT_PUBLIC_API_ORIGIN || "http://localhost:5000";
-  const response = await fetch(`${apiOrigin}/api/admin/sections`, { cache: "no-store" });
+  await connection();
+  const response = await handleApi(new Request("http://ikayi.internal/api/admin/sections"));
 
   if (!response.ok) {
     throw new Error(`Homepage sections request failed with ${response.status}`);
@@ -256,8 +256,8 @@ type ApiSectionResponse<T> = {
 };
 
 export async function getReservationSection(): Promise<ReservationSectionData | null> {
-  const apiOrigin = process.env.IKAYI_API_ORIGIN || process.env.NEXT_PUBLIC_API_ORIGIN || "http://localhost:5000";
-  const response = await fetch(`${apiOrigin}/api/admin/sections/reservations`, { cache: "no-store" });
+  await connection();
+  const response = await handleApi(new Request("http://ikayi.internal/api/admin/sections/reservations"));
 
   if (response.status === 404) {
     return null;

@@ -31,7 +31,7 @@ export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect,
     <div className={styles.groups}>
       <section className={styles.group} aria-labelledby="reservation-heading">
         <div className={styles.headingBlock}>
-          <h1 id="reservation-heading">Reservations</h1>
+          <h2 id="reservation-heading">Reservations</h2>
           <div className={styles.rule} aria-hidden="true">
             <span />
           </div>
@@ -50,8 +50,8 @@ export function ReservationTypeCards({ reservationTypes, selectedSlug, onSelect,
         </div>
       ) : null}
 
-      {isMoreVisible ? (
-        <section className={styles.group} aria-labelledby="more-reservations-heading">
+      {moreTypes.length > 0 ? (
+        <section className={styles.group} aria-labelledby="more-reservations-heading" hidden={!isMoreVisible} style={!isMoreVisible ? { display: "none" } : undefined}>
           <div className={styles.headingBlock}>
             <h2 id="more-reservations-heading">More Reservation Types</h2>
             <div className={styles.rule} aria-hidden="true">

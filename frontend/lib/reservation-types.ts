@@ -1,3 +1,5 @@
+import { connection } from "next/server";
+import { handleApi } from "@/server/api";
 export type ReservationType = {
   id: string;
   slug: string;
@@ -22,8 +24,8 @@ type ReservationTypesResponse = {
 };
 
 export async function getReservationTypes(): Promise<ReservationType[]> {
-  const apiOrigin = process.env.IKAYI_API_ORIGIN || process.env.NEXT_PUBLIC_API_ORIGIN || "http://localhost:5000";
-  const response = await fetch(`${apiOrigin}/api/reservations/types`, { cache: "no-store" });
+  await connection();
+  const response = await handleApi(new Request("http://ikayi.internal/api/reservations/types"));
 
   if (!response.ok) {
     throw new Error(`Reservation types request failed with ${response.status}`);

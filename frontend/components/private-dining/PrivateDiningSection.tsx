@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { CalendarCheck, Clock, ConciergeBell, type LucideIcon } from "lucide-react";
-import { getActiveItems, GuestJourneySectionData } from "@/lib/homepage-sections";
+import { getActiveItems } from "@/lib/active-items";
+import type { GuestJourneySectionData } from "@/lib/homepage-sections";
 import styles from "./PrivateDiningSection.module.css";
 
 type PrivateDiningSectionProps = {

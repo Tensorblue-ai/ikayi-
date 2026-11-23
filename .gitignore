@@ -9,6 +9,7 @@ frontend/build/
 frontend/coverage/
 frontend/.vercel/
 frontend/.env*
+!frontend/.env.example
 frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 frontend/AGENTS.md

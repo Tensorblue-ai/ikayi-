@@ -72,7 +72,7 @@ const dashboardIdByBackendSectionKey = Object.fromEntries(
   Object.entries(backendSectionKeyById).map(([dashboardId, backendSectionKey]) => [backendSectionKey, dashboardId])
 ) as Record<string, string>;
 
-const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+const apiOrigin = "";
 
 export function AdminDashboard() {
   const [activeView, setActiveView] = useState<AdminView>("content");
@@ -185,6 +185,9 @@ export function AdminDashboard() {
   }
 
   async function uploadAdminImage(file: File) {
+    if (file.size > 4 * 1024 * 1024) {
+      throw new Error("Image must be 4 MB or smaller.");
+    }
     const formData = new FormData();
     formData.append("file", file);
 

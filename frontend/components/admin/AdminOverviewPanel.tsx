@@ -53,7 +53,7 @@ type AdminOverviewPanelProps = {
   onViewTables: () => void;
 };
 
-const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+const apiOrigin = "";
 
 export function AdminOverviewPanel({ onEditSection, onViewBookings, onViewTables }: AdminOverviewPanelProps) {
   const today = useMemo(() => getTodayIsoDate(), []);

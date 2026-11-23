@@ -6,7 +6,7 @@ export function ReservationLocationSection() {
   return (
     <section className={styles.locationSection} aria-labelledby="location-heading">
       <div className={styles.headingBlock}>
-        <h1 id="location-heading">Location</h1>
+        <h2 id="location-heading">Location</h2>
         <div className={styles.rule} aria-hidden="true">
           <span />
         </div>

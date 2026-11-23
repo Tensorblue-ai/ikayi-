@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { ReservationType } from "@/lib/reservation-types";
 import styles from "./page.module.css";
 
@@ -37,7 +37,7 @@ type BookingSummary = {
   reservationTypeTitle?: string;
 };
 
-const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+const apiOrigin = "";
 const reservationTimeZone = "Asia/Kolkata";
 const phonePattern = /^\d{10}$/;
 
@@ -52,9 +52,10 @@ export function ReservationBookingCard({
 }: ReservationBookingCardProps) {
   const dateOptions = useMemo(() => getUpcomingReservationDates(), []);
   const [selectedDate, setSelectedDate] = useState(dateOptions[0]?.isoDate ?? "");
-  const [reservationTypeSlug, setReservationTypeSlug] = useState(selectedReservationTypeSlug || reservationTypes[0]?.slug || "");
-  const [mealPeriod, setMealPeriod] = useState<"lunch" | "dinner">("lunch");
-  const [guestCount, setGuestCount] = useState(2);
+  const [localReservationTypeSlug, setReservationTypeSlug] = useState(reservationTypes[0]?.slug || "");
+  const reservationTypeSlug = selectedReservationTypeSlug || localReservationTypeSlug;
+  const [preferredMealPeriod, setMealPeriod] = useState<"lunch" | "dinner">("lunch");
+  const [requestedGuestCount, setGuestCount] = useState(2);
   const [slots, setSlots] = useState<AvailabilitySlot[]>([]);
   const [isAvailabilityOpen, setIsAvailabilityOpen] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<AvailabilitySlot | null>(null);
@@ -74,20 +75,10 @@ export function ReservationBookingCard({
   const minGuests = selectedReservationType?.minGuests ?? 1;
   const maxGuests = selectedReservationType?.maxGuests ?? 12;
 
-  useEffect(() => {
-    if (selectedReservationTypeSlug) {
-      setReservationTypeSlug(selectedReservationTypeSlug);
-    }
-  }, [selectedReservationTypeSlug]);
-
-  useEffect(() => {
-    if (!selectedReservationType) return;
-
-    setGuestCount((current) => Math.min(Math.max(current, selectedReservationType.minGuests), selectedReservationType.maxGuests));
-    if (selectedReservationType.mealPeriods.length > 0 && !selectedReservationType.mealPeriods.includes(mealPeriod)) {
-      setMealPeriod(selectedReservationType.mealPeriods[0]);
-    }
-  }, [mealPeriod, selectedReservationType]);
+  const guestCount = Math.min(Math.max(requestedGuestCount, minGuests), maxGuests);
+  const mealPeriod = selectedReservationType?.mealPeriods.length && !selectedReservationType.mealPeriods.includes(preferredMealPeriod)
+    ? selectedReservationType.mealPeriods[0]
+    : preferredMealPeriod;
 
   function updateReservationType(nextSlug: string) {
     setReservationTypeSlug(nextSlug);
@@ -265,9 +256,9 @@ export function ReservationBookingCard({
         <label className={styles.fieldGroup}>
           <span>Guests</span>
           <div className={styles.guestControl}>
-            <button type="button" aria-label="Decrease guests" onClick={() => setGuestCount((current) => Math.max(current - 1, minGuests))}>-</button>
+            <button type="button" aria-label="Decrease guests" onClick={() => setGuestCount(Math.max(guestCount - 1, minGuests))}>-</button>
             <strong>{guestCount} Guests</strong>
-            <button type="button" aria-label="Increase guests" onClick={() => setGuestCount((current) => Math.min(current + 1, maxGuests))}>+</button>
+            <button type="button" aria-label="Increase guests" onClick={() => setGuestCount(Math.min(guestCount + 1, maxGuests))}>+</button>
           </div>
         </label>
 

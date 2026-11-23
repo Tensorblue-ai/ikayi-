@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Sparkles, Users, Utensils, Wine, type LucideIcon } from "lucide-react";
-import { getActiveItems, SignatureExperienceSectionData } from "@/lib/homepage-sections";
+import { getActiveItems } from "@/lib/active-items";
+import type { SignatureExperienceSectionData } from "@/lib/homepage-sections";
 import styles from "./SignatureExperiencesSection.module.css";
 
 type SignatureExperiencesSectionProps = {
@@ -43,7 +44,7 @@ export function SignatureExperiencesSection({ section }: SignatureExperiencesSec
         {experiences.map((experience) => (
           <article className={styles.card} key={experience.title}>
             <div className={styles.imageWrap}>
-              <Image src={experience.image} alt={experience.title} fill sizes="280px" />
+              <Image src={experience.image} alt={experience.imageAlt || experience.title} fill sizes="280px" />
             </div>
             <div className={styles.iconBadge} aria-hidden="true">
               <SignatureIcon name={experience.icon} />

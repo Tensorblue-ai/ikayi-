@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { getActiveItems, KitchenExperienceSectionData } from "@/lib/homepage-sections";
+import { getActiveItems } from "@/lib/active-items";
+import type { KitchenExperienceSectionData } from "@/lib/homepage-sections";
 import styles from "./KitchenExperienceSection.module.css";
 
 type KitchenExperienceSectionProps = {

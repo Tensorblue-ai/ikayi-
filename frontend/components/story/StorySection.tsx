@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Compass, HeartHandshake, Leaf, MapPin, Sparkles, type LucideIcon } from "lucide-react";
-import { getActiveItems, StorySectionData } from "@/lib/homepage-sections";
+import { getActiveItems } from "@/lib/active-items";
+import type { StorySectionData } from "@/lib/homepage-sections";
 import styles from "./StorySection.module.css";
 
 type StorySectionProps = {

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { GallerySectionData, getActiveItems } from "@/lib/homepage-sections";
+import { getActiveItems } from "@/lib/active-items";
+import type { GallerySectionData } from "@/lib/homepage-sections";
 import styles from "./GallerySection.module.css";
 
 type GallerySectionProps = {

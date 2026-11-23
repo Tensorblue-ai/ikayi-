@@ -25,6 +25,7 @@ export function HeroSection() {
         </div>
 
         <h1>
+          <span className="sr-only">IKAYI — Modern Indian Restaurant in Lucknow. </span>
           We Are Because
           <span>You Are.</span>
         </h1>

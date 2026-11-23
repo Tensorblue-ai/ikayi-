@@ -34,7 +34,7 @@ const footerLinkGroups = [
     links: [
       { label: "Signature Experiences", href: "#signature-experiences" },
       { label: "Guest Journey", href: "#private-dining" },
-      { label: "Reservations", href: "#reservations" },
+      { label: "Reservations", href: "/reservations" },
     ],
   },
   {
@@ -98,21 +98,6 @@ export function TestimonialsFooterSection() {
                   <circle cx="17" cy="7" r="1" />
                 </svg>
               </a>
-              <a href="#facebook" aria-label="Facebook">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.6.4-1 1-1Z" />
-                </svg>
-              </a>
-              <a href="#tripadvisor" aria-label="Travel reviews">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <path d="M3.5 9.5h3.2A7.5 7.5 0 0 1 12 7.4a7.5 7.5 0 0 1 5.3 2.1h3.2" />
-                  <circle cx="8.2" cy="13.2" r="3.2" />
-                  <circle cx="15.8" cy="13.2" r="3.2" />
-                  <circle cx="8.2" cy="13.2" r="1" />
-                  <circle cx="15.8" cy="13.2" r="1" />
-                  <path d="M11.1 15.3 12 17l.9-1.7" />
-                </svg>
-              </a>
             </div>
           </div>
 
@@ -131,7 +116,7 @@ export function TestimonialsFooterSection() {
               SECTOR-C, ALKAPURI, Aliganj Main Rd, Ekta Vihar, SP-1, Chandralok, Lucknow, Uttar Pradesh 226020
             </a>
             <a href="mailto:hello@ikayirestaurant.com">hello@ikayirestaurant.com</a>
-            <a href="tel:+911234567890">+91 123 456 7890</a>
+            <a href="tel:+917905690000">+91 7905690000</a>
           </address>
 
           <div className={styles.footerArt} aria-hidden="true">
@@ -141,10 +126,6 @@ export function TestimonialsFooterSection() {
 
         <div className={styles.footerBottom}>
           <span>{"\u00A9"} 2024 IKAYI Modern Indian. All rights reserved.</span>
-          <div>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms & Conditions</a>
-          </div>
         </div>
       </footer>
     </section>

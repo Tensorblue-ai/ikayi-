@@ -13,8 +13,8 @@
     );
   color: var(--ikayi-ink);
   border-top: 1px solid color-mix(in srgb, var(--ikayi-terracotta) 34%, transparent);
-  opacity: 0;
-  transform: translateY(18px) scale(1.006);
+  opacity: 1;
+  transform: none;
   transform-origin: center top;
 }
 
@@ -27,6 +27,12 @@
   gap: clamp(42px, 6vw, 78px);
   width: min(100% - 88px, 1320px);
   margin: 0 auto;
+}
+
+.privateDining:not(.isVisible) .heroImage,
+.privateDining:not(.isVisible) .highlightCard {
+  opacity: 1;
+  transform: none;
 }
 
 .imagePanel {

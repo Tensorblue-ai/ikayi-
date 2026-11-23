@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteUrl } from "@/lib/seo";
 import { NavigationShell } from "@/components/navigation/NavigationShell";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -14,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: "Ikayi | Modern Indian Restaurant",
   description:
     "Ikayi is a modern Indian restaurant built around warm hospitality, refined dining, and memorable table experiences.",

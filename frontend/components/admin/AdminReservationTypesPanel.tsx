@@ -27,7 +27,7 @@ type ReservationTypePayload = {
   message?: string;
 };
 
-const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+const apiOrigin = "";
 const iconOptions: ReservationType["icon"][] = ["cloche", "teapot", "briefcase", "lotus", "sun", "handshake", "tractor"];
 const emptyDraft: ReservationType = {
   slug: "",

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ExperienceSectionData, getActiveItems } from "@/lib/homepage-sections";
+import { getActiveItems } from "@/lib/active-items";
+import type { ExperienceSectionData } from "@/lib/homepage-sections";
 import styles from "./ExperienceSection.module.css";
 
 type ExperienceSectionProps = {

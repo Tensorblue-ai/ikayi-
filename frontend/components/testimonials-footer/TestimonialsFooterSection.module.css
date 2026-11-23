@@ -15,6 +15,7 @@
 
 .footerLogo {
   display: grid;
+  overflow: hidden;
   place-items: center;
   align-content: center;
   border: 2px solid color-mix(in srgb, var(--ikayi-gold) 82%, transparent);

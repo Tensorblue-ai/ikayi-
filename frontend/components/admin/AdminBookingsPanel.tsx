@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import styles from "./AdminDashboard.module.css";
@@ -15,7 +15,7 @@ type AdminBooking = {
   createdAt: string;
 };
 
-const apiOrigin = process.env.NEXT_PUBLIC_API_ORIGIN ?? "http://localhost:5000";
+const apiOrigin = "";
 
 export function AdminBookingsPanel() {
   const [bookings, setBookings] = useState<AdminBooking[]>([]);

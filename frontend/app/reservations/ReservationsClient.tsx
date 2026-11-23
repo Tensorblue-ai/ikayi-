@@ -41,7 +41,8 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
 
   return (
     <main className={styles.page}>
-      <section className={styles.shell} aria-labelledby="reservation-heading">
+      <h1 id="reservation-page-heading" className="sr-only">Table Reservations at IKAYI, Lucknow</h1>
+      <section className={styles.shell} aria-labelledby="reservation-page-heading">
         <div className={styles.content}>
           <div className={styles.visualPanel}>
             <Image src={collageSrc} alt={collageAlt} fill sizes="(max-width: 980px) 100vw, 760px" priority />
@@ -60,18 +61,20 @@ export function ReservationsClient({ section, reservationTypes }: ReservationsCl
             })}
           </nav>
 
-          {activeTabLabel.toLowerCase() === "overview" ? (
+          <div hidden={activeTabLabel.toLowerCase() !== "overview"} style={activeTabLabel.toLowerCase() !== "overview" ? { display: "none" } : undefined}>
             <ReservationOverviewSection />
-          ) : activeTabLabel.toLowerCase() === "location" ? (
+          </div>
+          <div hidden={activeTabLabel.toLowerCase() !== "location"} style={activeTabLabel.toLowerCase() !== "location" ? { display: "none" } : undefined}>
             <ReservationLocationSection />
-          ) : (
+          </div>
+          <div hidden={["overview", "location"].includes(activeTabLabel.toLowerCase())} style={["overview", "location"].includes(activeTabLabel.toLowerCase()) ? { display: "none" } : undefined}>
             <ReservationTypeCards
               reservationTypes={reservationTypes}
               selectedSlug={selectedType?.slug ?? ""}
               onSelect={setSelectedSlug}
               onOpenDetails={setDetailsType}
             />
-          )}
+          </div>
 
           <aside className={styles.breakfastNote}>
             <span aria-hidden="true">i</span>
@@ -106,5 +109,5 @@ function getReservationCollageSrc(src?: string) {
     return fallbackCollageSrc;
   }
 
-  return imageSrc.replace(/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?\/api\/assets/i, "/api/assets");
+  return imageSrc.replace(/^https?:\/\/((localhost|127\.0\.0\.1)(:\d+)?|[a-z0-9-]+\.trycloudflare\.com)\/api\/assets/i, "/api/assets");
 }
