@@ -195,7 +195,9 @@ const sectionPhotos: Record<string, [string, string]> = {
 
 function replaceSectionPhotos(_key: string, value: unknown): unknown {
   if (typeof value === "string") {
-    return value.replace(/^https?:\/\/((localhost|127\.0\.0\.1)(:\d+)?|[a-z0-9-]+\.trycloudflare\.com)\/api\/assets\//i, "/api/assets/");
+    return value
+      .replace(/^https?:\/\/((localhost|127\.0\.0\.1)(:\d+)?|[a-z0-9-]+\.trycloudflare\.com)\/api\/assets\//i, "/api/assets/")
+      .replace(/^\/api\/assets\/assets\/(chef6|chef8|footer)\.png$/, "/assets/$1.png");
   }
   if (!value || typeof value !== "object" || Array.isArray(value)) return value;
 
