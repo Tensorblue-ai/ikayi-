@@ -20,6 +20,7 @@ export type HomepageSection = {
   summary: string;
   layout: string;
   status: SectionStatus;
+  isNew?: boolean;
   images?: Array<{ id: string; label: string; src: string; alt?: string }>;
   items: Array<{ title: string; copy: string; image?: string; alt?: string }>;
 };
@@ -175,8 +176,37 @@ export function AdminDashboard() {
     setIsEditorOpen(true);
   }
 
+  function addSection() {
+    const section: HomepageSection = {
+      id: `custom-${crypto.randomUUID()}`, title: "New section", copy: "", summary: "",
+      layout: "Text and image", status: "draft", isNew: true, items: [],
+      images: [{ id: "image", label: "Section image", src: "", alt: "" }],
+    };
+    setSections((current) => [...current, section]);
+    openEditor(section.id);
+  }
+
+  function closeEditor() {
+    if (selectedSection.isNew) setSections((current) => current.filter((section) => section.id !== selectedSection.id));
+    setIsEditorOpen(false);
+  }
+
+  async function deleteSelectedSection() {
+    if (selectedSection.isNew) { closeEditor(); return; }
+    setIsSavingSection(true);
+    setEditorError("");
+    try {
+      const response = await fetch(`/api/admin/sections/${selectedSection.id}`, { method: "DELETE" });
+      if (!response.ok) throw new Error("Unable to delete section.");
+      setSections((current) => current.filter((section) => section.id !== selectedSection.id));
+      setIsEditorOpen(false);
+    } catch (error) {
+      setEditorError(error instanceof Error ? error.message : "Unable to delete section.");
+    } finally { setIsSavingSection(false); }
+  }
+
   function openOverviewSection(sectionKey: string) {
-    const sectionId = dashboardIdByBackendSectionKey[sectionKey];
+    const sectionId = dashboardIdByBackendSectionKey[sectionKey] || (sectionKey.startsWith("custom-") ? sectionKey : "");
 
     if (!sectionId) return;
 
@@ -205,7 +235,7 @@ export function AdminDashboard() {
   }
 
   async function saveSelectedSection() {
-    const sectionKey = backendSectionKeyById[selectedSection.id];
+    const sectionKey = backendSectionKeyById[selectedSection.id] || (selectedSection.id.startsWith("custom-") ? selectedSection.id : "");
 
     if (!sectionKey) {
       setEditorError("This section is not mapped to a backend API yet.");
@@ -216,10 +246,11 @@ export function AdminDashboard() {
     setEditorError("");
 
     try {
-      const response = await fetch(`${apiOrigin}/api/admin/sections/${sectionKey}`, {
-        method: "PATCH",
+      const response = await fetch(selectedSection.isNew ? "/api/admin/sections" : `${apiOrigin}/api/admin/sections/${sectionKey}`, {
+        method: selectedSection.isNew ? "POST" : "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          sectionKey,
           title: selectedSection.title,
           copy: selectedSection.copy,
           summary: selectedSection.summary,
@@ -359,7 +390,7 @@ export function AdminDashboard() {
                 <h2 id="homepage-sections-heading">Homepage sections</h2>
                 <p>Names below match the titles customers see.</p>
               </div>
-              <button className={styles.secondaryButton} type="button">
+              <button className={styles.secondaryButton} type="button" onClick={addSection}>
                 <span aria-hidden="true">+</span>
                 Add section
               </button>
@@ -394,7 +425,8 @@ export function AdminDashboard() {
             section={selectedSection}
             error={editorError}
             isSaving={isSavingSection}
-            onClose={() => setIsEditorOpen(false)}
+            onClose={closeEditor}
+            onDelete={selectedSection.id.startsWith("custom-") ? deleteSelectedSection : undefined}
             onSave={saveSelectedSection}
             onUpdate={updateSelectedSection}
             onUploadImage={uploadAdminImage}

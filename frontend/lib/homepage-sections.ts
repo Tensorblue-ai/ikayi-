@@ -153,6 +153,16 @@ export type ReservationSectionData = {
   policyHref: string;
   isPublished?: boolean;
 };
+export type CustomSectionData = {
+  sectionKey: string;
+  title: string;
+  copy: string;
+  summary: string;
+  image?: string;
+  imageAlt?: string;
+  isPublished?: boolean;
+};
+
 export type HomepageSections = {
   experience?: ExperienceSectionData;
   "kitchen-experience"?: KitchenExperienceSectionData;
@@ -160,12 +170,13 @@ export type HomepageSections = {
   "signature-experiences"?: SignatureExperienceSectionData;
   "guest-journey"?: GuestJourneySectionData;
   gallery?: GallerySectionData;
+  custom?: CustomSectionData[];
 };
 
 type ApiSection = {
-  sectionKey: keyof HomepageSections;
+  sectionKey: string;
   isPublished?: boolean;
-  data?: HomepageSections[keyof HomepageSections];
+  data?: HomepageSections[keyof Omit<HomepageSections, "custom">] | CustomSectionData;
 };
 
 type ApiSectionsResponse = {
@@ -248,6 +259,10 @@ export async function getHomepageSections(): Promise<HomepageSections> {
       case "gallery":
         homepageSections.gallery = entry.data as GallerySectionData;
         break;
+      default:
+        if (entry.sectionKey.startsWith("custom-")) {
+          (homepageSections.custom ??= []).push(entry.data as CustomSectionData);
+        }
     }
   }
 

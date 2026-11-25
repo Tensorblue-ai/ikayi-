@@ -6,6 +6,7 @@ const reservations = require("./controllers/reservationTypesController");
 const bookings = require("./controllers/tableBookingsController");
 const tables = require("./controllers/tableSettingsController");
 const assets = require("./controllers/assetsController");
+const customSections = require("./controllers/customSectionsController");
 
 async function connectDatabase() {
   if (mongoose.connection.readyState === 1) return;
@@ -24,7 +25,7 @@ async function connectDatabase() {
 
 function resolveRoute(path, method) {
   const routes = {
-    "admin/sections": { GET: sections.getAdminSections },
+    "admin/sections": { GET: sections.getAdminSections, POST: customSections.saveCustomSection },
     "admin/bookings": { GET: bookings.getAdminBookings },
     "admin/tables/settings": { GET: tables.getTableSettings, PUT: tables.updateTableSettings },
     "admin/reservation-types": { GET: reservations.getAdminReservationTypes, POST: reservations.createReservationType },
@@ -36,7 +37,9 @@ function resolveRoute(path, method) {
   let handlers = routes[path];
   let params = {};
   if (!handlers && /^admin\/sections\/[^/]+$/.test(path)) {
-    handlers = { GET: sections.getAdminSectionByKey, PATCH: sections.updateAdminSectionByKey, POST: sections.updateAdminSectionByKey };
+    handlers = path.startsWith("admin/sections/custom-")
+      ? { GET: customSections.getCustomSection, PATCH: customSections.saveCustomSection, DELETE: customSections.deleteCustomSection }
+      : { GET: sections.getAdminSectionByKey, PATCH: sections.updateAdminSectionByKey, POST: sections.updateAdminSectionByKey };
     params = { sectionKey: path.split("/").pop() };
   } else if (!handlers && /^admin\/reservation-types\/[^/]+$/.test(path)) {
     handlers = { PATCH: reservations.updateReservationType, DELETE: reservations.deleteReservationType };

@@ -154,6 +154,14 @@ function mapBackendSection(section: AdminSectionPayload): HomepageSection | null
         })),
       };
     default:
+      if (section.sectionKey.startsWith("custom-")) {
+        return {
+          id: section.sectionKey, title: getTitle(section, "New section"),
+          copy: readString(data.copy) ?? "", summary: readString(data.summary) ?? "",
+          layout: "Text and image", status, isNew: false, items: [],
+          images: [{ id: "image", label: "Section image", src: readString(data.image) ?? "", alt: readString(data.imageAlt) ?? "" }],
+        };
+      }
       return null;
   }
 }
@@ -162,6 +170,7 @@ export function mapAdminSectionsResponse(sections: AdminSectionPayload[] = []) {
   const mappedSections = sections.map(mapBackendSection).filter(Boolean) as HomepageSection[];
   const sectionById = new Map(mappedSections.map((section) => [section.id, section]));
 
-  return initialSections.map((fallbackSection) => sectionById.get(fallbackSection.id) ?? fallbackSection);
+  return [...initialSections.map((fallbackSection) => sectionById.get(fallbackSection.id) ?? fallbackSection),
+    ...mappedSections.filter((section) => section.id.startsWith("custom-"))];
 }
 

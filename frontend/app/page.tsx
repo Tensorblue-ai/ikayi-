@@ -8,6 +8,7 @@ import { SignatureExperiencesSection } from "@/components/signature-experiences/
 import { StorySection } from "@/components/story/StorySection";
 import { TestimonialsFooterSection } from "@/components/testimonials-footer/TestimonialsFooterSection";
 import { getHomepageSections } from "@/lib/homepage-sections";
+import { CustomSection } from "@/components/custom-section/CustomSection";
 import { pageMetadata, siteUrl } from "@/lib/seo";
 
 export const metadata = pageMetadata(
@@ -42,6 +43,7 @@ export default async function Home() {
       ) : null}
       {sections["guest-journey"] ? <PrivateDiningSection section={sections["guest-journey"]} /> : null}
       {sections.gallery ? <GallerySection section={sections.gallery} /> : null}
+      {sections.custom?.map((section) => <CustomSection key={section.sectionKey} section={section} />)}
       <TestimonialsFooterSection />
     </main>
   );

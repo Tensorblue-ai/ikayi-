@@ -5,6 +5,7 @@ const SignatureExperience = require("../models/SignatureExperience");
 const GuestJourney = require("../models/GuestJourney");
 const Gallery = require("../models/Gallery");
 const Reservation = require("../models/Reservation");
+const { getCustomSections } = require("./customSectionsController");
 
 const sectionRegistry = [
   {
@@ -359,7 +360,7 @@ async function getAdminSections(_req, res, next) {
       })
     );
 
-    res.status(200).json({ sections: sections.filter(Boolean) });
+    res.status(200).json({ sections: [...sections.filter(Boolean), ...await getCustomSections()] });
   } catch (error) {
     next(error);
   }

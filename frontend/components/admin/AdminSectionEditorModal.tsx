@@ -7,6 +7,7 @@ type AdminSectionEditorModalProps = {
   error?: string;
   isSaving?: boolean;
   onClose: () => void;
+  onDelete?: () => void | Promise<void>;
   onSave: () => void | Promise<void>;
   onUpdate: (updates: Partial<HomepageSection>) => void;
   onUploadImage?: (file: File) => Promise<string>;
@@ -19,6 +20,7 @@ export function AdminSectionEditorModal({
   error = "",
   isSaving = false,
   onClose,
+  onDelete,
   onSave,
   onUpdate,
   onUploadImage,
@@ -98,7 +100,8 @@ export function AdminSectionEditorModal({
 
             <label>
               <span>Section layout</span>
-              <select value={section.layout} onChange={(event) => onUpdate({ layout: event.target.value })}>
+              <select value={section.layout} disabled={section.id.startsWith("custom-")} onChange={(event) => onUpdate({ layout: event.target.value })}>
+                {section.id.startsWith("custom-") ? <option>Text and image</option> : null}
                 <option>Guest feelings</option>
                 <option>Image collage</option>
                 <option>Story cards</option>
@@ -221,7 +224,7 @@ export function AdminSectionEditorModal({
         </div>
 
         <div className={styles.editorActions}>
-          <button className={styles.deleteButton} type="button">Delete section</button>
+          <button className={styles.deleteButton} type="button" disabled={!onDelete || isSaving} onClick={() => void onDelete?.()}>Delete section</button>
           <div className={styles.actionGroup}>
             {error ? <p className={styles.saveError}>{error}</p> : null}
             <button className={styles.cancelButton} type="button" onClick={onClose} disabled={isSaving}>Cancel</button>
